@@ -1,0 +1,43 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://dataz.tools/sitemap.xml
+Sitemap: https://www.dataz.tools/sitemap.xml
+
+# Block specific paths if needed
+Disallow: /private/
+Disallow: /admin/
+Disallow: /temp/
+
+# Crawl-delay for specific bots (optional)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+# Allow all search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Host preference
+Host: dataz.tools
