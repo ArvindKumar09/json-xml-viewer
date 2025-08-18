@@ -1,7 +1,7 @@
 /* -------------------------
    Show only one panel + save choice
 ------------------------- */
-function showOnly(type) {
+function showOnly(type, updateUrl = true) {
   const panels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath', 'summarize', 'translate', 'sentiment', 'grammar', 'keywords'];
   const buttons = ['btn-json', 'btn-xml', 'btn-graph', 'btn-base64', 'btn-jwt', 'btn-url', 'btn-hash', 'btn-uuid', 'btn-color', 'btn-timestamp', 'btn-qr', 'btn-regex', 'btn-text', 'btn-api', 'btn-markdown', 'btn-csv', 'btn-sql', 'btn-diff', 'btn-password', 'btn-jsonpath', 'btn-summarize', 'btn-translate', 'btn-sentiment', 'btn-grammar', 'btn-keywords'];
   
@@ -22,6 +22,11 @@ function showOnly(type) {
   
   if (targetPanel) targetPanel.classList.remove('hidden');
   if (targetButton) targetButton.classList.add('active');
+
+  // Update URL hash only when called from user interaction
+  if (updateUrl && window.location.hash !== `#${type}`) {
+    window.history.pushState(null, null, `#${type}`);
+  }
 
   // Restore saved inputs for the current panel
   restorePanelInputs(type);
@@ -242,9 +247,38 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('xml-input', this.value);
   });
 
-  // Restore last opened panel (default to JSON)
-  const savedPanel = localStorage.getItem('last-panel') || 'json';
-  showOnly(savedPanel);
+  // Check URL hash first, then fallback to saved panel or default
+  const urlHash = window.location.hash.substring(1); // Remove #
+  const validPanels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath', 'summarize', 'translate', 'sentiment', 'grammar', 'keywords'];
+  
+  let initialPanel = 'json'; // default
+  let shouldUpdateUrl = true;
+  
+  if (urlHash && validPanels.includes(urlHash)) {
+    initialPanel = urlHash;
+    shouldUpdateUrl = false; // Don't update URL if we're loading from hash
+  } else {
+    const savedPanel = localStorage.getItem('last-panel');
+    if (savedPanel && validPanels.includes(savedPanel)) {
+      initialPanel = savedPanel;
+    }
+  }
+  
+  showOnly(initialPanel, shouldUpdateUrl);
+});
+
+// Handle browser back/forward and direct hash changes
+window.addEventListener('hashchange', function() {
+  const urlHash = window.location.hash.substring(1); // Remove #
+  const validPanels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath', 'summarize', 'translate', 'sentiment', 'grammar', 'keywords'];
+  
+  if (urlHash && validPanels.includes(urlHash)) {
+    // Call showOnly without updating URL to avoid infinite loop
+    showOnly(urlHash, false);
+  } else if (!urlHash) {
+    // If hash is empty, go to default panel
+    showOnly('json', false);
+  }
 });
 
 /* -------------------------
