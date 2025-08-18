@@ -441,6 +441,229 @@ html, body {
   font-size: 0.9em;
 }
 
+/* Cookie button styling */
+.cookie-btn-header {
+  background: linear-gradient(135deg, #f4a261, #e76f51);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(244, 162, 97, 0.3);
+}
+
+.cookie-btn-header:hover {
+  background: linear-gradient(135deg, #e76f51, #f4a261);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(244, 162, 97, 0.4);
+}
+
+.cookie-btn-header i {
+  font-size: 0.9em;
+}
+
+/* Footer styling */
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Footer button styling */
+.footer-btn {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8em;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+}
+
+.footer-btn:hover {
+  background: var(--btn-hover-bg);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer-btn i {
+  font-size: 0.8em;
+}
+
+/* Specific footer button colors */
+.cookie-btn-footer {
+  background: linear-gradient(135deg, #f4a261, #e76f51);
+  color: white;
+  border: none;
+  box-shadow: 0 1px 3px rgba(244, 162, 97, 0.3);
+}
+
+.cookie-btn-footer:hover {
+  background: linear-gradient(135deg, #e76f51, #f4a261);
+  box-shadow: 0 2px 6px rgba(244, 162, 97, 0.4);
+}
+
+.feedback-btn-footer {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  border: none;
+  box-shadow: 0 1px 3px rgba(238, 90, 82, 0.3);
+}
+
+.feedback-btn-footer:hover {
+  background: linear-gradient(135deg, #ee5a52, #ff6b6b);
+  box-shadow: 0 2px 6px rgba(238, 90, 82, 0.4);
+}
+
+/* GitHub integration button styling */
+.github-btn {
+  background: linear-gradient(135deg, #24292e, #586069) !important;
+  color: white !important;
+  border: 1px solid #444d56 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.github-btn:hover {
+  background: linear-gradient(135deg, #2f363d, #6a737d) !important;
+  border-color: #6a737d !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(36, 41, 46, 0.3) !important;
+}
+
+.github-btn i {
+  margin-right: 6px;
+}
+
+/* GitHub button loading state */
+.github-btn.loading {
+  pointer-events: none;
+}
+
+.github-btn.loading i {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Postman integration button styling */
+.postman-btn {
+  background: linear-gradient(135deg, #ff6c37, #ff8f5a) !important;
+  color: white !important;
+  border: 1px solid #ff6c37 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.postman-btn:hover {
+  background: linear-gradient(135deg, #e55a2b, #ff6c37) !important;
+  border-color: #e55a2b !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(255, 108, 55, 0.3) !important;
+}
+
+.postman-btn i {
+  margin-right: 6px;
+}
+
+/* Postman button loading state */
+.postman-btn.loading {
+  pointer-events: none;
+}
+
+.postman-btn.loading i {
+  animation: spin 1s linear infinite;
+}
+
+/* Additional Postman styles */
+.postman-btn:active {
+  transform: translateY(0);
+}
+
+.postman-generate-btn {
+  background: linear-gradient(135deg, #ff6c37, #ff8f5a) !important;
+  color: white !important;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  font-weight: 500;
+}
+
+.postman-generate-btn:hover {
+  background: linear-gradient(135deg, #e55a2b, #ff7043) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 108, 55, 0.3);
+}
+
+.postman-generate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Postman Modal Specific Styles */
+#postmanModal .form-group label {
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+#postmanModal input, #postmanModal select, #postmanModal textarea {
+  font-size: 14px;
+}
+
+#postmanModal .json-preview-section {
+  background: var(--input-bg);
+  border-radius: 6px;
+}
+
+#postmanModal pre {
+  font-family: 'Courier New', monospace;
+  line-height: 1.4;
+}
+
+/* Responsive footer */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .footer-buttons {
+    justify-content: center;
+  }
+  
+  .footer-btn {
+    font-size: 0.75em;
+    padding: 5px 10px;
+  }
+}
+
 /* Make header content a flex container */
 .header-content {
   display: flex;
@@ -860,60 +1083,127 @@ body.dark .language-selector option {
 <!-- HEADER -->
 <header>
   <div class="header-content">
-    <svg xmlns="http://www.w3.org/2000/svg" width="240" height="60" viewBox="0 0 240 60" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="280" height="60" viewBox="0 0 280 60" fill="none">
   <style>
     /* Default = light theme */
     .outline { stroke: #005BBB; }
     .accent { stroke: #00A3A3; }
+    .ai-accent { stroke: #FF6B6B; }
     .text { fill: #333333; }
     .fill-blue { fill: #005BBB; }
     .fill-teal { fill: #00A3A3; }
+    .fill-ai { fill: #FF6B6B; }
     .fill-dark { fill: #4B4B4B; }
+    .fill-gradient { fill: url(#aiGradient); }
 
-    /* Dark theme adjustments - using body class */
+    /* Dark theme adjustments */
     body.dark .outline { stroke: #66B2FF; }
     body.dark .accent { stroke: #4DFFFF; }
+    body.dark .ai-accent { stroke: #FF8A8A; }
     body.dark .text { fill: #FFFFFF; }
     body.dark .fill-blue { fill: #66B2FF; }
     body.dark .fill-teal { fill: #4DFFFF; }
+    body.dark .fill-ai { fill: #FF8A8A; }
     body.dark .fill-dark { fill: #CCCCCC; }
 
     /* Light theme explicit styling */
     body.light .outline { stroke: #005BBB; }
     body.light .accent { stroke: #00A3A3; }
+    body.light .ai-accent { stroke: #FF6B6B; }
     body.light .text { fill: #333333; }
     body.light .fill-blue { fill: #005BBB; }
     body.light .fill-teal { fill: #00A3A3; }
+    body.light .fill-ai { fill: #FF6B6B; }
     body.light .fill-dark { fill: #4B4B4B; }
 
     /* Fallback for system preference dark mode */
     @media (prefers-color-scheme: dark) {
       body:not(.light) .outline { stroke: #66B2FF; }
       body:not(.light) .accent { stroke: #4DFFFF; }
+      body:not(.light) .ai-accent { stroke: #FF8A8A; }
       body:not(.light) .text { fill: #FFFFFF; }
       body:not(.light) .fill-blue { fill: #66B2FF; }
       body:not(.light) .fill-teal { fill: #4DFFFF; }
+      body:not(.light) .fill-ai { fill: #FF8A8A; }
       body:not(.light) .fill-dark { fill: #CCCCCC; }
+    }
+
+    /* Animation for AI elements */
+    .ai-pulse {
+      animation: aiPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes aiPulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
     }
   </style>
 
-  <!-- Circular data flow icon -->
-  <circle cx="30" cy="30" r="20" class="outline" stroke-width="3" fill="none"/>
-  <path d="M30 10 A20 20 0 0 1 50 30" class="accent" stroke-width="3" fill="none"/>
-  <path d="M50 30 A20 20 0 0 1 30 50" class="accent" stroke-width="3" fill="none"/>
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="aiGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" class="fill-ai" />
+      <stop offset="50%" class="fill-blue" />
+      <stop offset="100%" class="fill-teal" />
+    </linearGradient>
+  </defs>
+
+  <!-- Data Flow Circle -->
+  <circle cx="30" cy="30" r="18" class="outline" stroke-width="2.5" fill="none"/>
   
-  <!-- Conversion arrows -->
-  <polygon points="48,28 54,30 48,32" class="fill-blue"/>
-  <polygon points="12,28 6,30 12,32" class="fill-teal"/>
+  <!-- Data points around circle -->
+  <circle cx="30" cy="12" r="2" class="fill-blue"/>
+  <circle cx="42" cy="18" r="2" class="fill-teal"/>
+  <circle cx="48" cy="30" r="2" class="fill-ai"/>
+  <circle cx="42" cy="42" r="2" class="fill-blue"/>
+  <circle cx="30" cy="48" r="2" class="fill-teal"/>
+  <circle cx="18" cy="42" r="2" class="fill-ai"/>
+  <circle cx="12" cy="30" r="2" class="fill-blue"/>
+  <circle cx="18" cy="18" r="2" class="fill-teal"/>
+
+  <!-- Central AI Brain -->
+  <circle cx="30" cy="30" r="8" class="fill-gradient" opacity="0.3"/>
   
-  <!-- Graph bars inside -->
-  <rect x="24" y="20" width="3" height="10" class="fill-blue"/>
-  <rect x="29" y="15" width="3" height="15" class="fill-teal"/>
-  <rect x="34" y="25" width="3" height="5" class="fill-dark"/>
+  <!-- AI Neural connections -->
+  <path d="M22 26 L30 30 L38 34" class="ai-accent ai-pulse" stroke-width="1.5" fill="none"/>
+  <path d="M22 34 L30 30 L38 26" class="ai-accent ai-pulse" stroke-width="1.5" fill="none"/>
+  <path d="M26 22 L30 30 L34 38" class="ai-accent ai-pulse" stroke-width="1.5" fill="none"/>
+  <path d="M34 22 L30 30 L26 38" class="ai-accent ai-pulse" stroke-width="1.5" fill="none"/>
+
+  <!-- Data flow arrows -->
+  <polygon points="45,15 50,18 45,21" class="fill-blue"/>
+  <polygon points="15,45 10,42 15,39" class="fill-teal"/>
   
+  <!-- Data bars visualization -->
+  <g transform="translate(60, 20)">
+    <rect x="0" y="15" width="4" height="8" class="fill-blue"/>
+    <rect x="6" y="10" width="4" height="13" class="fill-teal"/>
+    <rect x="12" y="5" width="4" height="18" class="fill-ai"/>
+    <rect x="18" y="12" width="4" height="11" class="fill-blue"/>
+    <rect x="24" y="8" width="4" height="15" class="fill-teal"/>
+  </g>
+
+  <!-- AI chip icon -->
+  <g transform="translate(90, 22)">
+    <rect x="0" y="0" width="16" height="16" rx="2" class="outline" stroke-width="1.5" fill="none"/>
+    <rect x="3" y="3" width="10" height="10" rx="1" class="fill-ai" opacity="0.4"/>
+    <line x1="2" y1="4" x2="0" y2="4" class="outline" stroke-width="1"/>
+    <line x1="2" y1="8" x2="0" y2="8" class="outline" stroke-width="1"/>
+    <line x1="2" y1="12" x2="0" y2="12" class="outline" stroke-width="1"/>
+    <line x1="14" y1="4" x2="16" y2="4" class="outline" stroke-width="1"/>
+    <line x1="14" y1="8" x2="16" y2="8" class="outline" stroke-width="1"/>
+    <line x1="14" y1="12" x2="16" y2="12" class="outline" stroke-width="1"/>
+  </g>
+
   <!-- Site Name -->
-  <text x="70" y="35" font-family="Inter, sans-serif" font-size="18" class="text">
-    Data PlayGround
+  <text x="120" y="25" font-family="Inter, sans-serif" font-size="16" font-weight="600" class="text">
+    DataZ
+  </text>
+  <text x="164" y="25" font-family="Inter, sans-serif" font-size="16" font-weight="400" class="ai-accent">
+    AI
+  </text>
+  <text x="120" y="42" font-family="Inter, sans-serif" font-size="12" font-weight="400" class="fill-dark">
+    Data Tools + AI Power
   </text>
 </svg>
 
@@ -943,9 +1233,6 @@ body.dark .language-selector option {
         <option value="te">🇮🇳 తెలుగు</option>
       </select>
       <button id="themeToggle" class="theme-btn" data-i18n="dark_mode">Dark Mode</button>
-      <button id="feedbackBtn" class="feedback-btn" onclick="openFeedback()" data-i18n="feedback" title="Share Feedback">
-        <i class="fas fa-comment"></i> Feedback
-      </button>
     </div>
   </div>
 </header>
@@ -1172,6 +1459,14 @@ body.dark .language-selector option {
         <button onclick="generateJavaScriptClasses()" data-i18n="generate_js_classes">
           <i class="fas fa-code"></i>
           Generate JS Classes
+        </button>
+        <button onclick="openGitHubIntegration()" class="action-btn github-btn" data-i18n="github_pojo" title="Generate POJO classes from JSON input and commit to your GitHub repository">
+          <i class="fab fa-github"></i>
+          Generate POJOs to GitHub
+        </button>
+        <button onclick="openPostmanIntegration()" class="action-btn postman-btn" data-i18n="postman_collection" title="Generate Postman collection from JSON API responses">
+          <i class="fas fa-paper-plane"></i>
+          Generate Postman Collection
         </button>
         <button onclick="removeJSONSpaces('json-input')" data-i18n="remove_whitespace_json">
           <i class="fas fa-compress-alt"></i>
@@ -4646,7 +4941,17 @@ function initializeInputPersistence() {
 
 <!-- FOOTER -->
 <footer>
-  <p data-i18n="footer_text">© 2025 Dataz Studio | Professional Data Processing & Visualization Tool</p>
+  <div class="footer-content">
+    <p data-i18n="footer_text">© 2025 Dataz Studio | Professional Data Processing & Visualization Tool</p>
+    <div class="footer-buttons">
+      <button id="cookieBtn" class="footer-btn cookie-btn-footer" onclick="manageCookies()" data-i18n="manage_cookies" title="Manage Cookie Preferences">
+        <i class="fas fa-cookie-bite"></i> Cookies
+      </button>
+      <button id="feedbackBtn" class="footer-btn feedback-btn-footer" onclick="openFeedback()" data-i18n="feedback" title="Share Feedback">
+        <i class="fas fa-comment"></i> Feedback
+      </button>
+    </div>
+  </div>
 </footer>
 
 <!-- Full JSON Modal -->
@@ -4974,6 +5279,8 @@ const translations = {
     convert_json_to_xml: "Convert JSON → XML",
     convert_json_to_csv: "Convert JSON to CSV",
     generate_js_classes: "Generate JS Classes",
+    github_pojo: "Generate POJOs to GitHub",
+    postman_collection: "Generate Postman Collection",
     generate_graph: "Generate Graph",
     remove_whitespace_json: "Remove Whitespace",
     tree_view: "Tree View",
@@ -5144,7 +5451,34 @@ const translations = {
     translate_text: "Translate Text",
     analyze_sentiment: "Analyze Sentiment", 
     check_grammar: "Check Grammar",
-    extract_keywords: "Extract Keywords"
+    extract_keywords: "Extract Keywords",
+    
+    // Cookie Consent
+    manage_cookies: "Cookies",
+    cookie_title: "We value your privacy",
+    cookie_description: "We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.",
+    cookie_essential: "Essential Cookies",
+    cookie_analytics: "Analytics Cookies",
+    cookie_functional: "Functional Cookies",
+    cookie_marketing: "Marketing Cookies",
+    cookie_required: "(Required)",
+    cookie_optional: "(Optional)",
+    cookie_essential_desc: "These cookies are necessary for the website to function and cannot be switched off. They enable basic functions like page navigation and access to secure areas.",
+    cookie_analytics_desc: "These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.",
+    cookie_functional_desc: "These cookies enable enhanced functionality and personalization, such as remembering your preferences and settings.",
+    cookie_marketing_desc: "These cookies are used to track visitors across websites to display relevant and engaging advertisements.",
+    cookie_policy: "Cookie Policy",
+    privacy_policy: "Privacy Policy",
+    cookie_essential_only: "Accept Essential Only",
+    cookie_customize: "Customize",
+    cookie_accept_all: "Accept All Cookies",
+    cookie_settings_title: "Cookie Settings",
+    cookie_settings_desc: "Choose which cookies you want to accept. You can change these settings at any time.",
+    cookie_reset: "Reset to Default",
+    cookie_save_settings: "Save Settings",
+    cookie_banner_text: "We use cookies to improve your experience.",
+    cookie_manage: "Manage Cookies",
+    cookie_accept: "Accept"
   },
   
   es: {
@@ -6459,18 +6793,74 @@ document.addEventListener('DOMContentLoaded', function() {
         height: window.innerHeight,
         width: window.innerWidth,
         scrollX: 0,
-        scrollY: 0
+        scrollY: 0,
+        scale: 0.8, // Reduce size for better email compatibility
+        useCORS: true,
+        allowTaint: false
       }).then(canvas => {
         canvas.toBlob(blob => {
-          screenshotData = blob;
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            showAttachedScreenshot(e.target.result, 'captured-screenshot.png');
-          };
-          reader.readAsDataURL(blob);
-          
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Feedback';
+          // Check blob size and compress if necessary
+          if (blob.size > 2 * 1024 * 1024) { // If larger than 2MB
+            // Create a smaller version
+            const smallCanvas = document.createElement('canvas');
+            const ctx = smallCanvas.getContext('2d');
+            const img = new Image();
+            
+            img.onload = function() {
+              const maxWidth = 1200;
+              const maxHeight = 800;
+              let { width, height } = img;
+              
+              if (width > maxWidth || height > maxHeight) {
+                const ratio = Math.min(maxWidth / width, maxHeight / height);
+                width *= ratio;
+                height *= ratio;
+              }
+              
+              smallCanvas.width = width;
+              smallCanvas.height = height;
+              ctx.drawImage(img, 0, 0, width, height);
+              
+              smallCanvas.toBlob(compressedBlob => {
+                screenshotData = compressedBlob;
+                console.log('Screenshot captured and compressed:', {
+                  originalSize: blob.size,
+                  compressedSize: compressedBlob.size,
+                  dimensions: `${width}x${height}`
+                });
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                  showAttachedScreenshot(e.target.result, 'captured-screenshot.png');
+                };
+                reader.readAsDataURL(compressedBlob);
+                
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Feedback';
+              }, 'image/jpeg', 0.8);
+            };
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              img.src = e.target.result;
+            };
+            reader.readAsDataURL(blob);
+          } else {
+            screenshotData = blob;
+            console.log('Screenshot captured:', {
+              size: blob.size,
+              type: blob.type
+            });
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              showAttachedScreenshot(e.target.result, 'captured-screenshot.png');
+            };
+            reader.readAsDataURL(blob);
+            
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Feedback';
+          }
         }, 'image/png');
       }).catch(error => {
         console.error('Screenshot capture failed:', error);
@@ -6490,12 +6880,26 @@ document.addEventListener('DOMContentLoaded', function() {
   function handleScreenshotUpload(event) {
     const file = event.target.files[0];
     if (file && file.type.startsWith('image/')) {
+      // Validate file size (limit to 5MB for better email compatibility)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Screenshot file is too large. Please use an image smaller than 5MB.');
+        return;
+      }
+      
       screenshotData = file;
+      console.log('Screenshot uploaded:', {
+        name: file.name,
+        size: file.size,
+        type: file.type
+      });
+      
       const reader = new FileReader();
       reader.onload = function(e) {
         showAttachedScreenshot(e.target.result, file.name);
       };
       reader.readAsDataURL(file);
+    } else {
+      alert('Please select a valid image file.');
     }
   }
   
@@ -6544,35 +6948,89 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('feedbackSuccess').style.display = 'none';
     document.getElementById('feedbackError').style.display = 'none';
     
+    // Convert screenshot to base64 if available
+    let screenshotBase64 = '';
+    if (screenshotData) {
+      if (screenshotData instanceof Blob) {
+        // Handle blob data from capture
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          screenshotBase64 = e.target.result;
+          sendFormData(screenshotBase64, submitBtn, originalText);
+        };
+        reader.readAsDataURL(screenshotData);
+      } else if (screenshotData instanceof File) {
+        // Handle file upload
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          screenshotBase64 = e.target.result;
+          sendFormData(screenshotBase64, submitBtn, originalText);
+        };
+        reader.readAsDataURL(screenshotData);
+      } else {
+        sendFormData(screenshotBase64, submitBtn, originalText);
+      }
+    } else {
+      sendFormData(screenshotBase64, submitBtn, originalText);
+    }
+  }
+  
+  function sendFormData(screenshotBase64, submitBtn, originalText) {
     // Collect form data
     const formData = new FormData();
     formData.append('email', document.getElementById('feedbackEmail').value || 'Anonymous');
     formData.append('subject', document.getElementById('feedbackSubject').value);
-    formData.append('message', document.getElementById('feedbackMessage').value);
+    
+    // Create comprehensive message with screenshot
+    let message = `
+FROM: ${document.getElementById('feedbackEmail').value || 'Anonymous'}
+SUBJECT: ${document.getElementById('feedbackSubject').value}
+URL: ${window.location.href}
+BROWSER: ${navigator.userAgent}
+TIMESTAMP: ${new Date().toISOString()}
+
+MESSAGE:
+${document.getElementById('feedbackMessage').value}
+
+${screenshotBase64 ? `
+SCREENSHOT ATTACHED:
+${screenshotBase64}
+` : 'No screenshot attached.'}
+    `.trim();
+    
+    formData.append('message', message);
     formData.append('url', window.location.href);
     formData.append('userAgent', navigator.userAgent);
     formData.append('timestamp', new Date().toISOString());
     
-    // Add screenshot if available
+    // Add screenshot as attachment AND embed in message
     if (screenshotData) {
-      formData.append('screenshot', screenshotData, 'screenshot.png');
+      // Try to add as file attachment
+      if (screenshotData instanceof Blob) {
+        formData.append('_attachment', screenshotData, 'screenshot.png');
+      } else if (screenshotData instanceof File) {
+        formData.append('_attachment', screenshotData);
+      }
     }
     
     // Try multiple email services for better reliability
-    sendEmailWithFormSubmit(formData, submitBtn, originalText);
+    sendEmailWithFormSubmit(formData, submitBtn, originalText, screenshotBase64);
   }
   
-  function sendEmailWithFormSubmit(formData, submitBtn, originalText) {
-    // Send to FormSubmit.co (free email service)
-    // Note: First submission requires email verification
+  function sendEmailWithFormSubmit(formData, submitBtn, originalText, screenshotBase64) {
+    // Add FormSubmit.co specific configuration for better attachment support
+    formData.append('_next', window.location.href); // Redirect back to current page
+    formData.append('_subject', `DataZ Feedback: ${formData.get('subject')}`);
+    formData.append('_template', 'table'); // Use table template for better formatting
+    formData.append('_captcha', 'false'); // Disable captcha for better UX
+    
+    // Send to FormSubmit.co with attachment support
     fetch('https://formsubmit.co/ajax/d26a1a25336155845d9e8d061f10154b', {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json'
-      },
-      body: formData
+      body: formData // Don't set Content-Type header, let browser set it for FormData
     })
     .then(response => {
+      console.log('FormSubmit response status:', response.status);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -6580,23 +7038,36 @@ document.addEventListener('DOMContentLoaded', function() {
     })
     .then(data => {
       console.log('FormSubmit response:', data);
-      if (data.success || data.message === 'Email confirmation required') {
+      if (data.success === 'true' || data.success === true || data.message === 'Email confirmation required') {
         // Show success message
         document.getElementById('feedbackSuccess').style.display = 'block';
-        document.getElementById('feedbackForm').reset();
-        resetScreenshot();
+        const successEl = document.getElementById('feedbackSuccess');
         
-        // Show additional info if email confirmation is needed
-        if (data.message === 'Email confirmation required') {
-          const successEl = document.getElementById('feedbackSuccess');
-          successEl.innerHTML = `
-            <i class="fas fa-check-circle"></i> 
-            <div>Thank you! Your feedback has been received.</div>
+        let successMessage = `
+          <i class="fas fa-check-circle"></i> 
+          <div>Thank you! Your feedback has been received.</div>
+        `;
+        
+        if (screenshotBase64) {
+          successMessage += `
             <div style="font-size: 0.8em; margin-top: 5px; opacity: 0.8;">
-              Note: Please check your email (asa@gmail.com) to confirm the submission.
+              Screenshot attachment included successfully.
             </div>
           `;
         }
+        
+        if (data.message === 'Email confirmation required') {
+          successMessage += `
+            <div style="font-size: 0.8em; margin-top: 5px; opacity: 0.8;">
+              Note: Please check your email to confirm the submission.
+            </div>
+          `;
+        }
+        
+        successEl.innerHTML = successMessage;
+        
+        document.getElementById('feedbackForm').reset();
+        resetScreenshot();
         
         // Auto-close after 5 seconds
         setTimeout(() => {
@@ -6609,7 +7080,7 @@ document.addEventListener('DOMContentLoaded', function() {
     .catch(error => {
       console.error('FormSubmit error:', error);
       // Try fallback method
-      sendEmailWithMailto(formData, submitBtn, originalText);
+      sendEmailWithMailto(formData, submitBtn, originalText, screenshotBase64);
     })
     .finally(() => {
       submitBtn.disabled = false;
@@ -6617,24 +7088,41 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  function sendEmailWithMailto(formData, submitBtn, originalText) {
+  function sendEmailWithMailto(formData, submitBtn, originalText, screenshotBase64) {
     // Fallback: Generate mailto link
     const email = formData.get('email') || 'Anonymous';
-    const subject = `Feedback: ${formData.get('subject')}`;
-    const message = `
-From: ${email}
-Subject: ${formData.get('subject')}
+    const subject = `DataZ Feedback: ${document.getElementById('feedbackSubject').value}`;
+    
+    let message = `
+FROM: ${email}
+SUBJECT: ${document.getElementById('feedbackSubject').value}
 URL: ${formData.get('url')}
-Browser: ${formData.get('userAgent')}
-Time: ${formData.get('timestamp')}
+BROWSER: ${formData.get('userAgent')}
+TIME: ${formData.get('timestamp')}
 
-Message:
-${formData.get('message')}
-
-${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailto. Please reply to request the screenshot.' : ''}
+MESSAGE:
+${document.getElementById('feedbackMessage').value}
     `.trim();
 
-    const mailtoLink = `mailto:d26a1a25336155845d9e8d061f10154b?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    if (screenshotBase64) {
+      message += `\n\nSCREENSHOT ATTACHMENT:\nA screenshot was attached but cannot be sent via mailto link.\nPlease reply to this email to request the screenshot file, or resubmit your feedback using the web form.`;
+      
+      // Try to save screenshot locally for user to attach manually
+      try {
+        const link = document.createElement('a');
+        link.download = 'dataz-feedback-screenshot.png';
+        link.href = screenshotBase64;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        message += `\n\nNote: The screenshot has been automatically downloaded to your computer. Please attach it manually to your email.`;
+      } catch (e) {
+        console.warn('Could not auto-download screenshot:', e);
+      }
+    }
+
+    const mailtoLink = `mailto:d26a1a25336155845d9e8d061f10154b@formsubmit.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
 
     // Open mailto link
     window.open(mailtoLink, '_blank');
@@ -6642,7 +7130,8 @@ ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailt
     // Show success message
     document.getElementById('feedbackSuccess').style.display = 'block';
     const successEl = document.getElementById('feedbackSuccess');
-    successEl.innerHTML = `
+    
+    let successMessage = `
       <i class="fas fa-envelope"></i> 
       <div>Your email client has been opened.</div>
       <div style="font-size: 0.8em; margin-top: 5px; opacity: 0.8;">
@@ -6650,13 +7139,23 @@ ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailt
       </div>
     `;
     
+    if (screenshotBase64) {
+      successMessage += `
+        <div style="font-size: 0.8em; margin-top: 5px; opacity: 0.8; color: #f4a261;">
+          Screenshot downloaded automatically - please attach it to your email manually.
+        </div>
+      `;
+    }
+    
+    successEl.innerHTML = successMessage;
+    
     document.getElementById('feedbackForm').reset();
     resetScreenshot();
     
-    // Auto-close after 5 seconds
+    // Auto-close after 8 seconds (longer time for screenshot case)
     setTimeout(() => {
       closeFeedback();
-    }, 5000);
+    }, 8000);
   }
   
   // Make functions globally available
@@ -6759,9 +7258,513 @@ ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailt
   </div>
 </div>
 
+<!-- Cookie Consent Modal -->
+<div id="cookieModal" class="cookie-modal" style="display: none;">
+  <div class="cookie-content">
+    <div class="cookie-header">
+      <div class="cookie-icon">
+        <i class="fas fa-cookie-bite"></i>
+      </div>
+      <h3 data-i18n="cookie_title">We value your privacy</h3>
+    </div>
+    
+    <div class="cookie-body">
+      <p data-i18n="cookie_description">
+        We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. 
+        By clicking "Accept All", you consent to our use of cookies.
+      </p>
+      
+      <div class="cookie-categories">
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <input type="checkbox" id="essential-cookies" checked disabled>
+            <label for="essential-cookies">
+              <span class="cookie-category-title" data-i18n="cookie_essential">Essential Cookies</span>
+              <span class="cookie-required" data-i18n="cookie_required">(Required)</span>
+            </label>
+          </div>
+          <p class="cookie-category-desc" data-i18n="cookie_essential_desc">
+            These cookies are necessary for the website to function and cannot be switched off. 
+            They enable basic functions like page navigation and access to secure areas.
+          </p>
+        </div>
+        
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <input type="checkbox" id="analytics-cookies">
+            <label for="analytics-cookies">
+              <span class="cookie-category-title" data-i18n="cookie_analytics">Analytics Cookies</span>
+              <span class="cookie-optional" data-i18n="cookie_optional">(Optional)</span>
+            </label>
+          </div>
+          <p class="cookie-category-desc" data-i18n="cookie_analytics_desc">
+            These cookies help us understand how visitors interact with our website by collecting 
+            and reporting information anonymously.
+          </p>
+        </div>
+        
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <input type="checkbox" id="functional-cookies">
+            <label for="functional-cookies">
+              <span class="cookie-category-title" data-i18n="cookie_functional">Functional Cookies</span>
+              <span class="cookie-optional" data-i18n="cookie_optional">(Optional)</span>
+            </label>
+          </div>
+          <p class="cookie-category-desc" data-i18n="cookie_functional_desc">
+            These cookies enable enhanced functionality and personalization, such as remembering 
+            your preferences and settings.
+          </p>
+        </div>
+        
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <input type="checkbox" id="marketing-cookies">
+            <label for="marketing-cookies">
+              <span class="cookie-category-title" data-i18n="cookie_marketing">Marketing Cookies</span>
+              <span class="cookie-optional" data-i18n="cookie_optional">(Optional)</span>
+            </label>
+          </div>
+          <p class="cookie-category-desc" data-i18n="cookie_marketing_desc">
+            These cookies are used to track visitors across websites to display relevant 
+            and engaging advertisements.
+          </p>
+        </div>
+      </div>
+      
+      <div class="cookie-links">
+        <a href="#" onclick="showCookiePolicy()" data-i18n="cookie_policy">Cookie Policy</a>
+        <span>•</span>
+        <a href="#" onclick="showPrivacyPolicy()" data-i18n="privacy_policy">Privacy Policy</a>
+      </div>
+    </div>
+    
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-btn-secondary" onclick="acceptEssentialCookies()" data-i18n="cookie_essential_only">
+        Accept Essential Only
+      </button>
+      <button class="cookie-btn cookie-btn-settings" onclick="toggleCookieSettings()" data-i18n="cookie_customize">
+        <i class="fas fa-cog"></i> Customize
+      </button>
+      <button class="cookie-btn cookie-btn-primary" onclick="acceptAllCookies()" data-i18n="cookie_accept_all">
+        Accept All Cookies
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Settings Panel (Initially Hidden) -->
+<div id="cookieSettingsBackdrop" class="cookie-settings-backdrop" style="display: none;" onclick="toggleCookieSettings()"></div>
+<div id="cookieSettings" class="cookie-settings" style="display: none;">
+  <div class="cookie-settings-content">
+    <div class="cookie-settings-header">
+      <h3 data-i18n="cookie_settings_title">Cookie Settings</h3>
+      <button class="cookie-close" onclick="toggleCookieSettings()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="cookie-settings-body">
+      <p data-i18n="cookie_settings_desc">
+        Choose which cookies you want to accept. You can change these settings at any time.
+      </p>
+      
+      <div class="cookie-toggle-list">
+        <div class="cookie-toggle-item">
+          <div class="cookie-toggle-header">
+            <label class="cookie-toggle">
+              <input type="checkbox" id="settings-essential" checked disabled>
+              <span class="cookie-slider"></span>
+            </label>
+            <div class="cookie-toggle-info">
+              <h4 data-i18n="cookie_essential">Essential Cookies</h4>
+              <p data-i18n="cookie_essential_desc">These cookies are necessary for the website to function and cannot be switched off.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cookie-toggle-item">
+          <div class="cookie-toggle-header">
+            <label class="cookie-toggle">
+              <input type="checkbox" id="settings-analytics">
+              <span class="cookie-slider"></span>
+            </label>
+            <div class="cookie-toggle-info">
+              <h4 data-i18n="cookie_analytics">Analytics Cookies</h4>
+              <p data-i18n="cookie_analytics_desc">Help us understand how visitors interact with our website.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cookie-toggle-item">
+          <div class="cookie-toggle-header">
+            <label class="cookie-toggle">
+              <input type="checkbox" id="settings-functional">
+              <span class="cookie-slider"></span>
+            </label>
+            <div class="cookie-toggle-info">
+              <h4 data-i18n="cookie_functional">Functional Cookies</h4>
+              <p data-i18n="cookie_functional_desc">Enable enhanced functionality and personalization.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="cookie-toggle-item">
+          <div class="cookie-toggle-header">
+            <label class="cookie-toggle">
+              <input type="checkbox" id="settings-marketing">
+              <span class="cookie-slider"></span>
+            </label>
+            <div class="cookie-toggle-info">
+              <h4 data-i18n="cookie_marketing">Marketing Cookies</h4>
+              <p data-i18n="cookie_marketing_desc">Used to track visitors across websites for advertising.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cookie-settings-actions">
+      <button class="cookie-btn cookie-btn-secondary" onclick="resetCookieSettings()" data-i18n="cookie_reset">
+        Reset to Default
+      </button>
+      <button class="cookie-btn cookie-btn-primary" onclick="saveCookieSettings()" data-i18n="cookie_save_settings">
+        Save Settings
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Banner (Minimized View) -->
+<div id="cookieBanner" class="cookie-banner" style="display: none;">
+  <div class="cookie-banner-content">
+    <div class="cookie-banner-text">
+      <i class="fas fa-cookie-bite"></i>
+      <span data-i18n="cookie_banner_text">We use cookies to improve your experience.</span>
+    </div>
+    <div class="cookie-banner-actions">
+      <button class="cookie-banner-btn" onclick="showCookieModal()" data-i18n="cookie_manage">
+        Manage Cookies
+      </button>
+      <button class="cookie-banner-btn primary" onclick="acceptAllCookies()" data-i18n="cookie_accept">
+        Accept
+      </button>
+    </div>
+  </div>
+</div>
+
 <script>
+// Cookie Management System
+class CookieManager {
+  constructor() {
+    this.cookieTypes = {
+      essential: true,
+      analytics: false,
+      functional: false,
+      marketing: false
+    };
+    
+    this.init();
+  }
+  
+  init() {
+    // Check if user has already made a choice
+    const consent = this.getConsent();
+    if (!consent) {
+      // Show cookie modal after a short delay
+      setTimeout(() => {
+        this.showCookieModal();
+      }, 1000);
+    } else {
+      // Apply existing consent
+      this.applyConsent(consent);
+    }
+    
+    // Sync checkboxes with current state
+    this.syncCheckboxes();
+  }
+  
+  showCookieModal() {
+    document.getElementById('cookieModal').style.display = 'flex';
+    document.body.classList.add('modal-open');
+  }
+  
+  hideCookieModal() {
+    document.getElementById('cookieModal').style.display = 'none';
+    document.body.classList.remove('modal-open');
+  }
+  
+  showCookieBanner() {
+    document.getElementById('cookieBanner').style.display = 'block';
+  }
+  
+  hideCookieBanner() {
+    document.getElementById('cookieBanner').style.display = 'none';
+  }
+  
+  toggleCookieSettings() {
+    const settings = document.getElementById('cookieSettings');
+    const backdrop = document.getElementById('cookieSettingsBackdrop');
+    const isVisible = settings.style.display === 'block';
+    
+    if (isVisible) {
+      // Hide settings and backdrop
+      settings.style.display = 'none';
+      backdrop.style.display = 'none';
+    } else {
+      // Show backdrop and settings
+      backdrop.style.display = 'block';
+      settings.style.display = 'block';
+      this.syncSettingsCheckboxes();
+    }
+  }
+  
+  syncCheckboxes() {
+    const consent = this.getConsent();
+    if (consent) {
+      document.getElementById('analytics-cookies').checked = consent.analytics;
+      document.getElementById('functional-cookies').checked = consent.functional;
+      document.getElementById('marketing-cookies').checked = consent.marketing;
+    }
+  }
+  
+  syncSettingsCheckboxes() {
+    const consent = this.getConsent();
+    if (consent) {
+      document.getElementById('settings-analytics').checked = consent.analytics;
+      document.getElementById('settings-functional').checked = consent.functional;
+      document.getElementById('settings-marketing').checked = consent.marketing;
+    }
+  }
+  
+  acceptAllCookies() {
+    const consent = {
+      essential: true,
+      analytics: true,
+      functional: true,
+      marketing: true,
+      timestamp: Date.now()
+    };
+    
+    this.saveConsent(consent);
+    this.applyConsent(consent);
+    this.hideCookieModal();
+    this.hideCookieBanner();
+    
+    // Show success message
+    this.showConsentMessage('All cookies accepted. Thank you!', 'success');
+  }
+  
+  acceptEssentialCookies() {
+    const consent = {
+      essential: true,
+      analytics: false,
+      functional: false,
+      marketing: false,
+      timestamp: Date.now()
+    };
+    
+    this.saveConsent(consent);
+    this.applyConsent(consent);
+    this.hideCookieModal();
+    this.hideCookieBanner();
+    
+    // Show success message
+    this.showConsentMessage('Essential cookies accepted.', 'info');
+  }
+  
+  saveCookieSettings() {
+    const consent = {
+      essential: true,
+      analytics: document.getElementById('settings-analytics').checked,
+      functional: document.getElementById('settings-functional').checked,
+      marketing: document.getElementById('settings-marketing').checked,
+      timestamp: Date.now()
+    };
+    
+    this.saveConsent(consent);
+    this.applyConsent(consent);
+    this.hideCookieModal();
+    this.hideCookieBanner();
+    document.getElementById('cookieSettings').style.display = 'none';
+    document.getElementById('cookieSettingsBackdrop').style.display = 'none';
+    
+    // Show success message
+    this.showConsentMessage('Cookie preferences saved!', 'success');
+  }
+  
+  resetCookieSettings() {
+    document.getElementById('settings-analytics').checked = false;
+    document.getElementById('settings-functional').checked = false;
+    document.getElementById('settings-marketing').checked = false;
+  }
+  
+  saveConsent(consent) {
+    localStorage.setItem('cookie-consent', JSON.stringify(consent));
+    
+    // Also set HTTP cookies for server-side detection
+    const expires = new Date();
+    expires.setFullYear(expires.getFullYear() + 1); // 1 year
+    
+    document.cookie = `cookie-consent=${JSON.stringify(consent)}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
+  }
+  
+  getConsent() {
+    try {
+      const stored = localStorage.getItem('cookie-consent');
+      return stored ? JSON.parse(stored) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+  
+  applyConsent(consent) {
+    this.cookieTypes = consent;
+    
+    // Apply analytics cookies
+    if (consent.analytics) {
+      this.loadAnalytics();
+    }
+    
+    // Apply functional cookies
+    if (consent.functional) {
+      this.enableFunctionalFeatures();
+    }
+    
+    // Apply marketing cookies
+    if (consent.marketing) {
+      this.loadMarketingScripts();
+    }
+    
+    console.log('Cookie consent applied:', consent);
+  }
+  
+  loadAnalytics() {
+    // Example: Load Google Analytics
+    if (typeof gtag === 'undefined' && this.cookieTypes.analytics) {
+      console.log('Loading analytics scripts...');
+      // You can add your analytics code here
+      // Example: Google Analytics, Adobe Analytics, etc.
+    }
+  }
+  
+  enableFunctionalFeatures() {
+    if (this.cookieTypes.functional) {
+      console.log('Enabling functional features...');
+      // Enable features like:
+      // - Enhanced localStorage usage
+      // - Advanced personalization
+      // - Social media integrations
+    }
+  }
+  
+  loadMarketingScripts() {
+    if (this.cookieTypes.marketing) {
+      console.log('Loading marketing scripts...');
+      // Load marketing tools like:
+      // - Facebook Pixel
+      // - Google Ads
+      // - Other advertising pixels
+    }
+  }
+  
+  showConsentMessage(message, type = 'info') {
+    // Create a temporary notification
+    const notification = document.createElement('div');
+    notification.className = `cookie-notification cookie-notification-${type}`;
+    notification.innerHTML = `
+      <div class="cookie-notification-content">
+        <i class="fas fa-check-circle"></i>
+        <span>${message}</span>
+      </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Show notification
+    setTimeout(() => {
+      notification.classList.add('show');
+    }, 100);
+    
+    // Hide notification after 3 seconds
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 300);
+    }, 3000);
+  }
+  
+  // Public methods for external access
+  updateConsent(type, value) {
+    const consent = this.getConsent();
+    if (consent) {
+      consent[type] = value;
+      consent.timestamp = Date.now();
+      this.saveConsent(consent);
+      this.applyConsent(consent);
+    }
+  }
+  
+  revokeConsent() {
+    localStorage.removeItem('cookie-consent');
+    document.cookie = 'cookie-consent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    this.showCookieModal();
+  }
+  
+  getConsentStatus() {
+    return this.getConsent();
+  }
+}
+
+// Global cookie manager instance
+let cookieManager;
+
+// Cookie modal functions (global scope for onclick handlers)
+function acceptAllCookies() {
+  cookieManager.acceptAllCookies();
+}
+
+function acceptEssentialCookies() {
+  cookieManager.acceptEssentialCookies();
+}
+
+function toggleCookieSettings() {
+  cookieManager.toggleCookieSettings();
+}
+
+function saveCookieSettings() {
+  cookieManager.saveCookieSettings();
+}
+
+function resetCookieSettings() {
+  cookieManager.resetCookieSettings();
+}
+
+function showCookieModal() {
+  cookieManager.showCookieModal();
+}
+
+function showCookiePolicy() {
+  // You can implement this to show your cookie policy
+  alert('Cookie Policy: This would link to your detailed cookie policy page.');
+}
+
+function showPrivacyPolicy() {
+  // You can implement this to show your privacy policy
+  alert('Privacy Policy: This would link to your detailed privacy policy page.');
+}
+
+// Add cookie management to settings
+function manageCookies() {
+  cookieManager.showCookieModal();
+}
+
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize cookie manager first
+  cookieManager = new CookieManager();
+  
   // Get the last opened panel or default to JSON
   const lastPanel = localStorage.getItem('last-panel') || 'json';
   
@@ -6779,6 +7782,1182 @@ document.addEventListener('DOMContentLoaded', function() {
   
   console.log('Application initialized with panel:', lastPanel);
 });
+
+// Postman Collection Generator Functions
+function openPostmanIntegration() {
+  // Check if JSON data exists in the input textarea
+  const jsonInput = document.getElementById('json-input').value.trim();
+  if (!jsonInput) {
+    // Show helpful example in alert
+    const exampleApiResponse = `{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com",
+      "created_at": "2025-08-18T10:30:00Z"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 100
+  }
+}`;
+    
+    if (confirm('⚠️ Please enter JSON API response data first to generate Postman collection.\n\nWould you like to use an example API response?')) {
+      // Insert example JSON into the textarea
+      document.getElementById('json-input').value = exampleApiResponse;
+      // Trigger JSON formatting to show it nicely
+      beautifyJSON();
+      alert('✅ Example API response has been added! Now click the "Generate Postman Collection" button again.');
+    }
+    
+    // Focus on the JSON input textarea
+    document.getElementById('json-input').focus();
+    return;
+  }
+  
+  // Validate JSON format
+  try {
+    const parsedJson = JSON.parse(jsonInput);
+    console.log('✅ Valid JSON detected for Postman collection generation:', parsedJson);
+  } catch (error) {
+    alert(`❌ Invalid JSON format detected.\n\nError: ${error.message}\n\nPlease fix the JSON syntax in the input textarea and try again.`);
+    document.getElementById('json-input').focus();
+    return;
+  }
+  
+  // Show Postman integration modal
+  showPostmanModal();
+}
+
+function showPostmanModal() {
+  const modal = document.getElementById('postmanModal');
+  if (!modal) {
+    createPostmanModal();
+  }
+  
+  // Show the modal
+  document.getElementById('postmanModal').style.display = 'block';
+  
+  // Show JSON preview in the modal
+  const jsonInput = document.getElementById('json-input').value.trim();
+  const jsonPreview = document.getElementById('postmanJsonPreview');
+  if (jsonPreview) {
+    try {
+      const parsedJson = JSON.parse(jsonInput);
+      const formattedJson = JSON.stringify(parsedJson, null, 2);
+      jsonPreview.textContent = formattedJson.length > 200 
+        ? formattedJson.substring(0, 200) + '...' 
+        : formattedJson;
+    } catch (error) {
+      jsonPreview.textContent = 'Error parsing JSON';
+    }
+  }
+  
+  // Auto-suggest collection name from JSON structure
+  try {
+    const parsedJson = JSON.parse(jsonInput);
+    const suggestedName = suggestCollectionName(parsedJson);
+    const collectionNameInput = document.getElementById('collectionName');
+    if (collectionNameInput && !collectionNameInput.value) {
+      collectionNameInput.value = suggestedName;
+    }
+  } catch (error) {
+    // Ignore if JSON is invalid
+  }
+}
+
+function createPostmanModal() {
+  const modalHTML = `
+    <div id="postmanModal" class="modal" style="display: none;">
+      <div class="modal-content" style="max-width: 700px; max-height: 85vh; display: flex; flex-direction: column;">
+        <div class="modal-header" style="flex-shrink: 0; padding: 20px 20px 0 20px;">
+          <span class="modal-close" onclick="closePostmanModal()" style="float: right; font-size: 24px; cursor: pointer;">&times;</span>
+          <h3 style="margin: 0; padding-right: 30px;"><i class="fas fa-paper-plane" style="color: #ff6c37;"></i> Generate Postman Collection</h3>
+        </div>
+        
+        <div class="modal-body" style="flex: 1; overflow-y: auto; padding: 20px;">
+          <!-- JSON Preview Section -->
+          <div class="json-preview-section" style="background: var(--output-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; margin: 0 0 15px 0;">
+            <h4 style="margin: 0 0 8px 0; color: var(--text-color); font-size: 14px;">
+              <i class="fas fa-code"></i> API Response Data:
+            </h4>
+            <pre id="postmanJsonPreview" style="margin: 0; font-size: 12px; color: var(--text-color); background: transparent; border: none; padding: 0; max-height: 120px; overflow-y: auto; white-space: pre-wrap;">
+              Loading JSON preview...
+            </pre>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="collectionName" style="display: block; margin-bottom: 5px; font-weight: 500;">Collection Name</label>
+            <input type="text" id="collectionName" placeholder="My API Collection" 
+                   style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+            <small style="color: var(--text-color); opacity: 0.7; display: block; margin-top: 5px;">
+              Auto-suggested based on your JSON structure
+            </small>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="baseUrl" style="display: block; margin-bottom: 5px; font-weight: 500;">API Base URL</label>
+            <input type="text" id="baseUrl" placeholder="https://api.example.com" 
+                   style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+            <small style="color: var(--text-color); opacity: 0.7; display: block; margin-top: 5px;">
+              The base URL for your API endpoints
+            </small>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="apiEndpoints" style="display: block; margin-bottom: 5px; font-weight: 500;">API Endpoints</label>
+            <textarea id="apiEndpoints" placeholder="GET /users&#10;POST /users&#10;GET /users/{id}&#10;PUT /users/{id}&#10;DELETE /users/{id}" 
+                      style="width: 100%; height: 120px; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box; font-family: monospace; resize: vertical;"></textarea>
+            <small style="color: var(--text-color); opacity: 0.7; display: block; margin-top: 5px;">
+              One endpoint per line. Format: METHOD /path (e.g., GET /users)
+            </small>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label for="authType" style="display: block; margin-bottom: 5px; font-weight: 500;">Authentication Type</label>
+            <select id="authType" style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+              <option value="none">🔓 No Authentication</option>
+              <option value="bearer">🔑 Bearer Token</option>
+              <option value="apikey">🗝️ API Key</option>
+              <option value="basic">👤 Basic Auth</option>
+              <option value="oauth2">🔐 OAuth 2.0</option>
+            </select>
+          </div>
+          
+          <div id="authDetails" style="display: none; margin-bottom: 15px;">
+            <div class="form-group">
+              <label for="authValue" style="display: block; margin-bottom: 5px; font-weight: 500;">Authentication Value</label>
+              <input type="text" id="authValue" placeholder="Token, API Key, or Username:Password" 
+                     style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+            </div>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Options</label>
+            <label style="display: flex; align-items: center; margin-bottom: 8px; font-weight: normal;">
+              <input type="checkbox" id="includeTests" checked style="margin-right: 8px;">
+              Include response validation tests
+            </label>
+            <label style="display: flex; align-items: center; margin-bottom: 8px; font-weight: normal;">
+              <input type="checkbox" id="includeExamples" checked style="margin-right: 8px;">
+              Include example responses from JSON
+            </label>
+            <label style="display: flex; align-items: center; font-weight: normal;">
+              <input type="checkbox" id="includeEnvironment" style="margin-right: 8px;">
+              Generate environment variables
+            </label>
+          </div>
+        </div>
+        
+        <div class="modal-footer" style="flex-shrink: 0; padding: 15px 20px 20px 20px; border-top: 1px solid var(--border-color); background: var(--bg-color);">
+          <div class="postman-actions" style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button onclick="closePostmanModal()" style="background: var(--btn-bg); color: var(--btn-text); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+              Cancel
+            </button>
+            <button onclick="generatePostmanCollection()" class="postman-generate-btn" style="background: #ff6c37; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+              <i class="fas fa-download"></i> Generate & Download
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  
+  // Add event listener for auth type change
+  document.getElementById('authType').addEventListener('change', function() {
+    const authDetails = document.getElementById('authDetails');
+    const authValue = document.getElementById('authValue');
+    
+    if (this.value === 'none') {
+      authDetails.style.display = 'none';
+    } else {
+      authDetails.style.display = 'block';
+      
+      // Update placeholder based on auth type
+      switch (this.value) {
+        case 'bearer':
+          authValue.placeholder = 'your-bearer-token-here';
+          break;
+        case 'apikey':
+          authValue.placeholder = 'your-api-key-here';
+          break;
+        case 'basic':
+          authValue.placeholder = 'username:password';
+          break;
+        case 'oauth2':
+          authValue.placeholder = 'client-id:client-secret';
+          break;
+      }
+    }
+  });
+}
+
+function closePostmanModal() {
+  document.getElementById('postmanModal').style.display = 'none';
+}
+
+function suggestCollectionName(jsonData) {
+  // Try to suggest a collection name based on JSON structure
+  const keys = Object.keys(jsonData);
+  
+  // Look for common API response patterns
+  if (keys.includes('users') || keys.includes('user')) {
+    return 'User Management API';
+  }
+  if (keys.includes('products') || keys.includes('product')) {
+    return 'Product API';
+  }
+  if (keys.includes('orders') || keys.includes('order')) {
+    return 'Order Management API';
+  }
+  if (keys.includes('customers') || keys.includes('customer')) {
+    return 'Customer API';
+  }
+  if (keys.includes('data') && Array.isArray(jsonData.data)) {
+    return 'Data API Collection';
+  }
+  if (keys.includes('items') || keys.includes('results')) {
+    return 'API Collection';
+  }
+  
+  return 'Generated API Collection';
+}
+
+function generatePostmanCollection() {
+  const collectionName = document.getElementById('collectionName').value.trim();
+  const baseUrl = document.getElementById('baseUrl').value.trim();
+  const endpoints = document.getElementById('apiEndpoints').value.trim();
+  const authType = document.getElementById('authType').value;
+  const authValue = document.getElementById('authValue').value.trim();
+  const includeTests = document.getElementById('includeTests').checked;
+  const includeExamples = document.getElementById('includeExamples').checked;
+  const includeEnvironment = document.getElementById('includeEnvironment').checked;
+  
+  if (!collectionName) {
+    alert('Please enter a collection name.');
+    return;
+  }
+  
+  if (!baseUrl) {
+    alert('Please enter the API base URL.');
+    return;
+  }
+  
+  if (!endpoints) {
+    alert('Please enter at least one API endpoint.');
+    return;
+  }
+  
+  const btn = document.querySelector('.postman-generate-btn');
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+  
+  try {
+    // Get JSON data for examples
+    const jsonInput = document.getElementById('json-input').value.trim();
+    const exampleResponse = JSON.parse(jsonInput);
+    
+    // Generate Postman collection
+    const collection = generatePostmanCollectionJSON(
+      collectionName, 
+      baseUrl, 
+      endpoints, 
+      authType, 
+      authValue, 
+      exampleResponse,
+      { includeTests, includeExamples, includeEnvironment }
+    );
+    
+    // Download the collection
+    downloadPostmanCollection(collection, collectionName);
+    
+    alert(`✅ Postman collection "${collectionName}" generated and downloaded successfully!`);
+    closePostmanModal();
+    
+  } catch (error) {
+    console.error('Error generating Postman collection:', error);
+    alert('Failed to generate Postman collection: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
+
+function generatePostmanCollectionJSON(name, baseUrl, endpoints, authType, authValue, exampleResponse, options) {
+  const collection = {
+    info: {
+      name: name,
+      description: `Generated API collection from DataZ Tools on ${new Date().toLocaleDateString()}`,
+      schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    item: [],
+    auth: authType !== 'none' ? generateAuthConfig(authType, authValue) : undefined,
+    variable: options.includeEnvironment ? [
+      {
+        key: "baseUrl",
+        value: baseUrl,
+        type: "string"
+      }
+    ] : undefined
+  };
+  
+  // Parse endpoints
+  const endpointLines = endpoints.split('\n').filter(line => line.trim());
+  
+  endpointLines.forEach(line => {
+    const [method, path] = line.trim().split(' ');
+    if (!method || !path) return;
+    
+    const item = {
+      name: `${method.toUpperCase()} ${path}`,
+      request: {
+        method: method.toUpperCase(),
+        header: generateHeaders(authType),
+        url: {
+          raw: options.includeEnvironment ? `{{baseUrl}}${path}` : `${baseUrl}${path}`,
+          host: options.includeEnvironment ? ["{{baseUrl}}"] : [baseUrl.replace(/^https?:\/\//, '')],
+          path: path.split('/').filter(p => p)
+        }
+      },
+      response: options.includeExamples ? [{
+        name: "Example Response",
+        originalRequest: {
+          method: method.toUpperCase(),
+          header: generateHeaders(authType),
+          url: {
+            raw: options.includeEnvironment ? `{{baseUrl}}${path}` : `${baseUrl}${path}`,
+            host: options.includeEnvironment ? ["{{baseUrl}}"] : [baseUrl.replace(/^https?:\/\//, '')],
+            path: path.split('/').filter(p => p)
+          }
+        },
+        status: "OK",
+        code: 200,
+        header: [
+          {
+            key: "Content-Type",
+            value: "application/json"
+          }
+        ],
+        body: JSON.stringify(exampleResponse, null, 2)
+      }] : []
+    };
+    
+    // Add request body for POST/PUT methods
+    if (['POST', 'PUT', 'PATCH'].includes(method.toUpperCase())) {
+      item.request.body = {
+        mode: "raw",
+        raw: JSON.stringify(exampleResponse, null, 2),
+        options: {
+          raw: {
+            language: "json"
+          }
+        }
+      };
+    }
+    
+    // Add tests if enabled
+    if (options.includeTests) {
+      item.event = [{
+        listen: "test",
+        script: {
+          exec: [
+            "pm.test('Status code is 200', function () {",
+            "    pm.response.to.have.status(200);",
+            "});",
+            "",
+            "pm.test('Response is JSON', function () {",
+            "    pm.response.to.be.json;",
+            "});",
+            "",
+            "pm.test('Response has required structure', function () {",
+            "    const responseJson = pm.response.json();",
+            "    pm.expect(responseJson).to.be.an('object');",
+            "});"
+          ],
+          type: "text/javascript"
+        }
+      }];
+    }
+    
+    collection.item.push(item);
+  });
+  
+  return collection;
+}
+
+function generateAuthConfig(authType, authValue) {
+  switch (authType) {
+    case 'bearer':
+      return {
+        type: "bearer",
+        bearer: [
+          {
+            key: "token",
+            value: authValue,
+            type: "string"
+          }
+        ]
+      };
+    case 'apikey':
+      return {
+        type: "apikey",
+        apikey: [
+          {
+            key: "key",
+            value: "X-API-Key",
+            type: "string"
+          },
+          {
+            key: "value",
+            value: authValue,
+            type: "string"
+          }
+        ]
+      };
+    case 'basic':
+      return {
+        type: "basic",
+        basic: [
+          {
+            key: "username",
+            value: authValue.split(':')[0],
+            type: "string"
+          },
+          {
+            key: "password",
+            value: authValue.split(':')[1] || '',
+            type: "string"
+          }
+        ]
+      };
+    default:
+      return undefined;
+  }
+}
+
+function generateHeaders(authType) {
+  const headers = [
+    {
+      key: "Content-Type",
+      value: "application/json"
+    }
+  ];
+  
+  if (authType === 'apikey') {
+    headers.push({
+      key: "X-API-Key",
+      value: "{{apiKey}}",
+      type: "text"
+    });
+  }
+  
+  return headers;
+}
+
+function downloadPostmanCollection(collection, name) {
+  const blob = new Blob([JSON.stringify(collection, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${name.replace(/[^a-zA-Z0-9]/g, '_')}.postman_collection.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// GitHub Integration Functions
+let githubToken = localStorage.getItem('github_token');
+
+function openGitHubIntegration() {
+  // Check if JSON data exists in the input textarea
+  const jsonInput = document.getElementById('json-input').value.trim();
+  if (!jsonInput) {
+    // Show helpful example in alert
+    const exampleJson = `{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john@example.com",
+  "age": 30,
+  "isActive": true,
+  "address": {
+    "street": "123 Main St",
+    "city": "New York"
+  }
+}`;
+    
+    if (confirm('⚠️ Please enter JSON data in the input textarea first to generate POJOs.\n\nWould you like to use an example JSON?')) {
+      // Insert example JSON into the textarea
+      document.getElementById('json-input').value = exampleJson;
+      // Trigger JSON formatting to show it nicely
+      beautifyJSON();
+      alert('✅ Example JSON has been added! Now click the "Generate POJOs to GitHub" button again.');
+    }
+    
+    // Focus on the JSON input textarea
+    document.getElementById('json-input').focus();
+    return;
+  }
+  
+  // Validate JSON format
+  try {
+    const parsedJson = JSON.parse(jsonInput);
+    
+    // Check if it's an object (not array or primitive)
+    if (typeof parsedJson !== 'object' || parsedJson === null || Array.isArray(parsedJson)) {
+      alert('⚠️ Please enter a valid JSON object for POJO generation.\n\nArrays and primitive values are not supported.\n\nExample of valid JSON:\n{\n  "id": 1,\n  "name": "Product",\n  "price": 29.99\n}');
+      document.getElementById('json-input').focus();
+      return;
+    }
+    
+    // Check if object has properties
+    if (Object.keys(parsedJson).length === 0) {
+      alert('⚠️ The JSON object is empty. Please add some properties.\n\nExample:\n{\n  "id": 1,\n  "name": "Example"\n}');
+      document.getElementById('json-input').focus();
+      return;
+    }
+    
+    console.log('✅ Valid JSON detected for POJO generation:', parsedJson);
+    
+  } catch (error) {
+    alert(`❌ Invalid JSON format detected.\n\nError: ${error.message}\n\nPlease fix the JSON syntax in the input textarea and try again.`);
+    document.getElementById('json-input').focus();
+    return;
+  }
+  
+  // Show GitHub integration modal
+  showGitHubModal();
+}
+
+function showGitHubModal() {
+  const modal = document.getElementById('githubModal');
+  if (!modal) {
+    createGitHubModal();
+  }
+  
+  // Show the modal
+  document.getElementById('githubModal').style.display = 'block';
+  
+  // Show JSON preview in the modal
+  const jsonInput = document.getElementById('json-input').value.trim();
+  const jsonPreview = document.getElementById('jsonPreview');
+  if (jsonPreview) {
+    try {
+      const parsedJson = JSON.parse(jsonInput);
+      const formattedJson = JSON.stringify(parsedJson, null, 2);
+      jsonPreview.textContent = formattedJson.length > 200 
+        ? formattedJson.substring(0, 200) + '...' 
+        : formattedJson;
+    } catch (error) {
+      jsonPreview.textContent = 'Error parsing JSON';
+    }
+  }
+  
+  // Pre-fill token if available
+  if (githubToken) {
+    document.getElementById('githubToken').value = githubToken;
+    loadUserRepos();
+  }
+  
+  // Auto-suggest class name from JSON structure
+  try {
+    const parsedJson = JSON.parse(jsonInput);
+    const suggestedName = suggestClassName(parsedJson);
+    const classNameInput = document.getElementById('className');
+    if (classNameInput && !classNameInput.value) {
+      classNameInput.value = suggestedName;
+    }
+  } catch (error) {
+    // Ignore if JSON is invalid
+  }
+}
+
+function createGitHubModal() {
+  const modalHTML = `
+    <div id="githubModal" class="modal" style="display: none;">
+      <div class="modal-content" style="max-width: 700px; max-height: 85vh; display: flex; flex-direction: column;">
+        <div class="modal-header" style="flex-shrink: 0; padding: 20px 20px 0 20px;">
+          <span class="modal-close" onclick="closeGitHubModal()" style="float: right; font-size: 24px; cursor: pointer;">&times;</span>
+          <h3 style="margin: 0; padding-right: 30px;"><i class="fab fa-github"></i> Generate POJOs to GitHub Repository</h3>
+        </div>
+        
+        <div class="modal-body" style="flex: 1; overflow-y: auto; padding: 20px;">
+          <!-- JSON Preview Section -->
+          <div class="json-preview-section" style="background: var(--output-bg); border: 1px solid var(--border-color); border-radius: 4px; padding: 12px; margin: 0 0 15px 0;">
+            <h4 style="margin: 0 0 8px 0; color: var(--text-color); font-size: 14px;">
+              <i class="fas fa-code"></i> JSON Data to Convert:
+            </h4>
+            <pre id="jsonPreview" style="margin: 0; font-size: 12px; color: var(--text-color); background: transparent; border: none; padding: 0; max-height: 120px; overflow-y: auto; white-space: pre-wrap;">
+              Loading JSON preview...
+            </pre>
+          </div>
+          
+          <div class="github-setup">
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="githubToken" style="display: block; margin-bottom: 5px; font-weight: 500;">GitHub Personal Access Token</label>
+              <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" 
+                     style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+              <small style="color: var(--text-color); opacity: 0.7; display: block; margin-top: 5px;">
+                Create a token at <a href="https://github.com/settings/tokens" target="_blank" style="color: var(--primary-color);">GitHub Settings</a> with 'repo' permissions
+              </small>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+              <button onclick="connectGitHub()" class="github-connect-btn" style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; margin: 10px 0;">
+                <i class="fab fa-github"></i> Connect GitHub
+              </button>
+            </div>
+          </div>
+          
+          <div id="githubConnected" style="display: none;">
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="githubRepo" style="display: block; margin-bottom: 5px; font-weight: 500;">Select Repository</label>
+              <select id="githubRepo" style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+                <option value="">Loading repositories...</option>
+              </select>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="githubPath" style="display: block; margin-bottom: 5px; font-weight: 500;">File Path (optional)</label>
+              <input type="text" id="githubPath" placeholder="src/main/java/com/example/models/" 
+                     style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+              <small style="color: var(--text-color); opacity: 0.7; display: block; margin-top: 5px;">
+                Leave empty to create in root directory
+              </small>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="className" style="display: block; margin-bottom: 5px; font-weight: 500;">Class Name</label>
+              <input type="text" id="className" placeholder="MyDataClass" 
+                     style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+              <small style="color: var(--text-color); opacity: 0.7; display: block; margin-top: 5px;">
+                Auto-suggested based on your JSON structure
+              </small>
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="packageName" style="display: block; margin-bottom: 5px; font-weight: 500;">Package Name (for Java/Kotlin/C#)</label>
+              <input type="text" id="packageName" placeholder="com.example.models" 
+                     style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+            </div>
+            
+            <div class="form-group" style="margin-bottom: 15px;">
+              <label for="pojoLanguage" style="display: block; margin-bottom: 5px; font-weight: 500;">Programming Language</label>
+              <select id="pojoLanguage" style="width: 100%; padding: 8px; margin: 5px 0; border: 1px solid var(--border-color); border-radius: 4px; background: var(--input-bg); color: var(--input-text); box-sizing: border-box;">
+                <option value="java">☕ Java POJO (with getters/setters)</option>
+                <option value="kotlin">🎯 Kotlin Data Class</option>
+                <option value="csharp">🔷 C# Model Class</option>
+                <option value="typescript">📘 TypeScript Interface</option>
+                <option value="python">🐍 Python Dataclass</option>
+                <option value="go">🐹 Go Struct</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="modal-footer" style="flex-shrink: 0; padding: 15px 20px 20px 20px; border-top: 1px solid var(--border-color); background: var(--bg-color);">
+          <div class="github-actions" style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button onclick="closeGitHubModal()" style="background: var(--btn-bg); color: var(--btn-text); border: 1px solid var(--border-color); padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+              Cancel
+            </button>
+            <button onclick="generatePOJOToGitHub()" class="github-generate-btn" style="background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+              <i class="fas fa-code"></i> Generate & Commit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+function closeGitHubModal() {
+  document.getElementById('githubModal').style.display = 'none';
+}
+
+async function connectGitHub() {
+  const token = document.getElementById('githubToken').value.trim();
+  if (!token) {
+    alert('Please enter your GitHub token.');
+    return;
+  }
+  
+  try {
+    // Test the token by fetching user info
+    const response = await fetch('https://api.github.com/user', {
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error('Invalid GitHub token');
+    }
+    
+    const user = await response.json();
+    githubToken = token;
+    localStorage.setItem('github_token', token);
+    
+    // Show connected state
+    document.querySelector('.github-setup').style.display = 'none';
+    document.getElementById('githubConnected').style.display = 'block';
+    
+    // Load repositories
+    await loadUserRepos();
+    
+    alert(`Successfully connected as ${user.login}!`);
+    
+  } catch (error) {
+    console.error('GitHub connection error:', error);
+    alert('Failed to connect to GitHub. Please check your token.');
+  }
+}
+
+async function loadUserRepos() {
+  try {
+    const response = await fetch('https://api.github.com/user/repos?type=all&sort=updated&per_page=100', {
+      headers: {
+        'Authorization': `token ${githubToken}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch repositories');
+    }
+    
+    const repos = await response.json();
+    const select = document.getElementById('githubRepo');
+    
+    select.innerHTML = '<option value="">Select a repository...</option>';
+    
+    repos.forEach(repo => {
+      const option = document.createElement('option');
+      option.value = repo.full_name;
+      option.textContent = `${repo.name} ${repo.private ? '(Private)' : '(Public)'}`;
+      select.appendChild(option);
+    });
+    
+  } catch (error) {
+    console.error('Error loading repositories:', error);
+    alert('Failed to load repositories.');
+  }
+}
+
+async function generatePOJOToGitHub() {
+  const repoName = document.getElementById('githubRepo').value;
+  const filePath = document.getElementById('githubPath').value.trim();
+  const className = document.getElementById('className').value.trim();
+  const packageName = document.getElementById('packageName').value.trim();
+  const language = document.getElementById('pojoLanguage').value;
+  
+  if (!repoName) {
+    alert('Please select a repository.');
+    return;
+  }
+  
+  if (!className) {
+    alert('Please enter a class name.');
+    return;
+  }
+  
+  const btn = document.querySelector('.github-generate-btn');
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+  
+  try {
+    // Get JSON data
+    const jsonInput = document.getElementById('json-input').value.trim();
+    const jsonData = JSON.parse(jsonInput);
+    
+    // Generate POJO code
+    const pojoCode = generatePOJOCode(jsonData, className, packageName, language);
+    
+    // Determine file extension
+    const extensions = {
+      'java': '.java',
+      'kotlin': '.kt',
+      'csharp': '.cs',
+      'typescript': '.ts',
+      'python': '.py',
+      'go': '.go'
+    };
+    
+    const fileName = className + extensions[language];
+    const fullPath = filePath ? `${filePath}/${fileName}` : fileName;
+    
+    // Commit to GitHub
+    await commitToGitHub(repoName, fullPath, pojoCode, `Add ${className} ${language.toUpperCase()} model generated from JSON`);
+    
+    alert(`Successfully generated ${fileName} in ${repoName}!`);
+    closeGitHubModal();
+    
+  } catch (error) {
+    console.error('Error generating POJO:', error);
+    alert('Failed to generate POJO: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
+
+async function commitToGitHub(repoName, filePath, content, message) {
+  try {
+    // First, try to get the file (to check if it exists)
+    let sha = null;
+    try {
+      const existingFile = await fetch(`https://api.github.com/repos/${repoName}/contents/${filePath}`, {
+        headers: {
+          'Authorization': `token ${githubToken}`,
+          'Accept': 'application/vnd.github.v3+json'
+        }
+      });
+      
+      if (existingFile.ok) {
+        const fileData = await existingFile.json();
+        sha = fileData.sha;
+        message = `Update ${filePath}`;
+      }
+    } catch (e) {
+      // File doesn't exist, that's fine
+    }
+    
+    // Create or update the file
+    const requestBody = {
+      message: message,
+      content: btoa(unescape(encodeURIComponent(content))), // Base64 encode
+      branch: 'main'
+    };
+    
+    if (sha) {
+      requestBody.sha = sha;
+    }
+    
+    const response = await fetch(`https://api.github.com/repos/${repoName}/contents/${filePath}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${githubToken}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestBody)
+    });
+    
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to commit to GitHub');
+    }
+    
+    return await response.json();
+    
+  } catch (error) {
+    console.error('GitHub commit error:', error);
+    throw error;
+  }
+}
+
+function generatePOJOCode(jsonData, className, packageName, language) {
+  switch (language) {
+    case 'java':
+      return generateJavaPOJO(jsonData, className, packageName);
+    case 'kotlin':
+      return generateKotlinDataClass(jsonData, className, packageName);
+    case 'csharp':
+      return generateCSharpModel(jsonData, className, packageName);
+    case 'typescript':
+      return generateTypeScriptInterface(jsonData, className);
+    case 'python':
+      return generatePythonDataclass(jsonData, className);
+    case 'go':
+      return generateGoStruct(jsonData, className, packageName);
+    default:
+      throw new Error('Unsupported language: ' + language);
+  }
+}
+
+function generateJavaPOJO(jsonData, className, packageName) {
+  let code = '';
+  
+  if (packageName) {
+    code += `package ${packageName};\n\n`;
+  }
+  
+  code += `import com.fasterxml.jackson.annotation.JsonProperty;\n\n`;
+  code += `public class ${className} {\n`;
+  
+  // Generate fields
+  Object.keys(jsonData).forEach(key => {
+    const value = jsonData[key];
+    const javaType = getJavaType(value);
+    const fieldName = toCamelCase(key);
+    
+    code += `    @JsonProperty("${key}")\n`;
+    code += `    private ${javaType} ${fieldName};\n\n`;
+  });
+  
+  // Generate constructor
+  code += `    public ${className}() {}\n\n`;
+  
+  // Generate getters and setters
+  Object.keys(jsonData).forEach(key => {
+    const value = jsonData[key];
+    const javaType = getJavaType(value);
+    const fieldName = toCamelCase(key);
+    const methodName = capitalize(fieldName);
+    
+    code += `    public ${javaType} get${methodName}() {\n`;
+    code += `        return ${fieldName};\n`;
+    code += `    }\n\n`;
+    
+    code += `    public void set${methodName}(${javaType} ${fieldName}) {\n`;
+    code += `        this.${fieldName} = ${fieldName};\n`;
+    code += `    }\n\n`;
+  });
+  
+  code += `}\n`;
+  return code;
+}
+
+function generateKotlinDataClass(jsonData, className, packageName) {
+  let code = '';
+  
+  if (packageName) {
+    code += `package ${packageName}\n\n`;
+  }
+  
+  code += `import com.fasterxml.jackson.annotation.JsonProperty\n\n`;
+  code += `data class ${className}(\n`;
+  
+  const fields = Object.keys(jsonData).map(key => {
+    const value = jsonData[key];
+    const kotlinType = getKotlinType(value);
+    const fieldName = toCamelCase(key);
+    
+    return `    @JsonProperty("${key}") val ${fieldName}: ${kotlinType}`;
+  });
+  
+  code += fields.join(',\n');
+  code += '\n)\n';
+  
+  return code;
+}
+
+function generateCSharpModel(jsonData, className, packageName) {
+  let code = '';
+  
+  if (packageName) {
+    code += `namespace ${packageName}\n{\n`;
+  }
+  
+  code += `    using Newtonsoft.Json;\n\n`;
+  code += `    public class ${className}\n    {\n`;
+  
+  Object.keys(jsonData).forEach(key => {
+    const value = jsonData[key];
+    const csharpType = getCSharpType(value);
+    const propertyName = toPascalCase(key);
+    
+    code += `        [JsonProperty("${key}")]\n`;
+    code += `        public ${csharpType} ${propertyName} { get; set; }\n\n`;
+  });
+  
+  code += `    }\n`;
+  
+  if (packageName) {
+    code += `}\n`;
+  }
+  
+  return code;
+}
+
+function generateTypeScriptInterface(jsonData, className) {
+  let code = `export interface ${className} {\n`;
+  
+  Object.keys(jsonData).forEach(key => {
+    const value = jsonData[key];
+    const tsType = getTypeScriptType(value);
+    
+    code += `  ${key}: ${tsType};\n`;
+  });
+  
+  code += `}\n`;
+  return code;
+}
+
+function generatePythonDataclass(jsonData, className) {
+  let code = `from dataclasses import dataclass\nfrom typing import Optional, List, Dict, Any\n\n`;
+  code += `@dataclass\nclass ${className}:\n`;
+  
+  Object.keys(jsonData).forEach(key => {
+    const value = jsonData[key];
+    const pythonType = getPythonType(value);
+    const fieldName = toSnakeCase(key);
+    
+    code += `    ${fieldName}: ${pythonType}\n`;
+  });
+  
+  return code;
+}
+
+function generateGoStruct(jsonData, className, packageName) {
+  let code = '';
+  
+  if (packageName) {
+    code += `package ${packageName}\n\n`;
+  } else {
+    code += `package main\n\n`;
+  }
+  
+  code += `type ${className} struct {\n`;
+  
+  Object.keys(jsonData).forEach(key => {
+    const value = jsonData[key];
+    const goType = getGoType(value);
+    const fieldName = toPascalCase(key);
+    
+    code += `    ${fieldName} ${goType} \`json:"${key}"\`\n`;
+  });
+  
+  code += `}\n`;
+  return code;
+}
+
+// Helper functions for type mapping
+function getJavaType(value) {
+  if (value === null) return 'Object';
+  if (typeof value === 'boolean') return 'Boolean';
+  if (typeof value === 'number') {
+    return Number.isInteger(value) ? 'Integer' : 'Double';
+  }
+  if (typeof value === 'string') return 'String';
+  if (Array.isArray(value)) return 'List<Object>';
+  if (typeof value === 'object') return 'Object';
+  return 'Object';
+}
+
+function getKotlinType(value) {
+  if (value === null) return 'Any?';
+  if (typeof value === 'boolean') return 'Boolean';
+  if (typeof value === 'number') {
+    return Number.isInteger(value) ? 'Int' : 'Double';
+  }
+  if (typeof value === 'string') return 'String';
+  if (Array.isArray(value)) return 'List<Any>';
+  if (typeof value === 'object') return 'Any';
+  return 'Any';
+}
+
+function getCSharpType(value) {
+  if (value === null) return 'object';
+  if (typeof value === 'boolean') return 'bool';
+  if (typeof value === 'number') {
+    return Number.isInteger(value) ? 'int' : 'double';
+  }
+  if (typeof value === 'string') return 'string';
+  if (Array.isArray(value)) return 'List<object>';
+  if (typeof value === 'object') return 'object';
+  return 'object';
+}
+
+function getTypeScriptType(value) {
+  if (value === null) return 'any';
+  if (typeof value === 'boolean') return 'boolean';
+  if (typeof value === 'number') return 'number';
+  if (typeof value === 'string') return 'string';
+  if (Array.isArray(value)) return 'any[]';
+  if (typeof value === 'object') return 'any';
+  return 'any';
+}
+
+function getPythonType(value) {
+  if (value === null) return 'Optional[Any]';
+  if (typeof value === 'boolean') return 'bool';
+  if (typeof value === 'number') {
+    return Number.isInteger(value) ? 'int' : 'float';
+  }
+  if (typeof value === 'string') return 'str';
+  if (Array.isArray(value)) return 'List[Any]';
+  if (typeof value === 'object') return 'Dict[str, Any]';
+  return 'Any';
+}
+
+function getGoType(value) {
+  if (value === null) return 'interface{}';
+  if (typeof value === 'boolean') return 'bool';
+  if (typeof value === 'number') {
+    return Number.isInteger(value) ? 'int' : 'float64';
+  }
+  if (typeof value === 'string') return 'string';
+  if (Array.isArray(value)) return '[]interface{}';
+  if (typeof value === 'object') return 'map[string]interface{}';
+  return 'interface{}';
+}
+
+// Utility functions
+function toCamelCase(str) {
+  return str.replace(/_([a-z])/g, (match, letter) => letter.toUpperCase())
+            .replace(/^[A-Z]/, letter => letter.toLowerCase());
+}
+
+function toPascalCase(str) {
+  return str.replace(/_([a-z])/g, (match, letter) => letter.toUpperCase())
+            .replace(/^[a-z]/, letter => letter.toUpperCase());
+}
+
+function toSnakeCase(str) {
+  return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function suggestClassName(jsonData) {
+  // Try to suggest a class name based on JSON keys
+  const keys = Object.keys(jsonData);
+  
+  // Look for common ID or name patterns
+  if (keys.includes('user_id') || keys.includes('userId') || keys.includes('user_name')) {
+    return 'User';
+  }
+  if (keys.includes('product_id') || keys.includes('productId') || keys.includes('product_name')) {
+    return 'Product';
+  }
+  if (keys.includes('order_id') || keys.includes('orderId')) {
+    return 'Order';
+  }
+  if (keys.includes('customer_id') || keys.includes('customerId')) {
+    return 'Customer';
+  }
+  if (keys.includes('id') && keys.includes('name')) {
+    return 'Entity';
+  }
+  
+  // If none of the patterns match, use first key as suggestion
+  if (keys.length > 0) {
+    const firstKey = keys[0];
+    // Remove common suffixes and convert to PascalCase
+    const cleanKey = firstKey.replace(/_?(id|name|code|type)$/i, '');
+    return toPascalCase(cleanKey) || 'DataModel';
+  }
+  
+  return 'DataModel';
+}
+
+// Make functions globally available
+window.openGitHubIntegration = openGitHubIntegration;
+window.closeGitHubModal = closeGitHubModal;
+window.connectGitHub = connectGitHub;
+window.generatePOJOToGitHub = generatePOJOToGitHub;
 </script>
 
 </body>
