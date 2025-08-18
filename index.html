@@ -6075,7 +6075,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function sendEmailWithFormSubmit(formData, submitBtn, originalText) {
     // Send to FormSubmit.co (free email service)
     // Note: First submission requires email verification
-    fetch('https://formsubmit.co/ajax/funnycomedii@gmail.com', {
+    fetch('https://formsubmit.co/ajax/d26a1a25336155845d9e8d061f10154b', {
       method: 'POST',
       headers: {
         'Accept': 'application/json'
@@ -6144,7 +6144,7 @@ ${formData.get('message')}
 ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailto. Please reply to request the screenshot.' : ''}
     `.trim();
 
-    const mailtoLink = `mailto:funnycomedii@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    const mailtoLink = `mailto:d26a1a25336155845d9e8d061f10154b?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
 
     // Open mailto link
     window.open(mailtoLink, '_blank');
@@ -6195,7 +6195,7 @@ ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailt
     testFormData.append('userAgent', navigator.userAgent);
     testFormData.append('timestamp', new Date().toISOString());
     
-    fetch('https://formsubmit.co/ajax/funnycomedii@gmail.com', {
+    fetch('https://formsubmit.co/ajax/d26a1a25336155845d9e8d061f10154b', {
       method: 'POST',
       headers: {
         'Accept': 'application/json'
