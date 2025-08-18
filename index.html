@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 <!-- Primary SEO Meta Tags -->
-<title>DataZ Tools - Free Online Developer Tools | JSON, XML, Base64, JWT, Hash, UUID & More</title>
-<meta name="description" content="DataZ.Tools - The ultimate free online developer toolkit with 15+ professional tools: JSON/XML viewers, Base64 encoder, JWT decoder, hash generator, UUID generator, color converter, QR codes, regex tester, and more. No signup required!"/>
-<meta name="keywords" content="dataz.tools, dataz tools, free developer tools, JSON viewer, XML formatter, Base64 encoder decoder, JWT token decoder, hash generator, UUID generator, color converter, timestamp converter, QR code generator, regex tester, markdown preview, API formatter, online tools, web developer tools, programmer tools, data tools, developer utilities"/>
+<title>DataZ Tools - Free Online Developer Tools with AI | JSON, XML, Base64, JWT, Hash, UUID & More</title>
+<meta name="description" content="DataZ.Tools - The ultimate free online developer toolkit with 20+ professional tools including AI-powered text analysis: JSON/XML viewers, Base64 encoder, JWT decoder, hash generator, UUID generator, color converter, QR codes, regex tester, AI summarizer, translator, sentiment analyzer and more. No signup required!"/>
+<meta name="keywords" content="dataz.tools, dataz tools, free developer tools, AI tools, text summarizer, language translator, sentiment analyzer, grammar checker, keyword extractor, JSON viewer, XML formatter, Base64 encoder decoder, JWT token decoder, hash generator, UUID generator, color converter, timestamp converter, QR code generator, regex tester, markdown preview, API formatter, online tools, web developer tools, programmer tools, data tools, developer utilities, AI-powered tools"/>
 <meta name="author" content="DataZ Tools"/>
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
@@ -23,11 +23,12 @@
 <!-- Canonical URL -->
 <link rel="canonical" href="https://dataz.tools" />
 <link rel="alternate" href="https://www.dataz.tools" />
+<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="DataZ Tools - Free Online Developer Tools | JSON, XML, Base64 & More" />
-<meta property="og:description" content="Professional free online developer toolkit with 15+ tools: JSON/XML viewers, Base64 encoder, JWT decoder, hash generator, UUID generator, and more developer utilities. No signup required!" />
+<meta property="og:title" content="DataZ Tools - Free Online Developer Tools with AI | JSON, XML, Base64 & More" />
+<meta property="og:description" content="Professional free online developer toolkit with 20+ tools including AI-powered text analysis: JSON/XML viewers, Base64 encoder, JWT decoder, hash generator, UUID generator, text summarizer, translator, sentiment analyzer and more developer utilities. No signup required!" />
 <meta property="og:url" content="https://dataz.tools" />
 <meta property="og:site_name" content="DataZ Tools" />
 <meta property="og:image" content="https://dataz.tools/assets/preview-social.png" />
@@ -38,10 +39,10 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="DataZ Tools - Free Developer Toolkit" />
-<meta name="twitter:description" content="15+ professional developer tools in one place: JSON/XML viewers, encoders, generators, converters & more. Free online toolkit for developers." />
+<meta name="twitter:title" content="DataZ Tools - Free Developer Toolkit with AI" />
+<meta name="twitter:description" content="20+ professional developer tools in one place: JSON/XML viewers, encoders, generators, converters, AI text analysis & more. Free online toolkit for developers." />
 <meta name="twitter:image" content="https://dataz.tools/assets/preview-social.png" />
-<meta name="twitter:image:alt" content="DataZ Tools - Free Online Developer Toolkit" />
+<meta name="twitter:image:alt" content="DataZ Tools - Free Online Developer Toolkit with AI" />
 <meta name="twitter:site" content="@dataztools" />
 <meta name="twitter:creator" content="@dataztools" />
 
@@ -988,7 +989,7 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="encoders-dropdown">
-      <button id="btn-base64" class="active dropdown-item" onclick="showOnly('base64')" data-i18n="base64_encoder">
+      <button id="btn-base64" class="dropdown-item" onclick="showOnly('base64')" data-i18n="base64_encoder">
         <i class="fas fa-lock"></i> Base64 Encode/Decode
       </button>
       <button id="btn-jwt" class="dropdown-item" onclick="showOnly('jwt')" data-i18n="jwt_decoder">
@@ -1011,7 +1012,7 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="generators-dropdown">
-      <button id="btn-hash" class="active dropdown-item" onclick="showOnly('hash')" data-i18n="hash_generator">
+      <button id="btn-hash" class="dropdown-item" onclick="showOnly('hash')" data-i18n="hash_generator">
         <i class="fas fa-hashtag"></i> Hash Generator
       </button>
       <button id="btn-uuid" class="dropdown-item" onclick="showOnly('uuid')" data-i18n="uuid_generator">
@@ -1037,7 +1038,7 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="converters-dropdown">
-      <button id="btn-color" class="active dropdown-item" onclick="showOnly('color')" data-i18n="color_converter">
+      <button id="btn-color" class="dropdown-item" onclick="showOnly('color')" data-i18n="color_converter">
         <i class="fas fa-palette"></i> Color Converter
       </button>
       <button id="btn-timestamp" class="dropdown-item" onclick="showOnly('timestamp')" data-i18n="timestamp_converter">
@@ -1057,7 +1058,7 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="texttools-dropdown">
-      <button id="btn-regex" class="active dropdown-item" onclick="showOnly('regex')" data-i18n="regex_tester">
+      <button id="btn-regex" class="dropdown-item" onclick="showOnly('regex')" data-i18n="regex_tester">
         <i class="fas fa-search"></i> Regex Tester
       </button>
       <button id="btn-text" class="dropdown-item" onclick="showOnly('text')" data-i18n="text_utilities">
@@ -1077,6 +1078,35 @@ body.dark .language-selector option {
       </button>
       <button id="btn-jsonpath" class="dropdown-item" onclick="showOnly('jsonpath')" data-i18n="jsonpath_tester">
         <i class="fas fa-route"></i> JSONPath Tester
+      </button>
+    </div>
+  </div>
+
+  <!-- AI Tools Category -->
+  <div class="tool-category" data-category="ai">
+    <button class="category-btn" data-category="ai">
+      <i class="fas fa-robot"></i> 
+      <span class="category-info">
+        <span class="category-text" data-i18n="category_ai_tools">AI Tools</span>
+        <span class="selected-tool">Text Summarizer</span>
+      </span>
+      <i class="fas fa-chevron-down category-arrow"></i>
+    </button>
+    <div class="category-dropdown" id="ai-dropdown">
+      <button id="btn-summarize" class="dropdown-item" onclick="showOnly('summarize')" data-i18n="text_summarizer">
+        <i class="fas fa-compress-alt"></i> Text Summarizer
+      </button>
+      <button id="btn-translate" class="dropdown-item" onclick="showOnly('translate')" data-i18n="language_translator">
+        <i class="fas fa-language"></i> Language Translator
+      </button>
+      <button id="btn-sentiment" class="dropdown-item" onclick="showOnly('sentiment')" data-i18n="sentiment_analyzer">
+        <i class="fas fa-smile"></i> Sentiment Analyzer
+      </button>
+      <button id="btn-grammar" class="dropdown-item" onclick="showOnly('grammar')" data-i18n="grammar_checker">
+        <i class="fas fa-spell-check"></i> Grammar Checker
+      </button>
+      <button id="btn-keywords" class="dropdown-item" onclick="showOnly('keywords')" data-i18n="keyword_extractor">
+        <i class="fas fa-tags"></i> Keyword Extractor
       </button>
     </div>
   </div>
@@ -1784,6 +1814,13 @@ document.addEventListener('DOMContentLoaded', function() {
   makeResizable('sql-io-input', 'sql-divider', 'sql-io-output');
   makeResizable('diff-io-input', 'diff-divider', 'diff-io-output');
   makeResizable('jsonpath-io-input', 'jsonpath-divider', 'jsonpath-io-output');
+  
+  // AI Tools resizable panels
+  makeResizable('summarizer-io-input', 'summarizer-divider', 'summarizer-io-output');
+  makeResizable('translator-io-input', 'translator-divider', 'translator-io-output');
+  makeResizable('sentiment-io-input', 'sentiment-divider', 'sentiment-io-output');
+  makeResizable('grammar-io-input', 'grammar-divider', 'grammar-io-output');
+  makeResizable('keywords-io-input', 'keywords-divider', 'keywords-io-output');
   
   // Initialize categorized dropdown functionality first
   initializeCategorizedDropdowns();
@@ -4347,6 +4384,263 @@ function initializeInputPersistence() {
       </div>
     </div>
   </div>
+
+  <!-- TEXT SUMMARIZER PANEL -->
+  <div id="panel-summarize" class="panel hidden">
+    <div class="io-wrapper">
+      <div class="btn-group">
+        <button onclick="summarizeText()" data-i18n="summarize_text">
+          <i class="fas fa-compress-alt"></i> Summarize Text
+        </button>
+        <button onclick="clearSummarizer()" data-i18n="clear">
+          <i class="fas fa-trash"></i> Clear
+        </button>
+        <button onclick="pasteToElement('text-to-summarize')" title="Paste from clipboard">
+          <i class="fas fa-paste"></i> Paste
+        </button>
+        <button onclick="copyFromElement('text-to-summarize')" title="Copy input text">
+          <i class="fas fa-copy"></i> Copy Input
+        </button>
+        <button onclick="copyOutputText('summarizer-output')" title="Copy summary">
+          <i class="fas fa-download"></i> Copy Output
+        </button>
+      </div>
+      <div class="ai-settings">
+        <label for="summary-length">Summary Length:</label>
+        <select id="summary-length">
+          <option value="short">Short (1-2 sentences)</option>
+          <option value="medium" selected>Medium (3-5 sentences)</option>
+          <option value="long">Long (6-8 sentences)</option>
+        </select>
+      </div>
+      <div class="io-content">
+        <div class="io-input" id="summarizer-io-input">
+          <textarea id="text-to-summarize" placeholder="Enter text to summarize (articles, documents, etc.)..."></textarea>
+        </div>
+        <div class="divider" id="summarizer-divider"></div>
+        <div class="io-output" id="summarizer-io-output">
+          <div id="summarizer-output" class="output">
+            <div style="color: #888; text-align: center; margin-top: 100px;">
+              <i class="fas fa-compress-alt" style="font-size: 48px; margin-bottom: 10px;"></i>
+              <div>Summary will appear here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANGUAGE TRANSLATOR PANEL -->
+  <div id="panel-translate" class="panel hidden">
+    <div class="io-wrapper">
+      <div class="btn-group">
+        <button onclick="translateText()" data-i18n="translate_text">
+          <i class="fas fa-language"></i> Translate Text
+        </button>
+        <button onclick="clearTranslator()" data-i18n="clear">
+          <i class="fas fa-trash"></i> Clear
+        </button>
+        <button onclick="pasteToElement('text-to-translate')" title="Paste from clipboard">
+          <i class="fas fa-paste"></i> Paste
+        </button>
+        <button onclick="copyFromElement('text-to-translate')" title="Copy input text">
+          <i class="fas fa-copy"></i> Copy Input
+        </button>
+        <button onclick="copyOutputText('translator-output')" title="Copy translation">
+          <i class="fas fa-download"></i> Copy Output
+        </button>
+      </div>
+      <div class="ai-settings">
+        <label for="source-lang">From:</label>
+        <select id="source-lang">
+          <option value="auto">Auto-detect</option>
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="zh">Chinese</option>
+          <option value="hi">Hindi</option>
+          <option value="bn">Bengali</option>
+          <option value="te">Telugu</option>
+          <option value="ta">Tamil</option>
+          <option value="mr">Marathi</option>
+          <option value="sv">Swedish</option>
+          <option value="no">Norwegian</option>
+          <option value="da">Danish</option>
+          <option value="fi">Finnish</option>
+          <option value="is">Icelandic</option>
+          <option value="nl">Dutch</option>
+          <option value="ar">Arabic</option>
+          <option value="th">Thai</option>
+        </select>
+        <label for="target-lang">To:</label>
+        <select id="target-lang">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="ja">Japanese</option>
+          <option value="ko">Korean</option>
+          <option value="zh">Chinese</option>
+          <option value="hi">Hindi</option>
+          <option value="bn">Bengali</option>
+          <option value="te">Telugu</option>
+          <option value="ta">Tamil</option>
+          <option value="mr">Marathi</option>
+          <option value="sv">Swedish</option>
+          <option value="no">Norwegian</option>
+          <option value="da">Danish</option>
+          <option value="fi">Finnish</option>
+          <option value="is">Icelandic</option>
+          <option value="nl">Dutch</option>
+          <option value="ar">Arabic</option>
+          <option value="th">Thai</option>
+        </select>
+      </div>
+      <div class="io-content">
+        <div class="io-input" id="translator-io-input">
+          <textarea id="text-to-translate" placeholder="Enter text to translate..."></textarea>
+        </div>
+        <div class="divider" id="translator-divider"></div>
+        <div class="io-output" id="translator-io-output">
+          <div id="translator-output" class="output">
+            <div style="color: #888; text-align: center; margin-top: 100px;">
+              <i class="fas fa-language" style="font-size: 48px; margin-bottom: 10px;"></i>
+              <div>Translation will appear here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SENTIMENT ANALYZER PANEL -->
+  <div id="panel-sentiment" class="panel hidden">
+    <div class="io-wrapper">
+      <div class="btn-group">
+        <button onclick="analyzeSentiment()" data-i18n="analyze_sentiment">
+          <i class="fas fa-smile"></i> Analyze Sentiment
+        </button>
+        <button onclick="clearSentiment()" data-i18n="clear">
+          <i class="fas fa-trash"></i> Clear
+        </button>
+        <button onclick="pasteToElement('text-to-analyze')" title="Paste from clipboard">
+          <i class="fas fa-paste"></i> Paste
+        </button>
+        <button onclick="copyFromElement('text-to-analyze')" title="Copy input text">
+          <i class="fas fa-copy"></i> Copy Input
+        </button>
+        <button onclick="copyOutputText('sentiment-output')" title="Copy analysis">
+          <i class="fas fa-download"></i> Copy Output
+        </button>
+      </div>
+      <div class="io-content">
+        <div class="io-input" id="sentiment-io-input">
+          <textarea id="text-to-analyze" placeholder="Enter text to analyze sentiment (reviews, social media posts, feedback, etc.)..."></textarea>
+        </div>
+        <div class="divider" id="sentiment-divider"></div>
+        <div class="io-output" id="sentiment-io-output">
+          <div id="sentiment-output" class="output">
+            <div style="color: #888; text-align: center; margin-top: 100px;">
+              <i class="fas fa-smile" style="font-size: 48px; margin-bottom: 10px;"></i>
+              <div>Sentiment analysis will appear here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRAMMAR CHECKER PANEL -->
+  <div id="panel-grammar" class="panel hidden">
+    <div class="io-wrapper">
+      <div class="btn-group">
+        <button onclick="checkGrammar()" data-i18n="check_grammar">
+          <i class="fas fa-spell-check"></i> Check Grammar
+        </button>
+        <button onclick="clearGrammar()" data-i18n="clear">
+          <i class="fas fa-trash"></i> Clear
+        </button>
+        <button onclick="pasteToElement('text-to-check')" title="Paste from clipboard">
+          <i class="fas fa-paste"></i> Paste
+        </button>
+        <button onclick="copyFromElement('text-to-check')" title="Copy input text">
+          <i class="fas fa-copy"></i> Copy Input
+        </button>
+        <button onclick="copyOutputText('grammar-output')" title="Copy suggestions">
+          <i class="fas fa-download"></i> Copy Output
+        </button>
+      </div>
+      <div class="io-content">
+        <div class="io-input" id="grammar-io-input">
+          <textarea id="text-to-check" placeholder="Enter text to check for grammar and spelling errors..."></textarea>
+        </div>
+        <div class="divider" id="grammar-divider"></div>
+        <div class="io-output" id="grammar-io-output">
+          <div id="grammar-output" class="output">
+            <div style="color: #888; text-align: center; margin-top: 100px;">
+              <i class="fas fa-spell-check" style="font-size: 48px; margin-bottom: 10px;"></i>
+              <div>Grammar suggestions will appear here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEYWORD EXTRACTOR PANEL -->
+  <div id="panel-keywords" class="panel hidden">
+    <div class="io-wrapper">
+      <div class="btn-group">
+        <button onclick="extractKeywords()" data-i18n="extract_keywords">
+          <i class="fas fa-tags"></i> Extract Keywords
+        </button>
+        <button onclick="clearKeywords()" data-i18n="clear">
+          <i class="fas fa-trash"></i> Clear
+        </button>
+        <button onclick="pasteToElement('text-for-keywords')" title="Paste from clipboard">
+          <i class="fas fa-paste"></i> Paste
+        </button>
+        <button onclick="copyFromElement('text-for-keywords')" title="Copy input text">
+          <i class="fas fa-copy"></i> Copy Input
+        </button>
+        <button onclick="copyOutputText('keywords-output')" title="Copy keywords">
+          <i class="fas fa-download"></i> Copy Output
+        </button>
+      </div>
+      <div class="ai-settings">
+        <label for="keyword-count">Number of Keywords:</label>
+        <select id="keyword-count">
+          <option value="5">5 keywords</option>
+          <option value="10" selected>10 keywords</option>
+          <option value="15">15 keywords</option>
+          <option value="20">20 keywords</option>
+        </select>
+      </div>
+      <div class="io-content">
+        <div class="io-input" id="keywords-io-input">
+          <textarea id="text-for-keywords" placeholder="Enter text to extract keywords from (articles, documents, etc.)..."></textarea>
+        </div>
+        <div class="divider" id="keywords-divider"></div>
+        <div class="io-output" id="keywords-io-output">
+          <div id="keywords-output" class="output">
+            <div style="color: #888; text-align: center; margin-top: 100px;">
+              <i class="fas fa-tags" style="font-size: 48px; margin-bottom: 10px;"></i>
+              <div>Extracted keywords will appear here</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 
@@ -4417,6 +4711,7 @@ function initializeInputPersistence() {
 <script src="diff.js"></script>
 <script src="password.js"></script>
 <script src="jsonpath.js"></script>
+<script src="ai.js"></script>
 
 <!-- Graph Generation Functions -->
 <script>
@@ -4834,7 +5129,22 @@ const translations = {
     feedback_general: "General Feedback",
     feedback_other: "Other",
     feedback_remove: "Remove",
-    feedback_replace: "Replace"
+    feedback_replace: "Replace",
+    
+    // AI Tools
+    category_ai_tools: "AI Tools",
+    text_summarizer: "Text Summarizer",
+    language_translator: "Language Translator", 
+    sentiment_analyzer: "Sentiment Analyzer",
+    grammar_checker: "Grammar Checker",
+    keyword_extractor: "Keyword Extractor",
+    
+    // AI Actions
+    summarize_text: "Summarize Text",
+    translate_text: "Translate Text",
+    analyze_sentiment: "Analyze Sentiment", 
+    check_grammar: "Check Grammar",
+    extract_keywords: "Extract Keywords"
   },
   
   es: {
@@ -5007,7 +5317,22 @@ const translations = {
     feedback_general: "Comentario General",
     feedback_other: "Otro",
     feedback_remove: "Eliminar",
-    feedback_replace: "Reemplazar"
+    feedback_replace: "Reemplazar",
+    
+    // AI Tools
+    category_ai_tools: "Herramientas IA",
+    text_summarizer: "Resumidor de Texto",
+    language_translator: "Traductor de Idiomas",
+    sentiment_analyzer: "Analizador de Sentimientos", 
+    grammar_checker: "Corrector Gramatical",
+    keyword_extractor: "Extractor de Palabras Clave",
+    
+    // AI Actions
+    summarize_text: "Resumir Texto",
+    translate_text: "Traducir Texto",
+    analyze_sentiment: "Analizar Sentimientos",
+    check_grammar: "Revisar Gramática", 
+    extract_keywords: "Extraer Palabras Clave"
   },
   
   fr: {
@@ -5029,6 +5354,14 @@ const translations = {
     markdown_preview: "Aperçu Markdown",
     dark_mode: "Mode Sombre",
     light_mode: "Mode Clair",
+    
+    // Category Names
+    category_data_viewers: "Visualiseurs de Données",
+    category_encoders_decoders: "Encodeurs et Décodeurs",
+    category_generators_utilities: "Générateurs et Utilitaires",
+    category_converters: "Convertisseurs",
+    category_text_dev_tools: "Outils Texte et Développement",
+    category_ai_tools: "Outils IA",
     
     // Generic Actions
     copy: "Copier",
@@ -5100,6 +5433,14 @@ const translations = {
     dark_mode: "Dunkler Modus",
     light_mode: "Heller Modus",
     
+    // Category Names
+    category_data_viewers: "Daten-Betrachter",
+    category_encoders_decoders: "Codierer und Decodierer",
+    category_generators_utilities: "Generatoren und Werkzeuge",
+    category_converters: "Konverter",
+    category_text_dev_tools: "Text- und Entwicklungstools",
+    category_ai_tools: "KI-Tools",
+    
     // Generic Actions
     copy: "Kopieren",
     paste: "Einfügen",
@@ -5157,6 +5498,14 @@ const translations = {
     dark_mode: "Modalità Scura",
     light_mode: "Modalità Chiara",
     
+    // Category Names
+    category_data_viewers: "Visualizzatori Dati",
+    category_encoders_decoders: "Codificatori e Decodificatori",
+    category_generators_utilities: "Generatori e Utilità",
+    category_converters: "Convertitori",
+    category_text_dev_tools: "Strumenti Testo e Sviluppo",
+    category_ai_tools: "Strumenti IA",
+    
     // Generic Actions
     copy: "Copia",
     paste: "Incolla",
@@ -5200,6 +5549,14 @@ const translations = {
     xml_viewer: "Visualizador XML",
     dark_mode: "Modo Escuro",
     light_mode: "Modo Claro",
+    
+    // Category Names
+    category_data_viewers: "Visualizadores de Dados",
+    category_encoders_decoders: "Codificadores e Decodificadores",
+    category_generators_utilities: "Geradores e Utilitários",
+    category_converters: "Conversores",
+    category_text_dev_tools: "Ferramentas de Texto e Desenvolvimento",
+    category_ai_tools: "Ferramentas de IA",
     
     // Generic Actions
     copy: "Copiar",
@@ -5245,6 +5602,14 @@ const translations = {
     dark_mode: "Тёмный Режим",
     light_mode: "Светлый Режим",
     
+    // Category Names
+    category_data_viewers: "Просмотрщики Данных",
+    category_encoders_decoders: "Кодировщики и Декодировщики",
+    category_generators_utilities: "Генераторы и Утилиты",
+    category_converters: "Конвертеры",
+    category_text_dev_tools: "Инструменты Текста и Разработки",
+    category_ai_tools: "ИИ Инструменты",
+    
     // Generic Actions
     copy: "Копировать",
     paste: "Вставить",
@@ -5288,6 +5653,14 @@ const translations = {
     xml_viewer: "XML 查看器",
     dark_mode: "深色模式",
     light_mode: "浅色模式",
+    
+    // Category Names
+    category_data_viewers: "数据查看器",
+    category_encoders_decoders: "编码器和解码器",
+    category_generators_utilities: "生成器和实用工具",
+    category_converters: "转换器",
+    category_text_dev_tools: "文本和开发工具",
+    category_ai_tools: "AI工具",
     
     // Generic Actions
     copy: "复制",
@@ -5333,6 +5706,14 @@ const translations = {
     dark_mode: "ダークモード",
     light_mode: "ライトモード",
     
+    // Category Names
+    category_data_viewers: "データビューア",
+    category_encoders_decoders: "エンコーダー・デコーダー",
+    category_generators_utilities: "ジェネレーター・ユーティリティ",
+    category_converters: "コンバーター",
+    category_text_dev_tools: "テキスト・開発ツール",
+    category_ai_tools: "AIツール",
+    
     // Generic Actions
     copy: "コピー",
     paste: "貼り付け",
@@ -5376,6 +5757,14 @@ const translations = {
     xml_viewer: "XML 뷰어",
     dark_mode: "다크 모드",
     light_mode: "라이트 모드",
+    
+    // Category Names
+    category_data_viewers: "데이터 뷰어",
+    category_encoders_decoders: "인코더 및 디코더",
+    category_generators_utilities: "제너레이터 및 유틸리티",
+    category_converters: "변환기",
+    category_text_dev_tools: "텍스트 및 개발 도구",
+    category_ai_tools: "AI 도구",
     
     // Generic Actions
     copy: "복사",
@@ -5422,6 +5811,14 @@ const translations = {
     dark_mode: "Mörkt läge",
     light_mode: "Ljust läge",
     
+    // Category Translations
+    category_data_viewers: "Datavisare",
+    category_encoders_decoders: "Kodare och Dekodare",
+    category_generators_utilities: "Generatorer och Verktyg",
+    category_converters: "Konverterare",
+    category_text_dev_tools: "Textutvecklingsverktyg",
+    category_ai_tools: "AI-verktyg",
+    
     // Generic Actions
     copy: "Kopiera",
     paste: "Klistra in",
@@ -5454,6 +5851,13 @@ const translations = {
     paste_json_here: "Klistra in JSON här",
     paste_xml_here: "Klistra in XML här",
     
+    // AI Tools
+    text_summarizer: "Textsammanfattare",
+    language_translator: "Språköversättare",
+    sentiment_analyzer: "Sentimentanalysator",
+    grammar_checker: "Grammatikkontroll",
+    keyword_extractor: "Nyckelordsextraktion",
+    
     // Footer and Modal
     footer_text: "© 2025 Dataz Studio | Professionellt verktyg för databehandling och visualisering",
     full_formatted_json: "Fullständigt formaterad JSON"
@@ -5465,6 +5869,14 @@ const translations = {
     xml_viewer: "XML-viser",
     dark_mode: "Mørk modus",
     light_mode: "Lys modus",
+    
+    // Category Translations
+    category_data_viewers: "Datavisere",
+    category_encoders_decoders: "Kodere og Dekodere",
+    category_generators_utilities: "Generatorer og Verktøy",
+    category_converters: "Konvertere",
+    category_text_dev_tools: "Tekstutviklingsverktøy",
+    category_ai_tools: "AI-verktøy",
     
     // Generic Actions
     copy: "Kopier",
@@ -5498,6 +5910,13 @@ const translations = {
     paste_json_here: "Lim inn JSON her",
     paste_xml_here: "Lim inn XML her",
     
+    // AI Tools
+    text_summarizer: "Tekstsammendrag",
+    language_translator: "Språkoversetter",
+    sentiment_analyzer: "Sentimentanalyse",
+    grammar_checker: "Grammatikkontroll",
+    keyword_extractor: "Nøkkelordutrekk",
+    
     // Footer and Modal
     footer_text: "© 2025 Dataz Studio | Profesjonelt verktøy for databehandling og visualisering",
     full_formatted_json: "Fullstendig formatert JSON"
@@ -5508,6 +5927,17 @@ const translations = {
     json_viewer: "JSON-fremviser",
     xml_viewer: "XML-fremviser",
     dark_mode: "Mørk tilstand",
+    light_mode: "Lys tilstand",
+    
+    // Category Translations
+    category_data_viewers: "Datavisere",
+    category_encoders_decoders: "Kodere og Dekodere",
+    category_generators_utilities: "Generatorer og Værktøjer",
+    category_converters: "Konvertere",
+    category_text_dev_tools: "Tekstudviklingsværktøjer",
+    category_ai_tools: "AI-værktøjer",
+    
+    // Generic Actions
     light_mode: "Lys tilstand",
     
     // Generic Actions
@@ -5541,6 +5971,13 @@ const translations = {
     // Placeholders
     paste_json_here: "Indsæt JSON her",
     paste_xml_here: "Indsæt XML her",
+    
+    // AI Tools
+    text_summarizer: "Tekstsammendrag",
+    language_translator: "Sprogoversætter",
+    sentiment_analyzer: "Sentimentanalyse",
+    grammar_checker: "Grammatikkontrol",
+    keyword_extractor: "Nøgleordsudtrækning",
     
     // Footer and Modal
     footer_text: "© 2025 Dataz Studio | Professionelt værktøj til databehandling og visualisering",
@@ -5586,6 +6023,13 @@ const translations = {
     paste_json_here: "Liitä JSON tähän",
     paste_xml_here: "Liitä XML tähän",
     
+    // AI Tools
+    text_summarizer: "Tekstin tiivistäjä",
+    language_translator: "Kielenkääntäjä",
+    sentiment_analyzer: "Tunnelman analysaattori",
+    grammar_checker: "Kieliopintarkistaja",
+    keyword_extractor: "Avainsanojen erottaja",
+    
     // Footer and Modal
     footer_text: "© 2025 Dataz Studio | Ammattimainen tietojenkäsittely- ja visualisointityökalu",
     full_formatted_json: "Täysin muotoiltu JSON"
@@ -5598,6 +6042,14 @@ const translations = {
     xml_viewer: "XML व्यूअर",
     dark_mode: "डार्क मोड",
     light_mode: "लाइट मोड",
+    
+    // Category Translations
+    category_data_viewers: "डेटा व्यूअर",
+    category_encoders_decoders: "एन्कोडर और डिकोडर",
+    category_generators_utilities: "जेनरेटर और उपयोगिताएं",
+    category_converters: "कन्वर्टर",
+    category_text_dev_tools: "टेक्स्ट डेव टूल्स",
+    category_ai_tools: "AI टूल्स",
     
     // Generic Actions
     copy: "कॉपी करें",
@@ -5630,6 +6082,13 @@ const translations = {
     // Placeholders
     paste_json_here: "यहाँ JSON पेस्ट करें",
     paste_xml_here: "यहाँ XML पेस्ट करें",
+    
+    // AI Tools
+    text_summarizer: "टेक्स्ट सारांशकर्ता",
+    language_translator: "भाषा अनुवादक",
+    sentiment_analyzer: "भावना विश्लेषक",
+    grammar_checker: "व्याकरण जांचकर्ता",
+    keyword_extractor: "कीवर्ड निकालने वाला",
     
     // Footer and Modal
     footer_text: "© 2025 Dataz Studio | पेशेवर डेटा प्रोसेसिंग और विज़ुअलाइज़ेशन टूल",
@@ -5675,6 +6134,13 @@ const translations = {
     paste_json_here: "இங்கே JSON ஒட்டவும்",
     paste_xml_here: "இங்கே XML ஒட்டவும்",
     
+    // AI Tools
+    text_summarizer: "உரை சுருக்கம்",
+    language_translator: "மொழி மொழிபெயர்ப்பு",
+    sentiment_analyzer: "உணர்வு பகுப்பாய்வி",
+    grammar_checker: "இலக்கணப் பரிசோதகம்",
+    keyword_extractor: "முக்கிய வார்த்தை எடுப்பு",
+    
     // Footer and Modal
     footer_text: "© 2025 Dataz Studio | தொழில்முறை தரவு செயலாக்கம் மற்றும் காட்சிப்படுத்தல் கருவி",
     full_formatted_json: "முழுமையான வடிவமைக்கப்பட்ட JSON"
@@ -5719,6 +6185,13 @@ const translations = {
     paste_json_here: "এখানে JSON পেস্ট করুন",
     paste_xml_here: "এখানে XML পেস্ট করুন",
     
+    // AI Tools
+    text_summarizer: "টেক্সট সংক্ষেপক",
+    language_translator: "ভাষা অনুবাদক",
+    sentiment_analyzer: "মানসিক অবস্থা বিশ্লেষক",
+    grammar_checker: "ব্যাকরণ পরীক্ষক",
+    keyword_extractor: "কীওয়ার্ড এক্সট্র্যাক্টর",
+    
     // Footer and Modal
     footer_text: "© 2025 Dataz Studio | পেশাদার ডেটা প্রক্রিয়াকরণ এবং ভিজ্যুয়ালাইজেশন টুল",
     full_formatted_json: "সম্পূর্ণ ফরম্যাট করা JSON"
@@ -5762,6 +6235,13 @@ const translations = {
     // Placeholders
     paste_json_here: "ఇక్కడ JSON పేస్ట్ చేయండి",
     paste_xml_here: "ఇక్కడ XML పేస్ట్ చేయండి",
+    
+    // AI Tools
+    text_summarizer: "టెక్స్ట్ సంక్షేపణ",
+    language_translator: "భాష అనువాదకం",
+    sentiment_analyzer: "భావన విశ్లేషణ",
+    grammar_checker: "వ్యాకరణ తనిఖీ",
+    keyword_extractor: "కీలక పదాల వేర్పు",
     
     // Footer and Modal
     footer_text: "© 2025 Dataz Studio | వృత్తిపరమైన డేటా ప్రాసెసింగ్ మరియు విజువలైజేషన్ టూల్",
@@ -6278,6 +6758,28 @@ ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailt
     </div>
   </div>
 </div>
+
+<script>
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the last opened panel or default to JSON
+  const lastPanel = localStorage.getItem('last-panel') || 'json';
+  
+  // Show the correct panel
+  showOnly(lastPanel);
+  
+  // Ensure only the correct button is active
+  const allButtons = document.querySelectorAll('.dropdown-item');
+  allButtons.forEach(btn => btn.classList.remove('active'));
+  
+  const activeButton = document.getElementById(`btn-${lastPanel}`);
+  if (activeButton) {
+    activeButton.classList.add('active');
+  }
+  
+  console.log('Application initialized with panel:', lastPanel);
+});
+</script>
 
 </body>
 </html>

@@ -2,8 +2,8 @@
    Show only one panel + save choice
 ------------------------- */
 function showOnly(type) {
-  const panels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath'];
-  const buttons = ['btn-json', 'btn-xml', 'btn-graph', 'btn-base64', 'btn-jwt', 'btn-url', 'btn-hash', 'btn-uuid', 'btn-color', 'btn-timestamp', 'btn-qr', 'btn-regex', 'btn-text', 'btn-api', 'btn-markdown', 'btn-csv', 'btn-sql', 'btn-diff', 'btn-password', 'btn-jsonpath'];
+  const panels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath', 'summarize', 'translate', 'sentiment', 'grammar', 'keywords'];
+  const buttons = ['btn-json', 'btn-xml', 'btn-graph', 'btn-base64', 'btn-jwt', 'btn-url', 'btn-hash', 'btn-uuid', 'btn-color', 'btn-timestamp', 'btn-qr', 'btn-regex', 'btn-text', 'btn-api', 'btn-markdown', 'btn-csv', 'btn-sql', 'btn-diff', 'btn-password', 'btn-jsonpath', 'btn-summarize', 'btn-translate', 'btn-sentiment', 'btn-grammar', 'btn-keywords'];
   
   // Hide all panels and deactivate all buttons
   panels.forEach(panel => {
@@ -50,7 +50,13 @@ function restorePanelInputs(panelType) {
     regex: ['regex-pattern', 'regex-flags', 'regex-input'],
     text: ['text-input', 'text-operation'],
     api: ['api-input', 'api-format'],
-    markdown: ['markdown-input']
+    markdown: ['markdown-input'],
+    // AI Tools
+    summarize: ['text-to-summarize', 'summary-length'],
+    translate: ['text-to-translate', 'source-lang', 'target-lang'],
+    sentiment: ['text-to-analyze'],
+    grammar: ['text-to-check'],
+    keywords: ['text-for-keywords', 'keyword-count']
   };
   
   // Restore inputs for the current panel
