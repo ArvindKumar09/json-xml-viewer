@@ -295,6 +295,109 @@ html, body {
 #xml-input {
   flex: 1;
 }
+
+/* XML Tree Styles */
+.xml-row {
+  display: flex;
+  align-items: center;
+  padding: 2px 0;
+  line-height: 1.4;
+}
+
+.xml-arrow {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.2s;
+}
+
+.xml-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.xml-arrow span {
+  font-size: 12px;
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+  color: #666;
+}
+
+.collapse.collapsed > ul {
+  display: none;
+}
+
+.collapse.collapsed > .xml-row:last-child {
+  display: none;
+}
+
+.xml-tag-open, .xml-tag-close {
+  color: #2196f3;
+  font-weight: bold;
+}
+
+.xml-tag-open.active, .xml-tag-close.active {
+  background-color: rgba(33, 150, 243, 0.2);
+  border-radius: 2px;
+}
+
+.attr {
+  color: #ff9800;
+}
+
+.attr-value {
+  color: #4caf50;
+}
+
+.string {
+  color: #9c27b0;
+  font-style: italic;
+}
+
+.xml-copy-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.xml-copy-btn:hover {
+  opacity: 1;
+}
+
+.xml-search-match {
+  background-color: rgba(255, 235, 59, 0.3);
+  border-radius: 2px;
+}
+
+#xml-search-bar {
+  width: 200px;
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.xml-search-btn {
+  padding: 4px 8px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.xml-search-btn:hover {
+  background: #d32f2f;
+}
+
 /* Responsive stack for small screens */
 @media (max-width: 768px) {
   .io-wrapper {

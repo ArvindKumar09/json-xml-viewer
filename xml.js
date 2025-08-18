@@ -121,34 +121,61 @@ function viewXML() {
 
 // Convert XML to HTML tree
 function xmlToTree(node, path) {
-  let html = `<ul><li class="collapse" data-xml-path="${path}">`;
-  // Opening tag row with inline arrow
-  html += `<div class="xml-row">`;
-  html += `<span class="xml-arrow"></span>`;
-  html += `<span class="tag xml-tag-open" data-xml-path="${path}">&lt;${node.nodeName}</span>`;
-  if (node.attributes && node.attributes.length) {
-    for (let attr of node.attributes) {
-      html += ` <span class="attr">${attr.name}="<span class="attr-value">${escapeHtml(attr.value)}</span>"</span>`;
-    }
-  }
-  html += '<span class="tag">&gt;</span>';
-  html += `<button class="xml-copy-btn" title="Copy this node" style="margin-left:6px;font-size:12px;vertical-align:middle;">📋</button>`;
-  html += `</div>`;
-  // Children as sibling <li>s in a single <ul>
+  // Check if this node contains only text content or is empty
   const children = Array.from(node.childNodes).filter(child => child.nodeType === 1 || (child.nodeType === 3 && child.nodeValue.trim()));
-  if (children.length > 0) {
-    html += '<ul>';
-    children.forEach((child, idx) => {
-      if (child.nodeType === 1) {
-        html += xmlToTree(child, path + '-' + idx);
-      } else if (child.nodeType === 3 && child.nodeValue.trim()) {
-        html += `<li><div class="xml-row"><span class="string">${escapeHtml(child.nodeValue.trim())}</span></div></li>`;
+  const hasOnlyText = children.length === 1 && children[0].nodeType === 3;
+  const isEmpty = children.length === 0;
+  const isSimpleNode = hasOnlyText || isEmpty;
+  
+  let html = `<ul><li class="${isSimpleNode ? 'collapse' : 'collapse'}" data-xml-path="${path}">`;
+  
+  if (isSimpleNode) {
+    // For nodes with only text content or empty nodes, display everything on one line
+    html += `<div class="xml-row">`;
+    html += `<span class="xml-arrow" style="visibility: hidden;"></span>`; // Hidden arrow for simple nodes
+    html += `<span class="tag xml-tag-open" data-xml-path="${path}">&lt;${node.nodeName}`;
+    if (node.attributes && node.attributes.length) {
+      for (let attr of node.attributes) {
+        html += ` <span class="attr">${attr.name}="<span class="attr-value">${escapeHtml(attr.value)}</span>"</span>`;
       }
-    });
-    html += '</ul>';
+    }
+    html += '&gt;</span>';
+    if (hasOnlyText) {
+      html += `<span class="string">${escapeHtml(children[0].nodeValue.trim())}</span>`;
+    }
+    html += `<span class="tag xml-tag-close" data-xml-path="${path}">&lt;/${node.nodeName}&gt;</span>`;
+    html += `<button class="xml-copy-btn" title="Copy this node" style="margin-left:6px;font-size:12px;vertical-align:middle;">📋</button>`;
+    html += `</div>`;
+  } else {
+    // For nodes with child elements, use the tree structure
+    html += `<div class="xml-row">`;
+    html += `<span class="xml-arrow"></span>`;
+    html += `<span class="tag xml-tag-open" data-xml-path="${path}">&lt;${node.nodeName}`;
+    if (node.attributes && node.attributes.length) {
+      for (let attr of node.attributes) {
+        html += ` <span class="attr">${attr.name}="<span class="attr-value">${escapeHtml(attr.value)}</span>"</span>`;
+      }
+    }
+    html += '&gt;</span>';
+    html += `<button class="xml-copy-btn" title="Copy this node" style="margin-left:6px;font-size:12px;vertical-align:middle;">📋</button>`;
+    html += `</div>`;
+    
+    // Children as sibling <li>s in a single <ul>
+    if (children.length > 0) {
+      html += '<ul>';
+      children.forEach((child, idx) => {
+        if (child.nodeType === 1) {
+          html += xmlToTree(child, path + '-' + idx);
+        } else if (child.nodeType === 3 && child.nodeValue.trim()) {
+          html += `<li><div class="xml-row"><span class="string">${escapeHtml(child.nodeValue.trim())}</span></div></li>`;
+        }
+      });
+      html += '</ul>';
+    }
+    // Closing tag row
+    html += `<div class="xml-row"><span class="tag xml-tag-close" data-xml-path="${path}">&lt;/${node.nodeName}&gt;</span></div>`;
   }
-  // Closing tag row
-  html += `<div class="xml-row"><span class="tag xml-tag-close" data-xml-path="${path}">&lt;/${node.nodeName}&gt;</span></div>`;
+  
   html += '</li></ul>';
   return html;
 }
@@ -204,17 +231,42 @@ function getXMLStringFromNode(li) {
 // Filter XML tree by search
 function filterXMLTree() {
   const q = document.getElementById('xml-search-bar').value.trim().toLowerCase();
-  document.querySelectorAll('#xml-output li[data-xml-path]').forEach(li => {
+  const allNodes = document.querySelectorAll('#xml-output li[data-xml-path]');
+  
+  allNodes.forEach(li => {
     // Remove previous highlight
     li.classList.remove('xml-search-match');
     const text = li.textContent.toLowerCase();
+    
     if (!q || text.includes(q)) {
-      if (q && text.includes(q)) li.classList.add('xml-search-match');
+      if (q && text.includes(q)) {
+        li.classList.add('xml-search-match');
+        // Expand this node and all its parents when there's a match
+        if (q) {
+          expandNodeAndParents(li);
+        }
+      }
       li.style.display = '';
     } else {
       li.style.display = 'none';
     }
   });
+}
+
+// Helper function to expand a node and all its parents
+function expandNodeAndParents(node) {
+  let current = node;
+  while (current) {
+    if (current.classList && current.classList.contains('collapse')) {
+      current.classList.remove('collapsed');
+      // Update arrow direction
+      const arrow = current.querySelector('.xml-arrow span');
+      if (arrow) {
+        arrow.style.transform = 'rotate(90deg)';
+      }
+    }
+    current = current.parentElement ? current.parentElement.closest('li[data-xml-path]') : null;
+  }
 }
 
 function clearXMLSearch() {
@@ -238,36 +290,58 @@ function escapeHtml(text) {
 
 // Make collapsible tree
 function makeCollapsible(container) {
+  // Remove any existing event listeners first
+  container.removeEventListener('click', handleArrowClick);
+  
+  // Add single delegated event listener for all arrows
+  container.addEventListener('click', handleArrowClick);
+  
   container.querySelectorAll('.collapse').forEach(function(el) {
     el.classList.add('collapsed'); // start collapsed
-    // Only toggle when clicking the arrow
+    // Only setup arrows that don't already have content
     const arrow = el.querySelector('.xml-arrow');
-    if (arrow) {
+    if (arrow && !arrow.innerHTML) {
       arrow.innerHTML = '<span style="display:inline-block;transform:rotate(0deg);transition:transform 0.2s;">&#9654;</span>';
       arrow.style.cursor = 'pointer';
-      arrow.onclick = function(e) {
-        e.stopPropagation();
-        el.classList.toggle('collapsed');
-        // Rotate arrow
-        const icon = arrow.querySelector('span');
+    }
+    // Set initial arrow direction
+    if (arrow && el.classList.contains('collapsed')) {
+      const span = arrow.querySelector('span');
+      if (span) span.style.transform = 'rotate(0deg)';
+    }
+  });
+}
+
+// Handle arrow clicks with event delegation
+function handleArrowClick(e) {
+  if (e.target.closest('.xml-arrow')) {
+    e.stopPropagation();
+    const arrow = e.target.closest('.xml-arrow');
+    const el = arrow.closest('.collapse');
+    if (el) {
+      el.classList.toggle('collapsed');
+      // Rotate arrow
+      const icon = arrow.querySelector('span');
+      if (icon) {
         if (el.classList.contains('collapsed')) {
           icon.style.transform = 'rotate(0deg)';
         } else {
           icon.style.transform = 'rotate(90deg)';
         }
-      };
+      }
     }
-    // Set initial arrow direction
-    if (arrow && el.classList.contains('collapsed')) {
-      arrow.querySelector('span').style.transform = 'rotate(0deg)';
-    }
-  });
+  }
 }
 
 // Collapse all XML nodes
 function collapseAllXML() {
   document.querySelectorAll('#xml-output .collapse').forEach(el => {
     el.classList.add('collapsed');
+    // Update arrow direction
+    const arrow = el.querySelector('.xml-arrow span');
+    if (arrow) {
+      arrow.style.transform = 'rotate(0deg)';
+    }
   });
 }
 
@@ -275,5 +349,10 @@ function collapseAllXML() {
 function expandAllXML() {
   document.querySelectorAll('#xml-output .collapse').forEach(el => {
     el.classList.remove('collapsed');
+    // Update arrow direction
+    const arrow = el.querySelector('.xml-arrow span');
+    if (arrow) {
+      arrow.style.transform = 'rotate(90deg)';
+    }
   });
 }
