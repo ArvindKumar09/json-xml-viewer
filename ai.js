@@ -640,8 +640,9 @@ function clearSummarizer() {
   `;
 }
 
-function translateText() {
-  console.log('translateText function called');
+function aiTranslateText() {
+  alert('AI Translate function called!'); // Test alert
+  console.log('aiTranslateText function called');
   
   // Test if elements exist
   const textElement = document.getElementById('text-to-translate');
@@ -658,6 +659,7 @@ function translateText() {
   
   if (!textElement || !sourceLangElement || !targetLangElement || !outputElement) {
     console.error('Missing required elements for translation');
+    alert('Missing required elements for translation');
     return;
   }
   
