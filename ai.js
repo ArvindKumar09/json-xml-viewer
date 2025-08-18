@@ -90,16 +90,17 @@ class AITools {
 
     // Language Translator using MyMemory free API
   async translateText() {
+    console.log('AITools.translateText method called');
     const text = document.getElementById('text-to-translate').value.trim();
     const sourceLang = document.getElementById('source-lang').value;
     const targetLang = document.getElementById('target-lang').value;
     
+    console.log('Translation inputs:', { text, sourceLang, targetLang });
+
     if (!text) {
       this.showError('translator-output', 'Please enter text to translate');
       return;
-    }
-
-    if (sourceLang === targetLang) {
+    }    if (sourceLang === targetLang) {
       this.showError('translator-output', 'Source and target languages cannot be the same');
       return;
     }
@@ -107,38 +108,16 @@ class AITools {
     this.showLoading('translator-output', 'Translating text...');
 
     try {
-      // MyMemory API supports multiple language pairs
-      const langPair = sourceLang === 'auto' ? targetLang : `${sourceLang}|${targetLang}`;
-      
-      // If auto-detect, use a different endpoint
-      let url;
-      if (sourceLang === 'auto') {
-        // For auto-detect, we'll use English as intermediate if needed
-        url = `${this.apiProviders.mymemory}?q=${encodeURIComponent(text)}&langpair=en|${targetLang}`;
-        
-        // Try to detect language first with a simple heuristic
-        const detectedLang = this.detectLanguage(text);
-        if (detectedLang && detectedLang !== targetLang) {
-          url = `${this.apiProviders.mymemory}?q=${encodeURIComponent(text)}&langpair=${detectedLang}|${targetLang}`;
-        }
-      } else {
-        url = `${this.apiProviders.mymemory}?q=${encodeURIComponent(text)}&langpair=${sourceLang}|${targetLang}`;
-      }
+      // Simplified approach - just use MyMemory API directly
+      const langPair = sourceLang === 'auto' ? `en|${targetLang}` : `${sourceLang}|${targetLang}`;
+      const url = `${this.apiProviders.mymemory}?q=${encodeURIComponent(text)}&langpair=${langPair}`;
       
       console.log('Translation URL:', url); // Debug log
       
-      // Use a more compatible fetch approach
-      const response = await fetch(url, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).catch(err => {
-        console.warn('CORS fetch failed, trying without headers:', err);
-        // Fallback to simple fetch if CORS fails
-        return fetch(url);
-      });
+      // Simple fetch without complex error handling first
+      const response = await fetch(url);
+      
+      console.log('Response received:', response.status, response.ok);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -149,57 +128,26 @@ class AITools {
       console.log('Translation response:', data); // Debug log
       
       if (data.responseStatus === 200 && data.responseData && data.responseData.translatedText) {
+        console.log('Translation successful, displaying result');
         this.displayTranslation(text, data.responseData.translatedText, sourceLang, targetLang);
       } else if (data.matches && data.matches.length > 0) {
         // Use the best match from the translation database
+        console.log('Using match translation');
         const bestMatch = data.matches[0];
         this.displayTranslation(text, bestMatch.translation, sourceLang, targetLang);
       } else {
-        // Fallback: try with English as intermediate language
-        if (sourceLang !== 'en' && targetLang !== 'en') {
-          const enUrl = `${this.apiProviders.mymemory}?q=${encodeURIComponent(text)}&langpair=${sourceLang}|en`;
-          const enResponse = await fetch(enUrl, {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json',
-              'User-Agent': 'DatazTools/1.0'
-            }
-          });
-          
-          if (enResponse.ok) {
-            const enData = await enResponse.json();
-            
-            if (enData.responseData && enData.responseData.translatedText) {
-              const finalUrl = `${this.apiProviders.mymemory}?q=${encodeURIComponent(enData.responseData.translatedText)}&langpair=en|${targetLang}`;
-              const finalResponse = await fetch(finalUrl, {
-                method: 'GET',
-                headers: {
-                  'Accept': 'application/json',
-                  'User-Agent': 'DatazTools/1.0'
-                }
-              });
-              
-              if (finalResponse.ok) {
-                const finalData = await finalResponse.json();
-                
-                if (finalData.responseData && finalData.responseData.translatedText) {
-                  this.displayTranslation(text, finalData.responseData.translatedText, sourceLang, targetLang);
-                  return;
-                }
-              }
-            }
-          }
-        }
-        
-        throw new Error('Translation service returned no valid results');
+        throw new Error('No translation found in response');
       }
     } catch (error) {
       console.error('Translation error:', error);
+      console.error('Error stack:', error.stack);
       
       // Try fallback translation with a simpler approach
       try {
+        console.log('Attempting fallback translation...');
         const fallbackResult = await this.fallbackTranslation(text, sourceLang, targetLang);
         if (fallbackResult) {
+          console.log('Fallback successful:', fallbackResult);
           this.displayTranslation(text, fallbackResult, sourceLang, targetLang);
           return;
         }
@@ -207,7 +155,7 @@ class AITools {
         console.error('Fallback translation failed:', fallbackError);
       }
       
-      this.showError('translator-output', 'Translation service temporarily unavailable. Please try again later.');
+      this.showError('translator-output', `Translation failed: ${error.message}. Please try again or check your internet connection.`);
     }
   }
 
@@ -334,7 +282,7 @@ class AITools {
           </div>
         </div>
         <div class="ai-result-actions">
-          <button onclick="copyToClipboard('${translatedText.replace(/'/g, "\\'")}')">
+          <button onclick="copyToClipboard(\`${translatedText.replace(/`/g, '\\`')}\`)">
             <i class="fas fa-copy"></i> Copy Translation
           </button>
         </div>
@@ -693,6 +641,26 @@ function clearSummarizer() {
 }
 
 function translateText() {
+  console.log('translateText function called');
+  
+  // Test if elements exist
+  const textElement = document.getElementById('text-to-translate');
+  const sourceLangElement = document.getElementById('source-lang');
+  const targetLangElement = document.getElementById('target-lang');
+  const outputElement = document.getElementById('translator-output');
+  
+  console.log('Elements found:', {
+    textElement: !!textElement,
+    sourceLangElement: !!sourceLangElement,
+    targetLangElement: !!targetLangElement,
+    outputElement: !!outputElement
+  });
+  
+  if (!textElement || !sourceLangElement || !targetLangElement || !outputElement) {
+    console.error('Missing required elements for translation');
+    return;
+  }
+  
   aiTools.translateText();
 }
 
