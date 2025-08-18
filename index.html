@@ -637,41 +637,6 @@ body.dark .language-selector option {
   font-size: 0.8em;
 }
 
-.feedback-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-  flex-wrap: wrap;
-}
-
-.feedback-test-btn {
-  background: #6c757d;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
-  font-weight: 500;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex: 1;
-  justify-content: center;
-}
-
-.feedback-test-btn:hover {
-  background: #5a6268;
-  transform: translateY(-1px);
-}
-
-.feedback-test-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-  transform: none;
-}
-
 .feedback-submit {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
@@ -682,11 +647,7 @@ body.dark .language-selector option {
   font-size: 1em;
   font-weight: 600;
   transition: all 0.2s ease;
-  flex: 2;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  justify-content: center;
+  margin-top: 10px;
 }
 
 .feedback-submit:hover {
@@ -719,52 +680,6 @@ body.dark .language-selector option {
   margin-bottom: 15px;
   text-align: center;
   font-weight: 500;
-}
-
-.feedback-info {
-  background: #e8f4f8;
-  border: 1px solid #bee5eb;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  overflow: hidden;
-}
-
-.feedback-info-header {
-  background: #d1ecf1;
-  padding: 10px 15px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  color: #0c5460;
-  border-bottom: 1px solid #bee5eb;
-}
-
-.feedback-info-content {
-  padding: 15px;
-  color: #0c5460;
-}
-
-.feedback-info-content p {
-  margin: 0 0 10px 0;
-  font-size: 0.9em;
-  line-height: 1.4;
-}
-
-.feedback-info-email {
-  font-size: 0.85em;
-  padding: 8px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 3px;
-  border-left: 3px solid #17a2b8;
-}
-
-.feedback-info-email code {
-  background: #fff;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Courier New', monospace;
-  color: #495057;
 }
 
 /* Responsive feedback panel */
@@ -4816,11 +4731,7 @@ const translations = {
     feedback_general: "General Feedback",
     feedback_other: "Other",
     feedback_remove: "Remove",
-    feedback_replace: "Replace",
-    feedback_test: "Test Email Connection",
-    feedback_info_title: "Email Setup Information",
-    feedback_info_text: "First-time setup requires email verification. Click \"Test Email Connection\" to verify the system is working properly.",
-    feedback_info_recipient: "Feedback will be sent to:"
+    feedback_replace: "Replace"
   },
   
   es: {
@@ -4993,11 +4904,7 @@ const translations = {
     feedback_general: "Comentario General",
     feedback_other: "Otro",
     feedback_remove: "Eliminar",
-    feedback_replace: "Reemplazar",
-    feedback_test: "Probar Conexión de Email",
-    feedback_info_title: "Información de Configuración de Email",
-    feedback_info_text: "La configuración inicial requiere verificación de email. Haz clic en \"Probar Conexión de Email\" para verificar que el sistema funciona correctamente.",
-    feedback_info_recipient: "Los comentarios se enviarán a:"
+    feedback_replace: "Reemplazar"
   },
   
   fr: {
@@ -6178,63 +6085,6 @@ ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailt
   window.removeScreenshot = removeScreenshot;
   window.replaceScreenshot = replaceScreenshot;
   
-  // Add test email function
-  function testEmailConnection() {
-    const testBtn = document.getElementById('testEmailBtn');
-    const originalText = testBtn.innerHTML;
-    
-    testBtn.disabled = true;
-    testBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
-    
-    // Send a simple test email
-    const testFormData = new FormData();
-    testFormData.append('email', 'test@example.com');
-    testFormData.append('subject', 'test');
-    testFormData.append('message', 'This is a test email to verify the feedback system is working.');
-    testFormData.append('url', window.location.href);
-    testFormData.append('userAgent', navigator.userAgent);
-    testFormData.append('timestamp', new Date().toISOString());
-    
-    fetch('https://formsubmit.co/ajax/d26a1a25336155845d9e8d061f10154b', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json'
-      },
-      body: testFormData
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Test email response:', data);
-      
-      if (data.success) {
-        testBtn.innerHTML = '<i class="fas fa-check"></i> Email System Active';
-        testBtn.style.background = '#28a745';
-      } else if (data.message === 'Email confirmation required') {
-        testBtn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Email Verification Needed';
-        testBtn.style.background = '#ffc107';
-        testBtn.style.color = '#000';
-        
-        } else {
-        throw new Error('Test failed');
-      }
-    })
-    .catch(error => {
-      console.error('Test email error:', error);
-      testBtn.innerHTML = '<i class="fas fa-times"></i> Connection Failed';
-      testBtn.style.background = '#dc3545';
-      })
-    .finally(() => {
-      setTimeout(() => {
-        testBtn.disabled = false;
-        testBtn.innerHTML = originalText;
-        testBtn.style.background = '';
-        testBtn.style.color = '';
-      }, 3000);
-    });
-  }
-  
-  window.testEmailConnection = testEmailConnection;
-  
   // Also listen for storage changes (in case theme is changed in another tab)
   window.addEventListener('storage', function(e) {
     if (e.key === 'theme-mode') {
@@ -6261,22 +6111,6 @@ ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailt
       <div id="feedbackError" class="feedback-error" style="display: none;">
         <i class="fas fa-exclamation-triangle"></i> 
         <span data-i18n="feedback_error">Sorry, there was an error sending your feedback. Please try again.</span>
-      </div>
-      
-      <div class="feedback-info">
-        <div class="feedback-info-header">
-          <i class="fas fa-info-circle"></i>
-          <span data-i18n="feedback_info_title">Email Setup Information</span>
-        </div>
-        <div class="feedback-info-content">
-          <p data-i18n="feedback_info_text">
-            First-time setup requires email verification. Click "Test Email Connection" to verify the system is working properly.
-          </p>
-          <!--<div class="feedback-info-email">
-            <strong data-i18n="feedback_info_recipient">Feedback will be sent to:</strong> 
-            <code>aaa@gmail.com</code>
-          </div>-->
-        </div>
       </div>
       
       <form id="feedbackForm" class="feedback-form">
@@ -6334,15 +6168,9 @@ ${screenshotData ? '\nNote: Screenshot was attached but cannot be sent via mailt
           </div>
         </div>
         
-        <div class="feedback-actions">
-          <button type="button" class="feedback-test-btn" id="testEmailBtn" onclick="testEmailConnection()">
-            <i class="fas fa-vial"></i> <span data-i18n="feedback_test">Test Email Connection</span>
-          </button>
-          
-          <button type="submit" class="feedback-submit" id="feedbackSubmit">
-            <i class="fas fa-paper-plane"></i> <span data-i18n="feedback_send">Send Feedback</span>
-          </button>
-        </div>
+        <button type="submit" class="feedback-submit" id="feedbackSubmit">
+          <i class="fas fa-paper-plane"></i> <span data-i18n="feedback_send">Send Feedback</span>
+        </button>
       </form>
     </div>
   </div>
