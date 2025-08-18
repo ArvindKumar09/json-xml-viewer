@@ -641,8 +641,7 @@ function clearSummarizer() {
 }
 
 function aiTranslateText() {
-  alert('AI Translate function called!'); // Test alert
-  console.log('aiTranslateText function called');
+
   
   // Test if elements exist
   const textElement = document.getElementById('text-to-translate');
@@ -650,16 +649,10 @@ function aiTranslateText() {
   const targetLangElement = document.getElementById('target-lang');
   const outputElement = document.getElementById('translator-output');
   
-  console.log('Elements found:', {
-    textElement: !!textElement,
-    sourceLangElement: !!sourceLangElement,
-    targetLangElement: !!targetLangElement,
-    outputElement: !!outputElement
-  });
-  
+
   if (!textElement || !sourceLangElement || !targetLangElement || !outputElement) {
     console.error('Missing required elements for translation');
-    alert('Missing required elements for translation');
+    
     return;
   }
   
