@@ -2,8 +2,8 @@
    Show only one panel + save choice
 ------------------------- */
 function showOnly(type) {
-  const panels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown'];
-  const buttons = ['btn-json', 'btn-xml', 'btn-graph', 'btn-base64', 'btn-jwt', 'btn-url', 'btn-hash', 'btn-uuid', 'btn-color', 'btn-timestamp', 'btn-qr', 'btn-regex', 'btn-text', 'btn-api', 'btn-markdown'];
+  const panels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath'];
+  const buttons = ['btn-json', 'btn-xml', 'btn-graph', 'btn-base64', 'btn-jwt', 'btn-url', 'btn-hash', 'btn-uuid', 'btn-color', 'btn-timestamp', 'btn-qr', 'btn-regex', 'btn-text', 'btn-api', 'btn-markdown', 'btn-csv', 'btn-sql', 'btn-diff', 'btn-password', 'btn-jsonpath'];
   
   // Hide all panels and deactivate all buttons
   panels.forEach(panel => {
@@ -255,4 +255,218 @@ function clearAllSavedData() {
   showOnly('json');
   document.body.classList.remove('light');
   document.body.classList.add('dark');
+}
+
+// Essential shared functions for UI interactions
+
+function makeResizable(inputId, dividerId, outputId) {
+  let dragging = false;
+  let startX = 0;
+  let startInputWidth = 0;
+  let startOutputWidth = 0;
+  const input = document.getElementById(inputId);
+  const divider = document.getElementById(dividerId);
+  const output = document.getElementById(outputId);
+  if (!input || !divider || !output) return;
+
+  // Reset widths to default (50/50) when panel is shown
+  function resetWidths() {
+    input.style.flex = '';
+    output.style.flex = '';
+    input.style.width = '';
+    output.style.width = '';
+  }
+
+  // Listen for custom event to reset widths
+  divider.parentNode.addEventListener('reset-divider', resetWidths);
+
+  divider.addEventListener('mousedown', function(e) {
+    dragging = true;
+    startX = e.clientX;
+    startInputWidth = input.offsetWidth;
+    startOutputWidth = output.offsetWidth;
+    divider.classList.add('active');
+    document.body.style.cursor = 'col-resize';
+    e.preventDefault();
+  });
+
+  function onMouseMove(e) {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    let newInputWidth = startInputWidth + dx;
+    let newOutputWidth = startOutputWidth - dx;
+    const min = 80;
+    const total = newInputWidth + newOutputWidth;
+    if (newInputWidth < min) {
+      newInputWidth = min;
+      newOutputWidth = total - min;
+    }
+    if (newOutputWidth < min) {
+      newOutputWidth = min;
+      newInputWidth = total - min;
+    }
+    input.style.flex = 'none';
+    output.style.flex = 'none';
+    input.style.width = newInputWidth + 'px';
+    output.style.width = newOutputWidth + 'px';
+  }
+
+  function onMouseUp() {
+    if (dragging) {
+      dragging = false;
+      divider.classList.remove('active');
+      document.body.style.cursor = '';
+    }
+  }
+
+  document.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+}
+
+function copyToClipboard(elementId) {
+  const element = document.getElementById(elementId);
+  const text = element.textContent || element.innerText;
+  
+  if (!text.trim()) {
+    alert('Nothing to copy!');
+    return;
+  }
+  
+  navigator.clipboard.writeText(text).then(() => {
+    // Temporary visual feedback
+    const originalBg = element.style.backgroundColor;
+    element.style.backgroundColor = '#d4edda';
+    setTimeout(() => {
+      element.style.backgroundColor = originalBg;
+    }, 200);
+  }).catch(err => {
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+  });
+}
+
+function pasteInput(elementId) {
+  navigator.clipboard.readText().then(text => {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.value = text;
+      
+      // Auto-trigger functions for certain panels
+      if (elementId === 'color-input') convertColor();
+      if (elementId === 'timestamp-input') convertTimestamp();
+      if (elementId === 'uuid-input') validateUUID();
+      if (elementId === 'markdown-input') previewMarkdown();
+    }
+  }).catch(err => {
+    console.error('Failed to read clipboard: ', err);
+  });
+}
+
+function clearInput(elementId) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.value = '';
+    
+    // Auto-clear related outputs
+    if (elementId === 'color-input') {
+      document.getElementById('color-output').textContent = '';
+      document.getElementById('color-preview').style.backgroundColor = '#f0f0f0';
+    }
+    if (elementId === 'timestamp-input') {
+      document.getElementById('timestamp-output').textContent = 'Timestamp conversion will appear here';
+    }
+    if (elementId === 'uuid-input') {
+      document.getElementById('uuid-validation').textContent = '';
+    }
+    if (elementId === 'markdown-input') {
+      document.getElementById('markdown-output').innerHTML = '<p><em>Enter Markdown text to see preview</em></p>';
+    }
+  }
+}
+
+function captureScreenshot(outputId, filename) {
+  const output = document.getElementById(outputId);
+  if (!output) return;
+  // Temporarily expand to show all content
+  const prevScrollTop = output.scrollTop;
+  const prevScrollLeft = output.scrollLeft;
+  output.scrollTop = 0;
+  output.scrollLeft = 0;
+  html2canvas(output, {useCORS: true, backgroundColor: null, windowWidth: output.scrollWidth, windowHeight: output.scrollHeight, width: output.scrollWidth, height: output.scrollHeight, scrollY: -window.scrollY}).then(canvas => {
+    // Restore scroll
+    output.scrollTop = prevScrollTop;
+    output.scrollLeft = prevScrollLeft;
+    const link = document.createElement('a');
+    link.download = filename;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+
+function clearAll(panelType) {
+  switch (panelType) {
+    case 'url':
+      document.getElementById('url-input').value = '';
+      document.getElementById('url-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-link" style="font-size: 48px; margin-bottom: 10px;"></i><div>URL encoded/decoded result will appear here</div></div>';
+      break;
+    case 'hash':
+      document.getElementById('hash-input').value = '';
+      document.getElementById('hash-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-hashtag" style="font-size: 48px; margin-bottom: 10px;"></i><div>Hash values will appear here</div></div>';
+      break;
+    case 'uuid':
+      document.getElementById('uuid-input').value = '';
+      document.getElementById('uuid-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-fingerprint" style="font-size: 48px; margin-bottom: 10px;"></i><div>Generated UUIDs will appear here</div></div>';
+      break;
+    case 'color':
+      document.getElementById('color-input').value = '';
+      document.getElementById('color-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-palette" style="font-size: 48px; margin-bottom: 10px;"></i><div>Color conversions will appear here</div></div>';
+      break;
+    case 'timestamp':
+      document.getElementById('timestamp-input').value = '';
+      document.getElementById('timestamp-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-clock" style="font-size: 48px; margin-bottom: 10px;"></i><div>Timestamp conversions will appear here</div></div>';
+      break;
+    case 'regex':
+      document.getElementById('regex-pattern').value = '';
+      document.getElementById('regex-input').value = '';
+      if (document.getElementById('regex-global')) document.getElementById('regex-global').checked = true;
+      if (document.getElementById('regex-ignorecase')) document.getElementById('regex-ignorecase').checked = true;
+      document.getElementById('regex-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-search" style="font-size: 48px; margin-bottom: 10px;"></i><div>Regex matches will appear here</div></div>';
+      break;
+    case 'text':
+      document.getElementById('text-input').value = '';
+      document.getElementById('text-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-text-width" style="font-size: 48px; margin-bottom: 10px;"></i><div>Processed text will appear here</div></div>';
+      break;
+    case 'api':
+      document.getElementById('api-input').value = '';
+      document.getElementById('api-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-server" style="font-size: 48px; margin-bottom: 10px;"></i><div>Formatted API response will appear here</div></div>';
+      break;
+    case 'markdown':
+      document.getElementById('markdown-input').value = '';
+      document.getElementById('markdown-output').innerHTML = '<div style="color: #888; text-align: center; margin-top: 100px;"><i class="fas fa-markdown" style="font-size: 48px; margin-bottom: 10px;"></i><div>Markdown preview will appear here</div></div>';
+      break;
+  }
+}
+
+function clearAllStorage() {
+  if (confirm('Are you sure you want to clear all saved data? This cannot be undone.')) {
+    // Clear all panel data (keep language and last-panel settings)
+    const keysToKeep = ['language', 'last-panel'];
+    const keysToRemove = [];
+    
+    for (let key in localStorage) {
+      if (localStorage.hasOwnProperty(key) && !keysToKeep.includes(key)) {
+        keysToRemove.push(key);
+      }
+    }
+    
+    keysToRemove.forEach(key => localStorage.removeItem(key));
+    
+    alert('All saved data has been cleared.');
+    closeStorageModal();
+  }
 }
