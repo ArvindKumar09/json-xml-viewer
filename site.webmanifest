@@ -1,15 +1,17 @@
 {
-  "name": "DataZ Tools - Free Developer Toolkit",
+  "name": "DataZ Tools - Free Online Developer Toolkit with AI",
   "short_name": "DataZ Tools",
-  "description": "Free online developer toolkit with 15+ professional tools including JSON/XML viewers, Base64 encoder, JWT decoder, hash generator, and more utilities for developers.",
+  "description": "Professional free online developer toolkit with 20+ essential tools including AI-powered text analysis: JSON/XML viewers, Base64 encoder/decoder, JWT token decoder, hash generator, UUID generator, text summarizer, language translator, sentiment analyzer, grammar checker, keyword extractor, and more utilities. No signup required.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1e1e1e",
   "theme_color": "#2196f3",
-  "categories": ["developer", "tools", "utilities", "productivity"],
+  "categories": ["developer", "tools", "utilities", "productivity", "ai", "text-processing"],
   "lang": "en",
   "orientation": "any",
   "scope": "/",
+  "dir": "ltr",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

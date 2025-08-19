@@ -4,49 +4,129 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Main Page -->
+  <!-- Main Pages -->
   <url>
-    <loc>https://dataz.tools</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://dataz.tools/</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>https://www.dataz.tools</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://www.dataz.tools/</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Data Viewers -->
+  <!-- Tool Sections - These are functional anchor links -->
   <url>
-    <loc>https://dataz.tools#json</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://dataz.tools/#json</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://www.dataz.tools#json</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://dataz.tools/#xml</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://dataz.tools#xml</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://dataz.tools/#ai</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://www.dataz.tools#xml</loc>
-    <lastmod>2025-08-18</lastmod>
+    <loc>https://dataz.tools/#base64</loc>
+    <lastmod>2025-08-19</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
+  
+  <url>
+    <loc>https://dataz.tools/#jwt</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/#hash</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/#uuid</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/#url</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/#qr</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/#regex</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/#password</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/#csv</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/#diff</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Essential Files -->
+  <url>
+    <loc>https://dataz.tools/sitemap.xml</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://dataz.tools/robots.txt</loc>
+    <lastmod>2025-08-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
   
   <url>
     <loc>https://dataz.tools#csv</loc>

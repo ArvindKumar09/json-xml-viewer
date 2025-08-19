@@ -2,6 +2,48 @@ User-agent: *
 Allow: /
 
 # Sitemap
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /sitemap.xml
+Allow: /robots.txt
+Allow: /assets/
+Allow: /*.js
+Allow: /*.css
+
+# Allow anchor/fragment URLs (these are functional)
+Allow: /#json
+Allow: /#xml
+Allow: /#ai
+Allow: /#base64
+Allow: /#jwt
+Allow: /#hash
+Allow: /#uuid
+Allow: /#url
+Allow: /#qr
+Allow: /#regex
+Allow: /#password
+Allow: /#csv
+Allow: /#diff
+
+# Prevent crawling of non-existent directories (without #)
+Disallow: /json/
+Disallow: /xml/
+Disallow: /base64/
+Disallow: /jwt/
+Disallow: /hash/
+Disallow: /uuid/
+Disallow: /qr/
+Disallow: /ai/
+Disallow: /tools/
+Disallow: /admin/
+Disallow: /api/
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Sitemap
 Sitemap: https://dataz.tools/sitemap.xml
 Sitemap: https://www.dataz.tools/sitemap.xml
 

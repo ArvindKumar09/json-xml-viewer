@@ -1,13 +1,15 @@
-# �️ DataZ Tools - Free Online Developer Toolkit
+# 🛠️ DataZ Tools - Free Online Developer Toolkit with AI
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/Mr-Arvind-Kumar/json-xml-viewer.svg)](https://github.com/Mr-Arvind-Kumar/json-xml-viewer/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/Mr-Arvind-Kumar/json-xml-viewer.svg)](https://github.com/Mr-Arvind-Kumar/json-xml-viewer/issues)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Website](https://img.shields.io/website?url=https%3A//dataz.tools)](https://dataz.tools)
+[![Performance](https://img.shields.io/badge/Lighthouse-95%2B-brightgreen)](https://pagespeed.web.dev/analysis/https-dataz-tools/5o8lzwgij5)
 
-> **The Ultimate Free Online Developer Toolkit** - 15+ Professional Tools in One Place!
+> **The Ultimate Free Online Developer Toolkit with AI** - 20+ Professional Tools in One Place!
 
-Visit: **[dataz.tools](https://dataz.tools)** | **[www.dataz.tools](https://www.dataz.tools)**
+**🌐 Live Site:** [dataz.tools](https://dataz.tools) | [www.dataz.tools](https://www.dataz.tools)
 
 ---
 

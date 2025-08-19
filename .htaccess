@@ -1,5 +1,25 @@
 # DataZ Tools - SEO and Performance Optimizations
 
+# Custom 404 Error Page - redirect to main page
+ErrorDocument 404 /index.html
+
+# URL Rewriting for better SEO
+RewriteEngine On
+
+# Remove trailing slashes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/$ /$1 [R=301,L]
+
+# Handle fragment URLs that cause 404s
+RewriteRule ^json/?$ /index.html#json [R=301,L]
+RewriteRule ^xml/?$ /index.html#xml [R=301,L]
+RewriteRule ^base64/?$ /index.html#base64 [R=301,L]
+RewriteRule ^jwt/?$ /index.html#jwt [R=301,L]
+RewriteRule ^hash/?$ /index.html#hash [R=301,L]
+RewriteRule ^uuid/?$ /index.html#uuid [R=301,L]
+RewriteRule ^qr/?$ /index.html#qr [R=301,L]
+RewriteRule ^ai/?$ /index.html#ai [R=301,L]
+
 # Enable compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
