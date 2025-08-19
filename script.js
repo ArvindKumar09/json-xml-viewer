@@ -223,8 +223,8 @@ document.getElementById('themeToggle').addEventListener('click', () => {
    Restore everything on load
 ------------------------- */
 document.addEventListener('DOMContentLoaded', () => {
-  // Restore saved theme. Default to dark
-  const savedTheme = localStorage.getItem('theme-mode') || 'dark';
+  // Restore saved theme. Default to light
+  const savedTheme = localStorage.getItem('theme-mode') || 'light';
   if (savedTheme === 'light') {
     document.body.classList.add('light');
     document.body.classList.remove('dark');

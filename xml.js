@@ -32,6 +32,10 @@ function xmlToJson(node) {
   if (node.nodeType === 3) {
     return node.nodeValue.trim();
   }
+  // If CDATA node
+  if (node.nodeType === 4) {
+    return node.nodeValue;
+  }
   let obj = {};
   // Attributes
   if (node.attributes && node.attributes.length > 0) {
@@ -42,6 +46,7 @@ function xmlToJson(node) {
   }
   // Child nodes
   let hasElementChild = false;
+  let textContent = '';
   for (let child of node.childNodes) {
     if (child.nodeType === 1) {
       hasElementChild = true;
@@ -55,10 +60,24 @@ function xmlToJson(node) {
         obj[child.nodeName] = childObj;
       }
     } else if (child.nodeType === 3 && child.nodeValue.trim()) {
-      obj['#text'] = child.nodeValue.trim();
+      // Regular text node
+      textContent += child.nodeValue.trim();
+    } else if (child.nodeType === 4) {
+      // CDATA section - preserve as-is
+      textContent += child.nodeValue;
     }
   }
-  if (!hasElementChild && obj['#text']) return obj['#text'];
+  
+  // Handle text content (including CDATA)
+  if (textContent) {
+    obj['#text'] = textContent;
+  }
+  
+  // If no child elements and only text content, return just the text
+  if (!hasElementChild && textContent) {
+    return textContent;
+  }
+  
   return obj;
 }
 // Parse, validate, count, and render XML structure
@@ -121,16 +140,31 @@ function viewXML() {
 
 // Convert XML to HTML tree
 function xmlToTree(node, path) {
-  // Check if this node contains only text content or is empty
-  const children = Array.from(node.childNodes).filter(child => child.nodeType === 1 || (child.nodeType === 3 && child.nodeValue.trim()));
-  const hasOnlyText = children.length === 1 && children[0].nodeType === 3;
+  // Get all child nodes (elements and text)
+  const children = Array.from(node.childNodes).filter(child => 
+    child.nodeType === 1 || (child.nodeType === 3 && child.nodeValue.trim()) || child.nodeType === 4 // Include CDATA
+  );
+  
+  // Get just the text content (including CDATA) without child elements
+  const textContent = Array.from(node.childNodes)
+    .filter(child => (child.nodeType === 3 || child.nodeType === 4) && child.nodeValue.trim())
+    .map(child => child.nodeValue.trim())
+    .join('');
+  
+  // Check if this node has only text content (no child elements)
+  const hasChildElements = children.some(child => child.nodeType === 1);
+  const hasTextContent = textContent.length > 0;
   const isEmpty = children.length === 0;
-  const isSimpleNode = hasOnlyText || isEmpty;
+  const isSimpleNode = hasTextContent && !hasChildElements;
+  
+  // Count child elements for display
+  const childElementCount = children.filter(child => child.nodeType === 1).length;
+  const countDisplay = childElementCount > 0 ? ` {${childElementCount}}` : '';
   
   let html = `<ul><li class="${isSimpleNode ? 'collapse' : 'collapse'}" data-xml-path="${path}">`;
   
   if (isSimpleNode) {
-    // For nodes with only text content or empty nodes, display everything on one line
+    // For nodes with only text content, display everything on one line
     html += `<div class="xml-row">`;
     html += `<span class="xml-arrow" style="visibility: hidden;"></span>`; // Hidden arrow for simple nodes
     html += `<span class="tag xml-tag-open" data-xml-path="${path}">&lt;${node.nodeName}`;
@@ -140,9 +174,21 @@ function xmlToTree(node, path) {
       }
     }
     html += '&gt;</span>';
-    if (hasOnlyText) {
-      html += `<span class="string">${escapeHtml(children[0].nodeValue.trim())}</span>`;
+    html += `<span class="string">${escapeHtml(textContent)}</span>`;
+    html += `<span class="tag xml-tag-close" data-xml-path="${path}">&lt;/${node.nodeName}&gt;</span>`;
+    html += `<button class="xml-copy-btn" title="Copy this node" style="margin-left:6px;font-size:12px;vertical-align:middle;">📋</button>`;
+    html += `</div>`;
+  } else if (isEmpty) {
+    // For empty nodes, display as self-closing or empty
+    html += `<div class="xml-row">`;
+    html += `<span class="xml-arrow" style="visibility: hidden;"></span>`;
+    html += `<span class="tag xml-tag-open" data-xml-path="${path}">&lt;${node.nodeName}`;
+    if (node.attributes && node.attributes.length) {
+      for (let attr of node.attributes) {
+        html += ` <span class="attr">${attr.name}="<span class="attr-value">${escapeHtml(attr.value)}</span>"</span>`;
+      }
     }
+    html += '&gt;</span>';
     html += `<span class="tag xml-tag-close" data-xml-path="${path}">&lt;/${node.nodeName}&gt;</span>`;
     html += `<button class="xml-copy-btn" title="Copy this node" style="margin-left:6px;font-size:12px;vertical-align:middle;">📋</button>`;
     html += `</div>`;
@@ -157,17 +203,28 @@ function xmlToTree(node, path) {
       }
     }
     html += '&gt;</span>';
+    // Add count indicator for nodes with child elements
+    if (childElementCount > 0) {
+      html += `<span class="xml-count" style="color: #666; font-size: 0.9em; margin-left: 4px;">${countDisplay}</span>`;
+    }
     html += `<button class="xml-copy-btn" title="Copy this node" style="margin-left:6px;font-size:12px;vertical-align:middle;">📋</button>`;
     html += `</div>`;
     
-    // Children as sibling <li>s in a single <ul>
-    if (children.length > 0) {
+    // Add mixed text content if present (text that exists alongside child elements)
+    if (hasTextContent && hasChildElements) {
       html += '<ul>';
-      children.forEach((child, idx) => {
+      html += `<li><div class="xml-row"><span class="string">${escapeHtml(textContent)}</span></div></li>`;
+      html += '</ul>';
+    }
+    
+    // Children as sibling <li>s in a single <ul>
+    if (hasChildElements) {
+      html += '<ul>';
+      let elementIndex = 0;
+      children.forEach((child) => {
         if (child.nodeType === 1) {
-          html += xmlToTree(child, path + '-' + idx);
-        } else if (child.nodeType === 3 && child.nodeValue.trim()) {
-          html += `<li><div class="xml-row"><span class="string">${escapeHtml(child.nodeValue.trim())}</span></div></li>`;
+          html += xmlToTree(child, path + '-' + elementIndex);
+          elementIndex++;
         }
       });
       html += '</ul>';
