@@ -1220,15 +1220,30 @@ body.dark .language-selector option {
   height: auto;
 }
 
-/* SEO Content Styles */
+/* SEO Content Styles - Hidden from regular users, visible to search engines */
 .seo-content {
+  display: none !important;
+  visibility: hidden;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  left: -9999px;
   padding: 20px;
   background: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
   margin: 0;
   max-width: 100%;
-  overflow: hidden;
+}
+
+/* Show SEO content only for search engines */
+.seo-content.show-for-seo {
+  display: block !important;
+  visibility: visible;
+  height: auto;
+  overflow: visible;
+  position: static;
+  left: auto;
 }
 
 .seo-content h1, .seo-content h2, .seo-content h3 {
@@ -1372,7 +1387,7 @@ body.dark .language-selector option {
 <body class="dark">
 
 <!-- SEO Content Section -->
-<section class="seo-content" style="display: none; position: relative; z-index: 1;" id="seo-content">
+<section class="seo-content" style="display: none !important; visibility: hidden; height: 0; overflow: hidden; position: absolute; left: -9999px;" id="seo-content">
   <h1>Free Online JSON XML Viewer & Developer Toolkit with AI</h1>
   <p>DataZ Tools is the ultimate <strong>free online developer toolkit</strong> featuring 20+ professional tools including AI-powered text analysis. Perfect for developers, programmers, and data analysts who need reliable, fast, and secure online utilities without any downloads or signups required.</p>
   <!-- SEO Breadcrumb Navigation -->
@@ -1604,16 +1619,16 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="viewers-dropdown">
-      <button id="btn-json" class="active dropdown-item" onclick="showOnly('json')" data-i18n="json_viewer">
+      <button id="btn-json" class="active dropdown-item" onclick="navigateToTool('json', event); return false;" data-i18n="json_viewer">
         <i class="fas fa-file-code"></i> JSON Viewer
       </button>
-      <button id="btn-xml" class="dropdown-item" onclick="showOnly('xml')" data-i18n="xml_viewer">
+      <button id="btn-xml" class="dropdown-item" onclick="navigateToTool('xml', event); return false;" data-i18n="xml_viewer">
         <i class="fas fa-file-lines"></i> XML Viewer
       </button>
-      <button id="btn-graph" class="dropdown-item" onclick="showOnly('graph')" data-i18n="graph_generator">
+      <button id="btn-graph" class="dropdown-item" onclick="navigateToTool('graph', event); return false;" data-i18n="graph_generator">
         <i class="fas fa-chart-bar"></i> Generate Graph
       </button>
-      <button id="btn-csv" class="dropdown-item" onclick="showOnly('csv')" data-i18n="csv_processor">
+      <button id="btn-csv" class="dropdown-item" onclick="navigateToTool('csv', event); return false;" data-i18n="csv_processor">
         <i class="fas fa-table"></i> CSV Processor
       </button>
     </div>
@@ -1630,13 +1645,13 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="encoders-dropdown">
-      <button id="btn-base64" class="dropdown-item" onclick="showOnly('base64')" data-i18n="base64_encoder">
+      <button id="btn-base64" class="dropdown-item" onclick="navigateToTool('base64', event); return false;" data-i18n="base64_encoder">
         <i class="fas fa-lock"></i> Base64 Encode/Decode
       </button>
-      <button id="btn-jwt" class="dropdown-item" onclick="showOnly('jwt')" data-i18n="jwt_decoder">
+      <button id="btn-jwt" class="dropdown-item" onclick="navigateToTool('jwt', event); return false;" data-i18n="jwt_decoder">
         <i class="fas fa-key"></i> JWT Token
       </button>
-      <button id="btn-url" class="dropdown-item" onclick="showOnly('url')" data-i18n="url_encoder">
+      <button id="btn-url" class="dropdown-item" onclick="navigateToTool('url', event); return false;" data-i18n="url_encoder">
         <i class="fas fa-link"></i> URL Encoder/Decoder
       </button>
     </div>
@@ -1653,16 +1668,16 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="generators-dropdown">
-      <button id="btn-hash" class="dropdown-item" onclick="showOnly('hash')" data-i18n="hash_generator">
+      <button id="btn-hash" class="dropdown-item" onclick="navigateToTool('hash', event); return false;" data-i18n="hash_generator">
         <i class="fas fa-hashtag"></i> Hash Generator
       </button>
-      <button id="btn-uuid" class="dropdown-item" onclick="showOnly('uuid')" data-i18n="uuid_generator">
+      <button id="btn-uuid" class="dropdown-item" onclick="navigateToTool('uuid', event); return false;" data-i18n="uuid_generator">
         <i class="fas fa-fingerprint"></i> UUID Generator
       </button>
-      <button id="btn-qr" class="dropdown-item" onclick="showOnly('qr')" data-i18n="qr_generator">
+      <button id="btn-qr" class="dropdown-item" onclick="navigateToTool('qr', event); return false;" data-i18n="qr_generator">
         <i class="fas fa-qrcode"></i> QR Code Generator
       </button>
-      <button id="btn-password" class="dropdown-item" onclick="showOnly('password')" data-i18n="password_generator">
+      <button id="btn-password" class="dropdown-item" onclick="navigateToTool('password', event); return false;" data-i18n="password_generator">
         <i class="fas fa-key"></i> Password Generator
       </button>
     </div>
@@ -1679,10 +1694,10 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="converters-dropdown">
-      <button id="btn-color" class="dropdown-item" onclick="showOnly('color')" data-i18n="color_converter">
+      <button id="btn-color" class="dropdown-item" onclick="navigateToTool('color', event); return false;" data-i18n="color_converter">
         <i class="fas fa-palette"></i> Color Converter
       </button>
-      <button id="btn-timestamp" class="dropdown-item" onclick="showOnly('timestamp')" data-i18n="timestamp_converter">
+      <button id="btn-timestamp" class="dropdown-item" onclick="navigateToTool('timestamp', event); return false;" data-i18n="timestamp_converter">
         <i class="fas fa-clock"></i> Timestamp Converter
       </button>
     </div>
@@ -1699,25 +1714,25 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="texttools-dropdown">
-      <button id="btn-regex" class="dropdown-item" onclick="showOnly('regex')" data-i18n="regex_tester">
+      <button id="btn-regex" class="dropdown-item" onclick="navigateToTool('regex', event); return false;" data-i18n="regex_tester">
         <i class="fas fa-search"></i> Regex Tester
       </button>
-      <button id="btn-text" class="dropdown-item" onclick="showOnly('text')" data-i18n="text_utilities">
+      <button id="btn-text" class="dropdown-item" onclick="navigateToTool('text', event); return false;" data-i18n="text_utilities">
         <i class="fas fa-text-width"></i> Text Utilities
       </button>
-      <button id="btn-api" class="dropdown-item" onclick="showOnly('api')" data-i18n="api_formatter">
+      <button id="btn-api" class="dropdown-item" onclick="navigateToTool('api', event); return false;" data-i18n="api_formatter">
         <i class="fas fa-server"></i> API Formatter
       </button>
-      <button id="btn-markdown" class="dropdown-item" onclick="showOnly('markdown')" data-i18n="markdown_preview">
+      <button id="btn-markdown" class="dropdown-item" onclick="navigateToTool('markdown', event); return false;" data-i18n="markdown_preview">
         <i class="fas fa-markdown"></i> Markdown Preview
       </button>
-      <button id="btn-sql" class="dropdown-item" onclick="showOnly('sql')" data-i18n="sql_formatter">
+      <button id="btn-sql" class="dropdown-item" onclick="navigateToTool('sql', event); return false;" data-i18n="sql_formatter">
         <i class="fas fa-database"></i> SQL Formatter
       </button>
-      <button id="btn-diff" class="dropdown-item" onclick="showOnly('diff')" data-i18n="diff_tool">
+      <button id="btn-diff" class="dropdown-item" onclick="navigateToTool('diff', event); return false;" data-i18n="diff_tool">
         <i class="fas fa-code-branch"></i> Text Diff Tool
       </button>
-      <button id="btn-jsonpath" class="dropdown-item" onclick="showOnly('jsonpath')" data-i18n="jsonpath_tester">
+      <button id="btn-jsonpath" class="dropdown-item" onclick="navigateToTool('jsonpath', event); return false;" data-i18n="jsonpath_tester">
         <i class="fas fa-route"></i> JSONPath Tester
       </button>
     </div>
@@ -1734,19 +1749,19 @@ body.dark .language-selector option {
       <i class="fas fa-chevron-down category-arrow"></i>
     </button>
     <div class="category-dropdown" id="ai-dropdown">
-      <button id="btn-summarize" class="dropdown-item" onclick="showOnly('summarize')" data-i18n="text_summarizer">
+      <button id="btn-summarize" class="dropdown-item" onclick="navigateToTool('summarize', event); return false;" data-i18n="text_summarizer">
         <i class="fas fa-compress-alt"></i> Text Summarizer
       </button>
-      <button id="btn-translate" class="dropdown-item" onclick="showOnly('translate')" data-i18n="language_translator">
+      <button id="btn-translate" class="dropdown-item" onclick="navigateToTool('translate', event); return false;" data-i18n="language_translator">
         <i class="fas fa-language"></i> Language Translator
       </button>
-      <button id="btn-sentiment" class="dropdown-item" onclick="showOnly('sentiment')" data-i18n="sentiment_analyzer">
+      <button id="btn-sentiment" class="dropdown-item" onclick="navigateToTool('sentiment', event); return false;" data-i18n="sentiment_analyzer">
         <i class="fas fa-smile"></i> Sentiment Analyzer
       </button>
-      <button id="btn-grammar" class="dropdown-item" onclick="showOnly('grammar')" data-i18n="grammar_checker">
+      <button id="btn-grammar" class="dropdown-item" onclick="navigateToTool('grammar', event); return false;" data-i18n="grammar_checker">
         <i class="fas fa-spell-check"></i> Grammar Checker
       </button>
-      <button id="btn-keywords" class="dropdown-item" onclick="showOnly('keywords')" data-i18n="keyword_extractor">
+      <button id="btn-keywords" class="dropdown-item" onclick="navigateToTool('keywords', event); return false;" data-i18n="keyword_extractor">
         <i class="fas fa-tags"></i> Keyword Extractor
       </button>
     </div>
@@ -2511,20 +2526,12 @@ function initSEOOptimizations() {
       }
     }
     
-    // Show SEO content for search engines and first-time visitors
+    // Show SEO content only for search engines
     const seoContent = document.getElementById('seo-content');
     const isSearchBot = /bot|crawler|spider|crawling/i.test(navigator.userAgent);
-    const hasVisited = localStorage.getItem('dataz-tools-visited');
     
-    if (seoContent && (isSearchBot || !hasVisited)) {
-      seoContent.style.display = 'block';
-      if (!hasVisited && !isSearchBot) {
-        localStorage.setItem('dataz-tools-visited', 'true');
-        // Hide after 3 seconds for regular users
-        setTimeout(() => {
-          seoContent.style.display = 'none';
-        }, 3000);
-      }
+    if (seoContent && isSearchBot) {
+      seoContent.classList.add('show-for-seo');
     }
     
     // Add performance monitoring only if supported

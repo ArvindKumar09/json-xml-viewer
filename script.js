@@ -23,16 +23,127 @@ function showOnly(type, updateUrl = true) {
   if (targetPanel) targetPanel.classList.remove('hidden');
   if (targetButton) targetButton.classList.add('active');
 
-  // Update URL hash only when called from user interaction
-  if (updateUrl && window.location.hash !== `#${type}`) {
-    window.history.pushState(null, null, `#${type}`);
+  // Update URL to clean path format instead of hash
+  if (updateUrl && window.location.pathname !== `/${type}`) {
+    try {
+      window.history.pushState({tool: type}, null, `/${type}`);
+    } catch (e) {
+      // Fallback to hash for file:// protocol
+      window.history.pushState(null, null, `#${type}`);
+    }
   }
+
+  // Update category dropdown selected tool display
+  updateSelectedToolDisplay(type);
 
   // Restore saved inputs for the current panel
   restorePanelInputs(type);
 
   // Remember last opened panel
   localStorage.setItem('last-panel', type);
+}
+
+/* -------------------------
+   Navigation function for clean URLs
+------------------------- */
+function navigateToTool(tool, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  
+  // Close any open dropdowns
+  document.querySelectorAll('.category-dropdown').forEach(dropdown => {
+    dropdown.classList.remove('show');
+  });
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.classList.remove('open');
+  });
+  
+  // Show the tool panel and update URL
+  showOnly(tool, true);
+  
+  return false;
+}
+
+/* -------------------------
+   Update selected tool display in category buttons
+------------------------- */
+function updateSelectedToolDisplay(tool) {
+  // Map tools to their display names
+  const toolNames = {
+    'json': 'JSON Viewer',
+    'xml': 'XML Viewer', 
+    'graph': 'Generate Graph',
+    'csv': 'CSV Processor',
+    'base64': 'Base64 Encoder',
+    'jwt': 'JWT Decoder',
+    'url': 'URL Encoder',
+    'hash': 'Hash Generator',
+    'uuid': 'UUID Generator',
+    'qr': 'QR Generator',
+    'password': 'Password Generator',
+    'color': 'Color Converter',
+    'timestamp': 'Timestamp Converter',
+    'regex': 'Regex Tester',
+    'text': 'Text Utilities',
+    'api': 'API Formatter',
+    'markdown': 'Markdown Preview',
+    'sql': 'SQL Formatter',
+    'diff': 'Diff Tool',
+    'jsonpath': 'JSONPath Tester',
+    'summarize': 'Text Summarizer',
+    'translate': 'Text Translator',
+    'sentiment': 'Sentiment Analysis',
+    'grammar': 'Grammar Checker',
+    'keywords': 'Keyword Extractor'
+  };
+
+  // Map tools to their categories
+  const toolCategories = {
+    'json': 'viewers', 'xml': 'viewers', 'graph': 'viewers', 'csv': 'viewers',
+    'base64': 'encoders', 'jwt': 'encoders', 'url': 'encoders',
+    'hash': 'generators', 'uuid': 'generators', 'qr': 'generators', 'password': 'generators',
+    'color': 'converters', 'timestamp': 'converters',
+    'regex': 'texttools', 'text': 'texttools', 'api': 'texttools', 'markdown': 'texttools', 'sql': 'texttools', 'diff': 'texttools', 'jsonpath': 'texttools',
+    'summarize': 'ai', 'translate': 'ai', 'sentiment': 'ai', 'grammar': 'ai', 'keywords': 'ai'
+  };
+
+  const category = toolCategories[tool];
+  const toolName = toolNames[tool] || tool;
+  
+  if (category) {
+    const categoryBtn = document.querySelector(`[data-category="${category}"] .selected-tool`);
+    if (categoryBtn) {
+      categoryBtn.textContent = toolName;
+    }
+  }
+}
+
+/* -------------------------
+   Get current tool from URL path
+------------------------- */
+function getCurrentToolFromPath() {
+  const path = window.location.pathname;
+  
+  // Remove leading slash and get the tool name
+  const tool = path.replace(/^\//, '').replace(/\/$/, '');
+  
+  // Valid tools list
+  const validTools = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath', 'summarize', 'translate', 'sentiment', 'grammar', 'keywords'];
+  
+  // Return tool if valid, otherwise check hash fallback, otherwise default to json
+  if (validTools.includes(tool)) {
+    return tool;
+  }
+  
+  // Fallback to hash-based detection for backwards compatibility
+  const hash = window.location.hash.replace('#', '');
+  if (validTools.includes(hash)) {
+    return hash;
+  }
+  
+  return 'json'; // default
 }
 
 /* -------------------------
@@ -247,27 +358,20 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('xml-input', this.value);
   });
 
-  // Check URL hash first, then fallback to saved panel or default
-  const urlHash = window.location.hash.substring(1); // Remove #
-  const validPanels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath', 'summarize', 'translate', 'sentiment', 'grammar', 'keywords'];
+  // Get the current tool from URL path or hash
+  const currentTool = getCurrentToolFromPath();
   
-  let initialPanel = 'json'; // default
-  let shouldUpdateUrl = true;
-  
-  if (urlHash && validPanels.includes(urlHash)) {
-    initialPanel = urlHash;
-    shouldUpdateUrl = false; // Don't update URL if we're loading from hash
-  } else {
-    const savedPanel = localStorage.getItem('last-panel');
-    if (savedPanel && validPanels.includes(savedPanel)) {
-      initialPanel = savedPanel;
-    }
-  }
-  
-  showOnly(initialPanel, shouldUpdateUrl);
+  // Show the current tool
+  showOnly(currentTool, false); // Don't update URL on initial load
 });
 
-// Handle browser back/forward and direct hash changes
+// Handle browser back/forward for both clean URLs and hash URLs
+window.addEventListener('popstate', function(event) {
+  const currentTool = getCurrentToolFromPath();
+  showOnly(currentTool, false); // Don't update URL to avoid infinite loop
+});
+
+// Legacy support: Handle direct hash changes for backwards compatibility
 window.addEventListener('hashchange', function() {
   const urlHash = window.location.hash.substring(1); // Remove #
   const validPanels = ['json', 'xml', 'graph', 'base64', 'jwt', 'url', 'hash', 'uuid', 'color', 'timestamp', 'qr', 'regex', 'text', 'api', 'markdown', 'csv', 'sql', 'diff', 'password', 'jsonpath', 'summarize', 'translate', 'sentiment', 'grammar', 'keywords'];
