@@ -972,37 +972,30 @@ body.dark {
 }
 
 /* ====== Category button styling in sidebar ====== */
-.sidebar-nav .tool-category[data-category="viewers"] .category-btn,
-.sidebar-nav .tool-category[data-category="encoders"] .category-btn,
-.sidebar-nav .tool-category[data-category="generators"] .category-btn,
-.sidebar-nav .tool-category[data-category="converters"] .category-btn,
-.sidebar-nav .tool-category[data-category="texttools"] .category-btn,
-.sidebar-nav .tool-category[data-category="ai"] .category-btn {
+.sidebar-nav .tool-category .category-btn {
     border: none !important;
-    border-left: 3px solid var(--border-color) !important;
-    border-radius: 0 8px 8px 0;
+    border-radius: 8px;
     box-shadow: none !important;
 }
 
 /* Light theme category colors - unified neutral */
 body.light .sidebar-nav .tool-category .category-btn {
-    background: #f5f6f8;
-    color: #4a5568;
+    background: #f5f6f8 !important;
+    color: #4a5568 !important;
 }
 
 body.light .sidebar-nav .tool-category .category-btn:hover {
-    background: #ebedf0;
+    background: #ebedf0 !important;
 }
 
-/* Dark theme category button hover states */
-body.dark .sidebar-nav .category-btn:hover {
-    background: var(--sidebar-hover) !important;
-}
-
-/* Dark theme category button colors - unified neutral */
+/* Dark theme category button styles */
 body.dark .sidebar-nav .tool-category .category-btn {
     background: #252830 !important;
     color: #b0b8c8 !important;
+}
+
+body.dark .sidebar-nav .tool-category .category-btn:hover {
+    background: var(--sidebar-hover) !important;
 }
 
 /* ====== Responsive Design ====== */
