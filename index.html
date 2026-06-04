@@ -2638,27 +2638,33 @@
               function initializeCategorizedDropdowns() {
                 const categoryBtns = document.querySelectorAll('.category-btn');
 
+                // Restore saved open/closed state from localStorage
+                const savedOpenState = JSON.parse(localStorage.getItem('sidebarOpenCategories') || '[]');
+                savedOpenState.forEach(cat => {
+                  const dropdown = document.getElementById(cat + '-dropdown');
+                  const btn = document.querySelector('.category-btn[data-category="' + cat + '"]');
+                  if (dropdown && btn) {
+                    dropdown.classList.add('show');
+                    btn.classList.add('open');
+                  }
+                });
+
+                function saveSidebarState() {
+                  const openCats = [];
+                  document.querySelectorAll('.category-dropdown.show').forEach(d => {
+                    const id = d.id.replace('-dropdown', '');
+                    if (id) openCats.push(id);
+                  });
+                  localStorage.setItem('sidebarOpenCategories', JSON.stringify(openCats));
+                }
+
                 categoryBtns.forEach(btn => {
                   btn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     const category = this.getAttribute('data-category');
                     const dropdown = document.getElementById(category + '-dropdown');
 
-                    // Close all other dropdowns
-                    document.querySelectorAll('.category-dropdown').forEach(other => {
-                      if (other !== dropdown) {
-                        other.classList.remove('show');
-                      }
-                    });
-
-                    // Remove open class from all category buttons
-                    document.querySelectorAll('.category-btn').forEach(otherBtn => {
-                      if (otherBtn !== this) {
-                        otherBtn.classList.remove('open');
-                      }
-                    });
-
-                    // Toggle current dropdown
+                    // Toggle current dropdown (don't close others)
                     const isOpen = dropdown.classList.contains('show');
                     if (isOpen) {
                       dropdown.classList.remove('show');
@@ -2667,6 +2673,7 @@
                       dropdown.classList.add('show');
                       this.classList.add('open');
                     }
+                    saveSidebarState();
                   });
                 });
 
@@ -2699,26 +2706,20 @@
                       }
                     }
 
-                    // Close all dropdowns
-                    document.querySelectorAll('.category-dropdown').forEach(dropdown => {
-                      dropdown.classList.remove('show');
-                    });
-
-                    // Remove open class from all category buttons
-                    document.querySelectorAll('.category-btn').forEach(btn => {
-                      btn.classList.remove('open');
-                    });
+                    // Keep the dropdown open - don't close on item selection
                   });
                 });
 
-                // Close dropdowns when clicking outside
-                document.addEventListener('click', function () {
+                // Close dropdowns when clicking outside (only for non-sidebar context)
+                document.addEventListener('click', function (e) {
+                  if (e.target.closest('.sidebar-nav')) return;
                   document.querySelectorAll('.category-dropdown').forEach(dropdown => {
                     dropdown.classList.remove('show');
                   });
                   document.querySelectorAll('.category-btn').forEach(btn => {
                     btn.classList.remove('open');
                   });
+                  saveSidebarState();
                 });
 
                 // Keyboard navigation support
@@ -2730,6 +2731,7 @@
                     document.querySelectorAll('.category-btn').forEach(btn => {
                       btn.classList.remove('open');
                     });
+                    saveSidebarState();
                   }
                 });
               }
@@ -2779,8 +2781,11 @@
                   const lineNumbers = document.getElementById('json-line-numbers');
                   if (!textarea || !lineNumbers) return;
 
+                  let lastLen = -1;
                   function updateLineNumbers() {
                     const lines = textarea.value.split('\n').length;
+                    if (lines === lastLen) return;
+                    lastLen = lines;
                     const nums = [];
                     for (let i = 1; i <= lines; i++) nums.push(i);
                     lineNumbers.textContent = nums.join('\n');
@@ -2792,7 +2797,17 @@
 
                   textarea.addEventListener('input', updateLineNumbers);
                   textarea.addEventListener('scroll', syncScroll);
-                  textarea.addEventListener('change', updateLineNumbers);
+
+                  // Intercept .value setter so programmatic changes also update line numbers
+                  const desc = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value');
+                  Object.defineProperty(textarea, 'value', {
+                    get: function () {return desc.get.call(this);},
+                    set: function (v) {
+                      desc.set.call(this, v);
+                      updateLineNumbers();
+                    }
+                  });
+
                   updateLineNumbers();
                 })();
               });

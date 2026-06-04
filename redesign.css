@@ -410,6 +410,8 @@ body.light .hamburger-btn:hover {
     border-left: none !important;
     position: relative;
     font-weight: 400;
+    background: transparent !important;
+    color: var(--btn-text) !important;
 }
 
 .sidebar-nav .dropdown-item i {
@@ -421,14 +423,24 @@ body.light .hamburger-btn:hover {
 }
 
 .sidebar-nav .dropdown-item:hover {
+    background: var(--sidebar-hover) !important;
+    color: var(--btn-text) !important;
     transform: none !important;
     box-shadow: none !important;
 }
 
 .sidebar-nav .dropdown-item.active {
+    background: var(--sidebar-hover) !important;
+    color: var(--btn-active-bg) !important;
     font-weight: 600;
+    border-left: none !important;
     transform: none !important;
     box-shadow: none !important;
+    animation: none !important;
+}
+
+.sidebar-nav .dropdown-item.active::after {
+    display: none !important;
 }
 
 /* Storage button in sidebar */
@@ -938,12 +950,7 @@ footer {
     display: none !important;
 }
 
-/* Active category in sidebar - unified subtle highlight */
-.sidebar-nav .tool-category .dropdown-item.active {
-    background: var(--category-viewers-bg);
-    color: var(--btn-active-bg);
-    font-weight: 600;
-}
+/* Active category in sidebar - handled by .sidebar-nav .dropdown-item.active above */
 
 /* ====== Theme Variable Additions ====== */
 :root {
@@ -996,15 +1003,6 @@ body.dark .sidebar-nav .category-btn:hover {
 body.dark .sidebar-nav .tool-category .category-btn {
     background: #252830 !important;
     color: #b0b8c8 !important;
-}
-
-/* Dark theme dropdown items */
-body.dark .sidebar-nav .dropdown-item:hover {
-    background: var(--sidebar-hover);
-}
-
-body.light .sidebar-nav .dropdown-item:hover {
-    background: #f0f0f0;
 }
 
 /* ====== Responsive Design ====== */
