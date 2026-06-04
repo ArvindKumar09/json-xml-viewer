@@ -407,7 +407,7 @@ body.light .hamburger-btn:hover {
     border-radius: 6px;
     margin: 1px 4px;
     transition: all 0.15s ease;
-    border-left: none !important;
+    border: none !important;
     position: relative;
     font-weight: 400;
     background: transparent !important;
@@ -433,7 +433,7 @@ body.light .hamburger-btn:hover {
     background: var(--sidebar-hover) !important;
     color: var(--btn-active-bg) !important;
     font-weight: 600;
-    border-left: none !important;
+    border: none !important;
     transform: none !important;
     box-shadow: none !important;
     animation: none !important;
