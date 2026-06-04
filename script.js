@@ -1,4 +1,96 @@
 /* -------------------------
+   Sidebar Toggle & Search
+------------------------- */
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  const isMobile = window.innerWidth <= 768;
+
+  if (isMobile) {
+    // Mobile: slide in/out
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('show');
+  } else {
+    // Desktop: collapse/expand
+    sidebar.classList.toggle('collapsed');
+  }
+}
+
+function filterTools(query) {
+  const q = query.toLowerCase().trim();
+  const categories = document.querySelectorAll('.sidebar-nav .tool-category');
+  const noResults = document.getElementById('sidebarNoResults');
+  let anyVisible = false;
+
+  categories.forEach(cat => {
+    const items = cat.querySelectorAll('.dropdown-item');
+    let catHasMatch = false;
+
+    items.forEach(item => {
+      const text = item.textContent.toLowerCase();
+      if (!q || text.includes(q)) {
+        item.classList.remove('search-hidden');
+        catHasMatch = true;
+      } else {
+        item.classList.add('search-hidden');
+      }
+    });
+
+    // Also check category name
+    const catText = cat.querySelector('.category-text');
+    if (catText && catText.textContent.toLowerCase().includes(q)) {
+      catHasMatch = true;
+      // Show all items in matching category
+      items.forEach(item => item.classList.remove('search-hidden'));
+    }
+
+    if (catHasMatch) {
+      cat.classList.remove('search-hidden');
+      anyVisible = true;
+      // Auto-expand matching categories when searching
+      if (q) {
+        const dropdown = cat.querySelector('.category-dropdown');
+        const btn = cat.querySelector('.category-btn');
+        if (dropdown) dropdown.classList.add('show');
+        if (btn) btn.classList.add('open');
+      }
+    } else {
+      cat.classList.add('search-hidden');
+    }
+  });
+
+  if (noResults) {
+    noResults.classList.toggle('show', !anyVisible && q.length > 0);
+  }
+
+  // Collapse all categories when search is cleared
+  if (!q) {
+    categories.forEach(cat => {
+      cat.classList.remove('search-hidden');
+      cat.querySelectorAll('.dropdown-item').forEach(item => item.classList.remove('search-hidden'));
+    });
+  }
+}
+
+// Close sidebar on mobile after selecting a tool
+function closeSidebarOnMobile() {
+  if (window.innerWidth <= 768) {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (sidebar) sidebar.classList.remove('open');
+    if (overlay) overlay.classList.remove('show');
+  }
+}
+
+// Keyboard shortcut: Ctrl+B to toggle sidebar
+document.addEventListener('keydown', function(e) {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+    e.preventDefault();
+    toggleSidebar();
+  }
+});
+
+/* -------------------------
    Show only one panel + save choice
 ------------------------- */
 function showOnly(type, updateUrl = true) {
@@ -63,7 +155,35 @@ function navigateToTool(tool, event) {
   // Show the tool panel and update URL
   showOnly(tool, true);
   
+  // Highlight the active tool in sidebar and keep its category open
+  highlightActiveTool(tool);
+  
+  // Close sidebar on mobile
+  closeSidebarOnMobile();
+  
   return false;
+}
+
+function highlightActiveTool(tool) {
+  // Remove active class from all dropdown items
+  document.querySelectorAll('.sidebar-nav .dropdown-item').forEach(item => {
+    item.classList.remove('active');
+  });
+
+  // Find and activate the selected tool's dropdown item
+  const activeItem = document.querySelector(`.sidebar-nav .dropdown-item[onclick*="'${tool}'"]`);
+  if (activeItem) {
+    activeItem.classList.add('active');
+
+    // Keep the parent category dropdown open
+    const dropdown = activeItem.closest('.category-dropdown');
+    const categoryDiv = activeItem.closest('.tool-category');
+    if (dropdown) dropdown.classList.add('show');
+    if (categoryDiv) {
+      const btn = categoryDiv.querySelector('.category-btn');
+      if (btn) btn.classList.add('open');
+    }
+  }
 }
 
 /* -------------------------
@@ -363,12 +483,16 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Show the current tool
   showOnly(currentTool, false); // Don't update URL on initial load
+  
+  // Highlight the active tool in sidebar
+  highlightActiveTool(currentTool);
 });
 
 // Handle browser back/forward for both clean URLs and hash URLs
 window.addEventListener('popstate', function(event) {
   const currentTool = getCurrentToolFromPath();
   showOnly(currentTool, false); // Don't update URL to avoid infinite loop
+  highlightActiveTool(currentTool);
 });
 
 // Legacy support: Handle direct hash changes for backwards compatibility

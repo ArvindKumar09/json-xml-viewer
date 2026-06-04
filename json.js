@@ -1,13 +1,36 @@
+/**
+ * Safely parse JSON, attempting repair if standard parse fails.
+ * Returns { obj, repaired, fixes } or throws if unfixable.
+ */
+function safeParseJSON(input) {
+  try {
+    return { obj: JSON.parse(input), repaired: false, fixes: [] };
+  } catch (e) {
+    const repaired = tryRepairJSON(input);
+    if (repaired.success) {
+      const obj = JSON.parse(repaired.json);
+      // Update the input field with fixed JSON
+      const inputEl = document.getElementById('json-input');
+      if (inputEl) {
+        inputEl.value = repaired.json;
+        localStorage.setItem('json-input', repaired.json);
+      }
+      return { obj, repaired: true, fixes: repaired.fixes };
+    }
+    throw e;
+  }
+}
+
 // Convert JSON to CSV and show in JSON output window
 function convertJSONtoCSV() {
   const input = document.getElementById('json-input').value;
   const output = document.getElementById('json-output');
   try {
-    const obj = JSON.parse(input);
+    const { obj } = safeParseJSON(input);
     let csv = jsonToCSV(obj);
     output.innerHTML = `<pre style="white-space:pre;overflow:auto;">${escapeHtml(csv)}</pre>`;
   } catch (e) {
-    output.textContent = 'Invalid JSON: ' + e.message;
+    showJSONError(input, e, output);
   }
 }
 
@@ -54,11 +77,11 @@ function generateJavaScriptClasses() {
   }
   
   try {
-    const obj = JSON.parse(input);
+    const { obj } = safeParseJSON(input);
     const classes = jsonToJavaScriptClasses(obj, 'MainClass');
     output.innerHTML = `<pre style="white-space: pre-wrap; font-family: 'Courier New', monospace; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 6px; margin: 0; font-size: 14px; line-height: 1.4;">${escapeHtml(classes)}</pre>`;
   } catch (e) {
-    output.textContent = 'Invalid JSON: ' + e.message;
+    showJSONError(input, e, output);
   }
 }
 
@@ -339,16 +362,259 @@ function beautifyJSON() {
     return;
   }
   
+  // First try standard parse
   try {
     const obj = JSON.parse(input);
     output.innerHTML = jsonToTree(obj, true, []);
-    
-    setTimeout(() => {
-      makeCollapsibleJSON(output);
-    }, 0);
-  } catch (e) {
-    output.textContent = 'Invalid JSON: ' + e.message;
+    setTimeout(() => { makeCollapsibleJSON(output); }, 0);
+    return;
+  } catch (originalError) {
+    // Try to repair the JSON
+    const repaired = tryRepairJSON(input);
+    if (repaired.success) {
+      try {
+        const obj = JSON.parse(repaired.json);
+        // Show a notice that JSON was auto-fixed
+        const fixNotice = `<div class="json-fix-notice"><i class="fas fa-wrench"></i> <strong>Auto-fixed:</strong> ${escapeHtml(repaired.fixes.join('; '))}</div>`;
+        output.innerHTML = fixNotice + jsonToTree(obj, true, []);
+        // Also update the input with the fixed JSON
+        document.getElementById('json-input').value = repaired.json;
+        localStorage.setItem('json-input', repaired.json);
+        setTimeout(() => { makeCollapsibleJSON(output); }, 0);
+        return;
+      } catch (e) {
+        // Repair produced invalid JSON, fall through to error display
+      }
+    }
+    // Show detailed error with line/column highlighting
+    showJSONError(input, originalError, output);
   }
+}
+
+/**
+ * Attempt to repair common JSON issues.
+ * Returns { success: boolean, json: string, fixes: string[] }
+ */
+function tryRepairJSON(input) {
+  let json = input;
+  const fixes = [];
+
+  // 1. Replace smart/curly quotes with straight quotes
+  if (/[\u201C\u201D\u201E\u201F\u2033\u2036]/.test(json)) {
+    json = json.replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"');
+    fixes.push('Replaced smart quotes (\u201C\u201D) with straight quotes');
+  }
+  if (/[\u2018\u2019\u201A\u201B\u2032\u2035]/.test(json)) {
+    json = json.replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'");
+    fixes.push("Replaced smart single quotes (\u2018\u2019) with straight quotes");
+  }
+
+  // 2. Replace single-quoted strings with double-quoted strings
+  // Only if not already valid and contains single-quoted strings
+  try { JSON.parse(json); return { success: true, json, fixes }; } catch(e) {}
+  
+  if (/:\s*'[^']*'/.test(json) || /\[\s*'/.test(json) || /,\s*'/.test(json)) {
+    json = replaceSingleQuotes(json);
+    fixes.push('Replaced single quotes with double quotes');
+  }
+
+  // 3. Remove trailing commas before } or ]
+  const trailingCommaPattern = /,\s*([\]}])/g;
+  if (trailingCommaPattern.test(json)) {
+    json = json.replace(/,\s*([\]}])/g, '$1');
+    fixes.push('Removed trailing commas');
+  }
+
+  // 4. Add quotes around unquoted keys: { key: "value" } -> { "key": "value" }
+  try { JSON.parse(json); return { success: true, json, fixes }; } catch(e) {}
+  
+  const unquotedKeyPattern = /([{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g;
+  if (unquotedKeyPattern.test(json)) {
+    json = json.replace(/([{,]\s*)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g, '$1"$2":');
+    fixes.push('Added quotes around unquoted keys');
+  }
+
+  // 5. Fix JavaScript-style comments (// and /* */)
+  if (/\/\/.*$/m.test(json) || /\/\*[\s\S]*?\*\//.test(json)) {
+    json = json.replace(/\/\/.*$/gm, '');
+    json = json.replace(/\/\*[\s\S]*?\*\//g, '');
+    fixes.push('Removed comments');
+  }
+
+  // 6. Replace undefined/NaN with null
+  if (/:\s*undefined\b/.test(json) || /:\s*NaN\b/.test(json)) {
+    json = json.replace(/:\s*undefined\b/g, ': null');
+    json = json.replace(/:\s*NaN\b/g, ': null');
+    fixes.push('Replaced undefined/NaN with null');
+  }
+
+  // 7. Fix unescaped backslashes in strings (common with file paths)
+  try { JSON.parse(json); return { success: true, json, fixes }; } catch(e) {}
+  json = fixUnescapedBackslashes(json);
+  if (fixes.length === 0 || json !== input) {
+    // Only add if something changed
+    const beforeFix = json;
+    try { JSON.parse(json); fixes.push('Fixed unescaped backslashes'); return { success: true, json, fixes }; } catch(e) { json = beforeFix; }
+  }
+
+  // 8. Fix unescaped control characters in strings
+  try { JSON.parse(json); return { success: true, json, fixes }; } catch(e) {}
+  json = json.replace(/[\x00-\x1F\x7F]/g, (ch) => {
+    if (ch === '\n' || ch === '\r' || ch === '\t') return ch;
+    return '\\u' + ch.charCodeAt(0).toString(16).padStart(4, '0');
+  });
+
+  // 9. Try wrapping bare value in array or object
+  try { JSON.parse(json); return { success: true, json, fixes }; } catch(e) {}
+
+  // 10. Handle JSONL (multiple JSON objects, one per line)
+  const lines = json.trim().split('\n').filter(l => l.trim());
+  if (lines.length > 1) {
+    const allObjects = lines.every(l => {
+      try { JSON.parse(l.trim()); return true; } catch(e) { return false; }
+    });
+    if (allObjects) {
+      json = '[' + lines.map(l => l.trim()).join(',') + ']';
+      fixes.push('Wrapped JSONL (newline-delimited JSON) into array');
+      try { JSON.parse(json); return { success: true, json, fixes }; } catch(e) {}
+    }
+  }
+
+  // Final check
+  try {
+    JSON.parse(json);
+    return { success: true, json, fixes };
+  } catch (e) {
+    return { success: false, json: input, fixes: [] };
+  }
+}
+
+/**
+ * Replace single-quoted strings with double-quoted strings.
+ * Handles escaped single quotes inside strings.
+ */
+function replaceSingleQuotes(json) {
+  let result = '';
+  let inDouble = false;
+  let inSingle = false;
+  for (let i = 0; i < json.length; i++) {
+    const ch = json[i];
+    const prev = i > 0 ? json[i - 1] : '';
+    if (ch === '"' && !inSingle && prev !== '\\') {
+      inDouble = !inDouble;
+      result += ch;
+    } else if (ch === "'" && !inDouble && prev !== '\\') {
+      if (!inSingle) {
+        inSingle = true;
+        result += '"';
+      } else {
+        inSingle = false;
+        result += '"';
+      }
+    } else if (ch === '"' && inSingle) {
+      result += '\\"';
+    } else {
+      result += ch;
+    }
+  }
+  return result;
+}
+
+/**
+ * Fix unescaped backslashes in JSON strings (e.g., Windows paths).
+ */
+function fixUnescapedBackslashes(json) {
+  let result = '';
+  let inString = false;
+  for (let i = 0; i < json.length; i++) {
+    const ch = json[i];
+    if (ch === '"' && (i === 0 || json[i - 1] !== '\\')) {
+      inString = !inString;
+      result += ch;
+    } else if (inString && ch === '\\') {
+      const next = json[i + 1];
+      // Valid JSON escapes: " \ / b f n r t u
+      if (next && '"\\/bfnrtu'.includes(next)) {
+        result += ch;
+      } else {
+        result += '\\\\'; // Escape the backslash
+      }
+    } else {
+      result += ch;
+    }
+  }
+  return result;
+}
+
+/**
+ * Show a detailed JSON error with line/column highlighting
+ */
+function showJSONError(input, error, output) {
+  const msg = error.message;
+  // Try to extract position from error message
+  // Chrome: "... at position 123"
+  // Firefox: "... at line 5 column 10"
+  let errorLine = -1;
+  let errorCol = -1;
+  let errorPos = -1;
+
+  const posMatch = msg.match(/position\s+(\d+)/i);
+  const lineColMatch = msg.match(/line\s+(\d+)\s+column\s+(\d+)/i);
+
+  if (lineColMatch) {
+    errorLine = parseInt(lineColMatch[1]) - 1;
+    errorCol = parseInt(lineColMatch[2]) - 1;
+  } else if (posMatch) {
+    errorPos = parseInt(posMatch[1]);
+    // Convert position to line/col
+    let pos = 0;
+    const lines = input.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (pos + lines[i].length >= errorPos) {
+        errorLine = i;
+        errorCol = errorPos - pos;
+        break;
+      }
+      pos += lines[i].length + 1; // +1 for newline
+    }
+  }
+
+  const lines = input.split('\n');
+  let html = '<div class="json-error-container">';
+  html += `<div class="json-error-header"><i class="fas fa-exclamation-triangle"></i> <strong>JSON Parse Error</strong></div>`;
+  html += `<div class="json-error-message">${escapeHtml(msg)}</div>`;
+  
+  if (errorLine >= 0) {
+    html += '<div class="json-error-code">';
+    // Show a few lines around the error
+    const startLine = Math.max(0, errorLine - 2);
+    const endLine = Math.min(lines.length - 1, errorLine + 2);
+    for (let i = startLine; i <= endLine; i++) {
+      const lineNum = (i + 1).toString().padStart(3, ' ');
+      const lineContent = escapeHtml(lines[i]);
+      if (i === errorLine) {
+        html += `<div class="json-error-line json-error-line-active">`;
+        html += `<span class="json-error-linenum">${lineNum}</span> ${lineContent}`;
+        if (errorCol >= 0 && errorCol <= lines[i].length) {
+          html += `\n<span class="json-error-linenum">   </span> ${' '.repeat(errorCol)}<span class="json-error-pointer">^--- error here</span>`;
+        }
+        html += `</div>`;
+      } else {
+        html += `<div class="json-error-line"><span class="json-error-linenum">${lineNum}</span> ${lineContent}</div>`;
+      }
+    }
+    html += '</div>';
+  }
+
+  html += '<div class="json-error-tips"><strong>Common fixes:</strong><ul>';
+  html += '<li>Check for missing or extra commas</li>';
+  html += '<li>Ensure all keys are double-quoted: <code>"key"</code> not <code>key</code> or <code>\'key\'</code></li>';
+  html += '<li>Use double quotes <code>"</code> not smart quotes <code>\u201C\u201D</code></li>';
+  html += '<li>Remove trailing commas before <code>}</code> or <code>]</code></li>';
+  html += '<li>Escape backslashes in strings: <code>\\\\</code></li>';
+  html += '</ul></div>';
+  html += '</div>';
+  output.innerHTML = html;
 }
 
 function openFullJSONModal() {
@@ -356,7 +622,7 @@ function openFullJSONModal() {
   const modal = document.getElementById('jsonModal');
   const content = document.getElementById('json-modal-content');
   try {
-    const obj = JSON.parse(input);
+    const { obj } = safeParseJSON(input);
     content.textContent = JSON.stringify(obj, null, 2);
   } catch (e) {
     content.textContent = 'Invalid JSON: ' + e.message;
