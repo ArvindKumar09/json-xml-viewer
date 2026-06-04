@@ -457,6 +457,54 @@
       flex: 1;
     }
 
+    /* Textarea with line numbers */
+    .textarea-with-lines {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      position: relative;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--input-bg);
+    }
+
+    .textarea-with-lines textarea {
+      border: none !important;
+      border-radius: 0 !important;
+      padding-left: 8px !important;
+      flex: 1;
+      min-width: 0;
+      resize: none;
+    }
+
+    .textarea-with-lines textarea:focus {
+      box-shadow: none !important;
+    }
+
+    .textarea-with-lines:focus-within {
+      border-color: var(--btn-active-bg);
+      box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    }
+
+    .line-numbers {
+      width: 40px;
+      min-width: 40px;
+      padding: 12px 6px 12px 4px;
+      background: var(--toolbar-bg);
+      color: var(--btn-text);
+      opacity: 0.5;
+      font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: right;
+      overflow: hidden;
+      user-select: none;
+      border-right: 1px solid var(--border-color);
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
     #json-input {
       flex: 1;
     }
@@ -965,7 +1013,7 @@
 
     .feedback-header {
       padding: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: var(--btn-active-bg, #4285f4);
       color: white;
       display: flex;
       justify-content: space-between;
@@ -1031,8 +1079,8 @@
     .form-group textarea:focus,
     .form-group select:focus {
       outline: none;
-      border-color: #667eea;
-      box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+      border-color: var(--btn-active-bg, #4285f4);
+      box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
     }
 
     .form-group textarea {
@@ -1051,12 +1099,12 @@
     }
 
     .screenshot-section:hover {
-      border-color: #667eea;
+      border-color: var(--btn-active-bg, #4285f4);
       background: #f0f4ff;
     }
 
     .screenshot-section.dragover {
-      border-color: #667eea;
+      border-color: var(--btn-active-bg, #4285f4);
       background: #e8f2ff;
     }
 
@@ -1076,7 +1124,7 @@
     }
 
     .screenshot-btn {
-      background: #667eea;
+      background: var(--btn-active-bg, #4285f4);
       color: white;
       border: none;
       padding: 8px 16px;
@@ -1144,7 +1192,7 @@
     }
 
     .feedback-submit {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: var(--btn-active-bg, #4285f4);
       color: white;
       border: none;
       padding: 12px 24px;
@@ -1158,7 +1206,7 @@
 
     .feedback-submit:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+      box-shadow: 0 4px 8px rgba(66, 133, 244, 0.3);
     }
 
     .feedback-submit:disabled {
@@ -2090,8 +2138,11 @@
             <div class="io-content">
               <!-- Left side: JSON input -->
               <div class="io-input" id="json-io-input">
-                <textarea id="json-input" data-i18n-placeholder="paste_json_here"
-                  placeholder="Paste JSON here"></textarea>
+                <div class="textarea-with-lines">
+                  <div class="line-numbers" id="json-line-numbers" aria-hidden="true">1</div>
+                  <textarea id="json-input" data-i18n-placeholder="paste_json_here"
+                    placeholder="Paste JSON here"></textarea>
+                </div>
               </div>
 
               <!-- Draggable divider -->
@@ -2721,6 +2772,29 @@
 
                 // Handle hash changes for SEO
                 window.addEventListener('hashchange', initSEOOptimizations);
+
+                // Line numbers for JSON input
+                (function initLineNumbers() {
+                  const textarea = document.getElementById('json-input');
+                  const lineNumbers = document.getElementById('json-line-numbers');
+                  if (!textarea || !lineNumbers) return;
+
+                  function updateLineNumbers() {
+                    const lines = textarea.value.split('\n').length;
+                    const nums = [];
+                    for (let i = 1; i <= lines; i++) nums.push(i);
+                    lineNumbers.textContent = nums.join('\n');
+                  }
+
+                  function syncScroll() {
+                    lineNumbers.scrollTop = textarea.scrollTop;
+                  }
+
+                  textarea.addEventListener('input', updateLineNumbers);
+                  textarea.addEventListener('scroll', syncScroll);
+                  textarea.addEventListener('change', updateLineNumbers);
+                  updateLineNumbers();
+                })();
               });
 
             </script>
@@ -3646,6 +3720,7 @@ Relative: ${getRelativeTime(timestamp)}`;
                   const element = document.getElementById(elementId);
                   if (element) {
                     element.value = text;
+                    element.dispatchEvent(new Event('input'));
 
                     // Auto-trigger functions for certain panels
                     if (elementId === 'color-input') convertColor();
@@ -3663,6 +3738,7 @@ Relative: ${getRelativeTime(timestamp)}`;
                 const element = document.getElementById(elementId);
                 if (element) {
                   element.value = '';
+                  element.dispatchEvent(new Event('input'));
 
                   // Auto-clear related outputs
                   if (elementId === 'color-input') {
